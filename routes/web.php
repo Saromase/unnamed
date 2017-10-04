@@ -18,3 +18,4 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'UserStatsController@displayInventory')->name('home');
+Route::get('/market', 'MarketController@displayProducts')->name('market');
