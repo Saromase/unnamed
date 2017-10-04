@@ -19,6 +19,7 @@ class PlayersStats extends Migration
             $table->integer('life');
             $table->integer('money');
             $table->integer('max_inventory');
+            $table->engine = 'InnoDB';
         });
         Schema::table('player_stats', function($table) {
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');

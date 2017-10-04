@@ -17,6 +17,7 @@ class Products extends Migration
             $table->increments('id');
             $table->string('name');
             $table->string('price');
+            $table->engine = 'InnoDB';
         });
     }
 
