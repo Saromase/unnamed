@@ -3,7 +3,7 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
-use App\Products;
+use Illuminate\Support\DB;
 
 class insertProducts extends Command
 {
@@ -34,7 +34,7 @@ class insertProducts extends Command
      */
     public function handle()
     {
-        Products::insert([
+        DB::table('products')->insert([
             [
                 'name' => 'water',
                 'price' => '50'
