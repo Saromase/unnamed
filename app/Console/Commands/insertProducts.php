@@ -3,7 +3,7 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
-use Illuminate\Support\DB;
+use Illuminate\Support\Facades\DB;
 
 class insertProducts extends Command
 {
