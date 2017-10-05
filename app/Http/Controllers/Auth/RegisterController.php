@@ -79,6 +79,7 @@ class RegisterController extends Controller
         event(new Registered($user = $this->create($request->all())));
         $test = UserStats::insert([
             'user_id' => $user->id,
+            'user_storage' => 1,
             'life' => 100,
             'money' => 10,
             'max_inventory' => 2,
