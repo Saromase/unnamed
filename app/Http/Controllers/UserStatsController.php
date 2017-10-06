@@ -11,7 +11,7 @@ class UserStatsController extends Controller
         $this->middleware('auth');
     }
 
-    public function displayInventory()
+    public function displayUserStats()
     {
         $stats = UserStats::get();
         \Log::info($stats);
