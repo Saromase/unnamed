@@ -12,14 +12,14 @@ class InsertStorages extends Command
      *
      * @var string
      */
-    protected $signature = 'database:stockage:insert';
+    protected $signature = 'database:storages:insert';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'add stockage datas';
+    protected $description = 'add storages datas';
 
     /**
      * Create a new command instance.
