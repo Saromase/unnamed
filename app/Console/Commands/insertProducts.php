@@ -36,17 +36,71 @@ class insertProducts extends Command
     {
         Products::insert([
             [
-                'name' => 'water',
-                'price' => '50'
+                'name' => 'Eau',
+                'price' => '5',
+                'min_price' => '0',
+                'max_price' => '10'
             ],
             [
-                'name' => 'wood',
-                'price' => '10'
+                'name' => 'Pierre',
+                'price' => '15',
+                'min_price' => '10',
+                'max_price' => '20'
             ],
             [
-                'name' => 'rock',
-                'price' => '75'
-            ]
+                'name' => 'Gaz naturel',
+                'price' => '5',
+                'min_price' => '0',
+                'max_price' => '10'
+            ],
+            [
+                'name' => 'Petrole',
+                'price' => '5',
+                'min_price' => '0',
+                'max_price' => '10'
+            ],
+            [
+                'name' => 'Aluminium',
+                'price' => '5',
+                'min_price' => '0',
+                'max_price' => '10'
+            ],
+            [
+                'name' => 'Or',
+                'price' => '5',
+                'min_price' => '0',
+                'max_price' => '10'
+            ],
+            [
+                'name' => 'Cuivre',
+                'price' => '5',
+                'min_price' => '0',
+                'max_price' => '10'
+            ],
+            [
+                'name' => 'Fer',
+                'price' => '5',
+                'min_price' => '0',
+                'max_price' => '10'
+            ],
+            [
+                'name' => 'Sable',
+                'price' => '5',
+                'min_price' => '0',
+                'max_price' => '10'
+            ],
+            [
+                'name' => 'Charbon',
+                'price' => '5',
+                'min_price' => '0',
+                'max_price' => '10'
+            ],
+            [
+                'name' => 'Bois',
+                'price' => '5',
+                'min_price' => '0',
+                'max_price' => '10'
+            ],
 
         ]);
 
