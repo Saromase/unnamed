@@ -41,18 +41,23 @@ class InsertStorages extends Command
     {
         Stockage::insert([
             [
-                'name' => 'Garage',
+                'name' => 'Chambre',
                 'length' => '5',
                 'price' => '0'
             ],
             [
-                'name' => 'Abris de jardin',
+                'name' => 'Garage',
                 'length' => '10',
                 'price' => '500'
             ],
             [
-                'name' => 'Container',
+                'name' => 'Abris de jardin',
                 'length' => '20',
+                'price' => '2500'
+            ],
+            [
+                'name' => 'Container',
+                'length' => '30',
                 'price' => '5000'
             ],
             [
@@ -62,17 +67,17 @@ class InsertStorages extends Command
             ],
             [
                 'name' => 'Moyen Entrepot',
-                'length' => '150',
+                'length' => '75',
                 'price' => '100000'
             ],
             [
                 'name' => 'Grand Entrepot',
-                'length' => '250',
+                'length' => '150',
                 'price' => '500000'
             ],
             [
                 'name' => 'Hangar',
-                'length' => '500',
+                'length' => '250',
                 'price' => '1000000'
             ],
         ]);
