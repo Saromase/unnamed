@@ -12,6 +12,7 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/style.css') }}" rel="stylesheet">
 </head>
 <body>
     <div id="app">
@@ -38,6 +39,7 @@
                     <ul class="nav navbar-nav">
                         @auth
                             <li><a href="{{ route('market') }}">Market</a></li>
+                            <li><a href="{{ route('storage') }}">Storage</a></li>
                         @endauth
                     </ul>
 

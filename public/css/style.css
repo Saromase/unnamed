@@ -1,0 +1,17 @@
+.main {
+   position: absolute;
+    margin: inherit;
+}
+.test {
+    position: relative;
+    margin-left: 10%;
+    margin-top: 20%;
+    height: 32vh;
+    width: 15vw;
+    background-color: #010304;
+    border-radius: 10px;
+    color: whitesmoke;
+}
+.test p {
+    padding-left: 4px;
+}
