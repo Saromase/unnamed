@@ -7,11 +7,8 @@
     </div> -->
     <div class="test">
         <h2 class="text-center">{{ $local->name  }}</h2>
-        <p> Taille du stockage : {{ $local->length  }}</p>
-        <p>Name Products : Number</p>
-        <p>Name Products : Number</p>
-        <p>Name Products : Number</p>
-        <p>Name Products : Number</p>
+        <h3 class="text-center"> Taille du stockage : {{ $local->length  }}</h3>
+        
     </div>
 
 </div>

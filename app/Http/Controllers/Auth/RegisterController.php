@@ -12,6 +12,7 @@ use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Http\Request;
 use Illuminate\Auth\Events\Registered;
 use App\UserStats;
+use App\Inventory;
 
 class RegisterController extends Controller
 {
@@ -81,10 +82,23 @@ class RegisterController extends Controller
     {
         $this->validator($request->all())->validate();
         event(new Registered($user = $this->create($request->all())));
-
+        Inventory::insert([
+            'water' => 0,
+            'rock' => 0,
+            'natural_gas' => 0,
+            'crud_oil' => 0,
+            'aluminium' => 0,
+            'gold' => 0,
+            'iron' => 0,
+            'copper' => 0,
+            'sand' => 0,
+            'charcoal' => 0,
+            'wood' => 0,
+        ]);
         UserStats::insert([
             'user_id' => $user->id,
             'user_storage' => 1,
+            'user_inventory' => $user->id,
             'life' => 100,
             'money' => 10,
             'max_inventory' => 2,
