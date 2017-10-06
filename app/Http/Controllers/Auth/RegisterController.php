@@ -4,11 +4,13 @@ namespace App\Http\Controllers\Auth;
 
 use App\User;
 use App\Http\Controllers\Controller;
+use Illuminate\Contracts\Validation\Validator as ValidationValidator;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Http\Request;
 use Illuminate\Auth\Events\Registered;
-
 use App\UserStats;
 
 class RegisterController extends Controller
@@ -35,8 +37,6 @@ class RegisterController extends Controller
 
     /**
      * Create a new controller instance.
-     *
-     * @return void
      */
     public function __construct()
     {
@@ -46,8 +46,8 @@ class RegisterController extends Controller
     /**
      * Get a validator for an incoming registration request.
      *
-     * @param  array  $data
-     * @return \Illuminate\Contracts\Validation\Validator
+     * @param array $data
+     * @return ValidationValidator
      */
     protected function validator(array $data)
     {
@@ -61,8 +61,8 @@ class RegisterController extends Controller
     /**
      * Create a new user instance after a valid registration.
      *
-     * @param  array  $data
-     * @return \App\User
+     * @param array $data
+     * @return User
      */
     protected function create(array $data)
     {
@@ -72,21 +72,26 @@ class RegisterController extends Controller
             'password' => bcrypt($data['password']),
         ]);
     }
-    
+
+    /**
+     * @param Request $request
+     * @return RedirectResponse|Redirector
+     */
     public function register(Request $request)
     {
         $this->validator($request->all())->validate();
         event(new Registered($user = $this->create($request->all())));
-        $test = UserStats::insert([
+
+        UserStats::insert([
             'user_id' => $user->id,
             'user_storage' => 1,
             'life' => 100,
             'money' => 10,
             'max_inventory' => 2,
         ]);
+
         $this->guard()->login($user);
 
-        return $this->registered($request, $user)
-                        ?: redirect($this->redirectPath());
+        return $this->registered($request, $user) ?: redirect($this->redirectPath());
     }
 }
