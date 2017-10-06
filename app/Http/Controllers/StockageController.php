@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Stockage;
+use App\Storage;
 use App\UserStats;
 
 class StockageController extends Controller
@@ -17,7 +17,7 @@ class StockageController extends Controller
         $storageId = UserStats::where('user_id', '=', "$id")->select('user_storage')->get();
         foreach ($storageId as $idS){}
         \Log::info($idS->user_storage);
-        $playerStorage = Stockage::where('id', '=', "$idS->user_storage")->get();
+        $playerStorage = Storage::where('id', '=', "$idS->user_storage")->get();
         \Log::info($playerStorage);
         return view('storage', [
             'storage' => $playerStorage

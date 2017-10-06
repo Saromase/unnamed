@@ -25,7 +25,7 @@ class PlayersStats extends Migration
         });
         Schema::table('player_stats', function($table) {
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->foreign('user_storage')->references('id')->on('stockage');
+            $table->foreign('user_storage')->references('id')->on('storage');
             $table->foreign('user_inventory')->references('id')->on('inventory');
         });
     }

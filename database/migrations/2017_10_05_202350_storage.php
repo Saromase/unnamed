@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class Stockage extends Migration
+class storage extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class Stockage extends Migration
      */
     public function up()
     {
-        Schema::create('stockage', function (Blueprint $table) {
+        Schema::create('storage', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
             $table->integer('length');
@@ -30,6 +30,6 @@ class Stockage extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('stockage');
+        Schema::dropIfExists('storage');
     }
 }
