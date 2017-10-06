@@ -28,7 +28,7 @@ class PlayersStats extends Migration
             $table->foreign('user_storage')->references('id')->on('storage');
             /*$table->foreign('user_inventory')->references('id')->on('inventory');*/
         });
-    } 
+    }
 
     /**
      * Reverse the migrations.
