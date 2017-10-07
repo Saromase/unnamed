@@ -19,6 +19,10 @@ use Illuminate\Database\Eloquent\Model;
  * @method static Builder|UserStats whereMoney($value)
  * @method static Builder|UserStats whereUserId($value)
  * @mixin \Eloquent
+ * @property int $user_storage
+ * @property int $user_inventory
+ * @method static Builder|UserStats whereUserInventory($value)
+ * @method static Builder|UserStats whereUserStorage($value)
  */
 class UserStats extends Model
 {

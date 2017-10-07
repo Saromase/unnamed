@@ -4,20 +4,20 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class Products extends Migration
+class CreateStorageClass extends Migration
 {
     /**
      * Run the migrations.
      */
     public function up()
     {
-        Schema::create('products', function (Blueprint $table) {
+        Schema::create('storage', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
-            $table->string('price');
-            $table->string('min_price');
-            $table->string('max_price');
+            $table->integer('length');
+            $table->integer('price');
             $table->engine = 'InnoDB';
+
         });
     }
 
@@ -26,6 +26,6 @@ class Products extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('products');
+        Schema::dropIfExists('storage');
     }
 }
