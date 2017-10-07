@@ -13,6 +13,7 @@ use Illuminate\Http\Request;
 use Illuminate\Auth\Events\Registered;
 use App\UserStats;
 use App\Inventory;
+use App\Storage;
 
 class RegisterController extends Controller
 {
@@ -82,6 +83,8 @@ class RegisterController extends Controller
     {
         $this->validator($request->all())->validate();
         event(new Registered($user = $this->create($request->all())));
+        $storage = Storage::where('id', '=', '1')->select('length')->get();
+        foreach ($storage as $idStorage){}
         Inventory::insert([
             'water' => 0,
             'rock' => 0,
@@ -101,7 +104,7 @@ class RegisterController extends Controller
             'user_inventory' => $user->id,
             'life' => 100,
             'money' => 10,
-            'max_inventory' => 2,
+            'max_inventory' => $idStorage->length,
         ]);
 
         $this->guard()->login($user);
