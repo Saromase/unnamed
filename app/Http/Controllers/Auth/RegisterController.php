@@ -80,7 +80,7 @@ class RegisterController extends Controller
             'user_inventory' => $user->id,
             'life' => 100,
             'money' => 10,
-            'max_inventory' => $storage->length,
+            'inventory' => 0,
         ]);
 
         return $user;
