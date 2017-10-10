@@ -15,6 +15,10 @@ use Illuminate\Database\Eloquent\Model;
  * @method static Builder|Products whereName($value)
  * @method static Builder|Products wherePrice($value)
  * @mixin \Eloquent
+ * @property string $min_price
+ * @property string $max_price
+ * @method static Builder|Products whereMaxPrice($value)
+ * @method static Builder|Products whereMinPrice($value)
  */
 class Products extends Model
 {

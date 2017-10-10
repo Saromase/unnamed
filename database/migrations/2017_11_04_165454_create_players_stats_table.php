@@ -4,12 +4,10 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class PlayersStats extends Migration
+class CreatePlayersStatsTable extends Migration
 {
     /**
      * Run the migrations.
-     *
-     * @return void
      */
     public function up()
     {
@@ -22,18 +20,15 @@ class PlayersStats extends Migration
             $table->integer('money');
             $table->integer('max_inventory');
             $table->engine = 'InnoDB';
-        });
-        Schema::table('player_stats', function($table) {
+
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->foreign('user_storage')->references('id')->on('stockage');
+            $table->foreign('user_storage')->references('id')->on('storage');
             $table->foreign('user_inventory')->references('id')->on('inventory');
         });
     }
 
     /**
      * Reverse the migrations.
-     *
-     * @return void
      */
     public function down()
     {

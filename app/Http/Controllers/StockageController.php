@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Stockage;
+use App\Storage;
 use App\UserStats;
+use App\Inventory;
 
 class StockageController extends Controller
 {
@@ -15,12 +15,17 @@ class StockageController extends Controller
     public function displayStorages(){
         $id = Auth::user()->id;
         $storageId = UserStats::where('user_id', '=', "$id")->select('user_storage')->get();
+        $inventoryId = UserStats::where('user_id', '=', "$id")->select('user_inventory')->get();
         foreach ($storageId as $idS){}
-        \Log::info($idS->user_storage);
-        $playerStorage = Stockage::where('id', '=', "$idS->user_storage")->get();
-        \Log::info($playerStorage);
+        $playerStorage = Storage::where('id', '=', "$idS->user_storage")->get();
+        foreach ($inventoryId as $idI){}
+        $inventory = Inventory::where('id', '=', "$id")->get();
+        \Log::info($inventory);
+        foreach ($inventory as $inv){}
+        \Log::info($inv->water);
         return view('storage', [
-            'storage' => $playerStorage
+            'storage' => $playerStorage,
+            'tutu' => $inventory
         ]);
     }
 }

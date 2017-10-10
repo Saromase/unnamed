@@ -4,12 +4,12 @@ namespace App\Http\Controllers\Auth;
 
 use App\User;
 use App\Http\Controllers\Controller;
+use Illuminate\Contracts\Validation\Validator as ValidationValidator;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
-use Illuminate\Http\Request;
-use Illuminate\Auth\Events\Registered;
-
 use App\UserStats;
+use App\Inventory;
+use App\Storage;
 
 class RegisterController extends Controller
 {
@@ -35,8 +35,6 @@ class RegisterController extends Controller
 
     /**
      * Create a new controller instance.
-     *
-     * @return void
      */
     public function __construct()
     {
@@ -46,8 +44,8 @@ class RegisterController extends Controller
     /**
      * Get a validator for an incoming registration request.
      *
-     * @param  array  $data
-     * @return \Illuminate\Contracts\Validation\Validator
+     * @param array $data
+     * @return ValidationValidator
      */
     protected function validator(array $data)
     {
@@ -61,32 +59,31 @@ class RegisterController extends Controller
     /**
      * Create a new user instance after a valid registration.
      *
-     * @param  array  $data
-     * @return \App\User
+     * @param array $data
+     * @return User
      */
     protected function create(array $data)
     {
-        return User::create([
+        $user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
         ]);
-    }
-    
-    public function register(Request $request)
-    {
-        $this->validator($request->all())->validate();
-        event(new Registered($user = $this->create($request->all())));
-        $test = UserStats::insert([
+
+        Inventory::create();
+
+        $storage = Storage::whereId(1)->select('length')->get();
+        $storage = array_first($storage);
+        UserStats::insert([
             'user_id' => $user->id,
             'user_storage' => 1,
+            'user_inventory' => $user->id,
             'life' => 100,
             'money' => 10,
-            'max_inventory' => 2,
+            'max_inventory' => $storage->length,
         ]);
-        $this->guard()->login($user);
 
-        return $this->registered($request, $user)
-                        ?: redirect($this->redirectPath());
+        return $user;
     }
+
 }

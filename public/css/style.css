@@ -27,4 +27,16 @@ body, html, #app {
 .container {
   margin: inherit; }
 
+.product {
+    width: 25%;
+    height: 20%;
+    display: inline-block;
+    margin: 10px 10px 10px 10px;
+    background-color: black;
+    color: white;
+}
+.product p {
+    color: red;
+    font-size: 30px;
+}
 /*# sourceMappingURL=style.css.map */

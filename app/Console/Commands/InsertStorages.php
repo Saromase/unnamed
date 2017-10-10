@@ -3,7 +3,7 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
-use App\Stockage;
+use App\Storage;
 
 class InsertStorages extends Command
 {
@@ -12,19 +12,17 @@ class InsertStorages extends Command
      *
      * @var string
      */
-    protected $signature = 'database:stockage:insert';
+    protected $signature = 'database:storages:insert';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'add stockage datas';
+    protected $description = 'add storages datas';
 
     /**
      * Create a new command instance.
-     *
-     * @return void
      */
     public function __construct()
     {
@@ -36,10 +34,9 @@ class InsertStorages extends Command
      *
      * @return mixed
      */
-    
       public function handle()
     {
-        Stockage::insert([
+        Storage::insert([
             [
                 'name' => 'Chambre',
                 'length' => '5',
