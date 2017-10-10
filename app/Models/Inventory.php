@@ -62,16 +62,4 @@ class Inventory extends Model
 {
     protected $table = 'inventory';
 
-
-    /**
-     * @param string $string
-     * @param bool $capitalizeFirst
-     * @return string
-     */
-    public static function dashesToCamelCase($string, $capitalizeFirst = false)
-    {
-        $str = str_replace(' ', '', ucwords(str_replace('_', ' ', $string)));
-        $str = $capitalizeFirst ? $str : strtolower($str[0]);
-        return $str;
-    }
 }
