@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\User;
+use App\Models\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Contracts\Validation\Validator as ValidationValidator;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
-use App\UserStats;
-use App\Inventory;
-use App\Storage;
+use App\Models\UserStats;
+use App\Models\Inventory;
+use App\Models\Storage;
 
 class RegisterController extends Controller
 {

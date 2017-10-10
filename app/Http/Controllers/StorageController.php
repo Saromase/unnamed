@@ -3,10 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Auth;
-use App\Storage;
-use App\UserStats;
-use App\Inventory;
-use App\Products;
+use App\Models\Storage;
+use App\Models\UserStats;
+use App\Models\Inventory;
+use App\Models\Products;
 
 class StorageController extends Controller
 {

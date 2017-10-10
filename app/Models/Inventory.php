@@ -1,12 +1,12 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * App\Inventory
+ * App\Models\Inventory
  *
  * @property int $id
  * @property int $water
@@ -55,10 +55,23 @@ use Illuminate\Database\Eloquent\Model;
  * @method int getRock()
  * @method int getSand()
  * @method int getWater()
- * @method int getWood() 
+ * @method int getWood()
  * @mixin \Eloquent
  */
 class Inventory extends Model
 {
     protected $table = 'inventory';
+
+
+    /**
+     * @param string $string
+     * @param bool $capitalizeFirst
+     * @return string
+     */
+    public static function dashesToCamelCase($string, $capitalizeFirst = false)
+    {
+        $str = str_replace(' ', '', ucwords(str_replace('_', ' ', $string)));
+        $str = $capitalizeFirst ? $str : strtolower($str[0]);
+        return $str;
+    }
 }

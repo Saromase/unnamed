@@ -3,9 +3,9 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
-use App\User;
-use App\UserStats;
-use App\Inventory;
+use App\Models\User;
+use App\Models\UserStats;
+use App\Models\Inventory;
 
 
 class InsertUser extends Command
