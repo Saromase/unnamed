@@ -18,7 +18,6 @@ class CreatePlayersStatsTable extends Migration
             $table->integer('user_inventory')->unsigned();
             $table->integer('life');
             $table->integer('money');
-            $table->integer('inventory');
             $table->integer('max_inventory');
             $table->engine = 'InnoDB';
 
