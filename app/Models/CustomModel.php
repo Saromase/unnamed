@@ -12,9 +12,11 @@ use Illuminate\Database\Eloquent\Model as BaseModel;
 
 /**
  * Class Model
+ *
  * @package App\Models
+ * @mixin \Eloquent
  */
-class Model extends BaseModel
+class CustomModel extends BaseModel
 {
     /**
      * @param string $method
