@@ -19,6 +19,7 @@ class CreatePlayersStatsTable extends Migration
             $table->integer('life');
             $table->integer('money');
             $table->integer('inventory');
+            $table->integer('max_inventory');
             $table->engine = 'InnoDB';
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');

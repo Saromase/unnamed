@@ -81,6 +81,7 @@ class RegisterController extends Controller
             'life' => 100,
             'money' => 10,
             'inventory' => 0,
+            'max_inventory' => $storage->length,
         ]);
 
         return $user;
