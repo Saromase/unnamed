@@ -25,7 +25,7 @@ class CustomModel extends BaseModel
     public function __call($method, $params)
     {
         $type = substr($method, 0, 3);
-        $params[0] = $this->transformValue($params[0]);
+        $params[0] = isset($params[0]) ? $this->transformValue($params[0]) : null;
         if (null != $var = $this->fromCamelCase(lcfirst(substr($method, 3)))) {
             if ($type == "get") {
                 return $this->__get($var);
