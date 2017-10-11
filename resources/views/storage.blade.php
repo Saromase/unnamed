@@ -7,7 +7,11 @@
 
             <h2 class="text-center">{{ $storage->name }}</h2>
             <h3 class="text-center"> Taille du stockage : {{ $storage->length }}</h3>
-
+            @isset ($warning)
+                <div class="alert alert-warning">
+                    {{ $warning}}
+                </div>
+            @endisset
             <div>
                 <table class="table">
                     <thead>
@@ -15,13 +19,11 @@
                         <th>Nombre</th>
                     </thead>
                     <tbody>
-                      @foreach($productsList as $product)
-                            @foreach($inventory as $item)
-                                <tr>
-                                    <td>{{ $product->name }}</td>
-                                    <td>{{ $item->{$product->name} }}</td>
-                                </tr>
-                            @endforeach
+                        @foreach($inventory as $item)
+                            <tr>
+                                <td>{{ $item->name }}</td>
+                                <td>{{ $item->quantity }}</td>
+                            </tr>
                         @endforeach
                     </tbody>
                 </table>

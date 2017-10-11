@@ -28,26 +28,26 @@ class StorageController extends Controller
             ->get()
             ->first();
 
-        // On recupere l'id de l'inventaire que possède l'utilisateur
-        $inventoryId = UserStats::where('user_id', '=', "$userId")
-            ->select('user_inventory')
-            ->get()
-            ->first();
-
-        // On recupere l'ensemble des informations liée à l'inventaire de l'utilisateur
-        $inventory = Inventory::where('id', '=', "$inventoryId->user_inventory")
+        // On recupere l'ensemble des inventaires de l'utilisateur
+        $inventory = Inventory::where('user_id', '=', "$userId")
             ->get();
+        
+        // On verifie si il possede un inventaire si il est vide on lui met un message
+        if ($inventory == null){
+            $message = 'Vous n\'avez aucun produit !';
+            return view('storage', [
+                'storage' => $playerStorage,
+                'warning' => $message
+            ]);
+        } else {
+            return view('storage', [
+                'storage' => $playerStorage,
+                'inventory' => $inventory
+            ]);
+        }
 
-        // On récupère la liste des produits
-        $productsList = Products::select('name')
-            ->get();
 
-
-        return view('storage', [
-            'storage' => $playerStorage,
-            'inventory' => $inventory,
-            'productsList' => $productsList
-        ]);
+        
     }
 
 
