@@ -14,6 +14,7 @@ use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 
+
 /**
  * App\Models\User
  *
@@ -32,20 +33,20 @@ use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
  * @method string getPassword()
  * @method string getRememberToken()
  * @method Carbon getUpdatedAt()
- * @method Builder|User setCreatedAt($value)
- * @method Builder|User setEmail($value)
- * @method Builder|User setId($value)
- * @method Builder|User setName($value)
- * @method Builder|User setPassword($value)
- * @method Builder|User setRememberToken($value)
- * @method Builder|User setUpdatedAt($value)
- * @method static Builder|User whereCreatedAt($value)
- * @method static Builder|User whereEmail($value)
- * @method static Builder|User whereId($value)
- * @method static Builder|User whereName($value)
- * @method static Builder|User wherePassword($value)
- * @method static Builder|User whereRememberToken($value)
- * @method static Builder|User whereUpdatedAt($value)
+ * @method User setCreatedAt($value)
+ * @method User setEmail($value)
+ * @method User setId($value)
+ * @method User setName($value)
+ * @method User setPassword($value)
+ * @method User setRememberToken($value)
+ * @method User setUpdatedAt($value)
+ * @method static Builder whereCreatedAt($value)
+ * @method static Builder whereEmail($value)
+ * @method static Builder whereId($value)
+ * @method static Builder whereName($value)
+ * @method static Builder wherePassword($value)
+ * @method static Builder whereRememberToken($value)
+ * @method static Builder whereUpdatedAt($value)
  * @mixin \Eloquent
  */
 class User extends CustomModel implements AuthenticatableContract, AuthorizableContract, CanResetPasswordContract
@@ -72,6 +73,6 @@ class User extends CustomModel implements AuthenticatableContract, AuthorizableC
 
     public function getUserStats()
     {
-        return UserStats::where('user_id', '=', $this->getId());//->select('user_storage')->get()->first();
+        return UserStats::whereUserId($this->getId())->first();//->select('user_storage')->get()->first();
     }
 }

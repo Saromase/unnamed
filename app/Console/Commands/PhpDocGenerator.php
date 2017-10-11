@@ -30,7 +30,6 @@ class PhpDocGenerator extends ModelsCommand
     public function handle()
     {
         $this->write = true;
-        $this->write_model_magic_where = true;
         $this->dirs = $this->laravel['config']->get('ide-helper.model_locations');
         $models = $this->loadModels();
         $this->generateDocs($models, '');
@@ -95,7 +94,8 @@ class PhpDocGenerator extends ModelsCommand
                 }
 
                 $this->setMethod(Str::camel("get_" . $name), $type, [], false);
-                $this->setMethod(Str::camel("set_" . $name), '\Illuminate\Database\Eloquent\Builder|\\' . get_class($model), ['$value'], false);
+                $this->setMethod(Str::camel("set_" . $name), '\\' . get_class($model), ['$value'], false);
+                $this->setMethod(Str::camel("where_" . $name), '\Illuminate\Database\Eloquent\Builder', ['$value']);
             }
         }
     }
