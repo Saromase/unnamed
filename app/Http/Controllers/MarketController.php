@@ -11,46 +11,54 @@ use App\Models\Inventory;
 
 class MarketController extends Controller
 {
-  public function __construct() {
-    $this->middleware('auth');
-  }
+    public function __construct() {
+        $this->middleware('auth');
+    }
 
-  public function displayProducts() {
-    $products = Products::get();
-    /** @var Products $product */
-    $product = $products->first();
-
-    $product->setMinPrice("test");
-
-    return view('market', ['products' => $products]);
-  }
-    public function buyProduct($id) {
-        $productInfo = Products::whereId($id)->get();
-        $userId = Auth::user()->id;
-        $playerInfo = UserStats::whereId($userId)->get();
-        $debug = $productInfo[0]->id;
+    public function displayProducts() {
         $products = Products::get();
-        if ($playerInfo[0]->money >= $productInfo[0]->price && $playerInfo[0]->inventory > 0 ){
-            UserStats::whereId($userId)->setMoney(10000);
+        return view('market', [
+            'products' => $products
+        ]);
+    }
+    public function buyProduct($id) {
+        $user = Auth::user();
+        $userId = Auth::user()->id;
+        $userStats = $user->getUserStats();
+        $productsBuy = Products::findOneById($id);
+        $products = Products::get();
+
+        if($userStats->money >= $productsBuy->price && $userStats->inventory != 0){
             
+            $userStatsInventory = $userStats->getInventory();
+            $userStatsInventory--;
+            $userStats->setInventory($userStatsInventory)->save();
             
+            $userProductInventory = Inventory::findOneByName($productsBuy->name)->findOneByUserId($userId);
             
-            $message = 'Vous avez bien acheter un blabla';
-           return view('market', [
-                'products' => $products,
-                'success' => $message
-            ]);
-        } else if ($playerInfo[0]->money <= $productInfo[0]->price){
-            $message = 'Vous n\'avez pas assez d\'argent pour acheter ce ' . $productInfo[0]->name;
+            $userProductInventoryQuantity = $userProductInventory->quantity;
+            $userProductInventoryQuantity++;
+            Inventory::findOneByName($productsBuy->name)->findOneByUserId($userId)->setQuantity($userProductInventoryQuantity)->save();
+            
+            $userStats->setMoney($userStats->money - $productsBuy->price)->save();
+            
+            $message = 'Vous avez bien buy';
+            
             return view('market', [
-                'products' => $products,
-                'faillure' => $message
+                'success' => $message,
+                'products' => $products
             ]);
-        } else if ($playerInfo[0]->inventory == 0){
-            $message = 'Vous n\'avez pas assez de place pour acheter ce ' . $productInfo[0]->name;
+        } else if ($userStats->inventory == 0){
+            $message = 'Vous n\'avez pas assez de place';
             return view('market', [
-                'products' => $products,
-                'faillure' => $message
+                'faillure' => $message,
+                'products' => $products
+            ]);
+        } else if ($userStats->money < $productsBuy->price){
+            $message = 'Vous n\'avez pas assez d\'argent ';
+            return view('market', [
+                'faillure' => $message,
+                'products' => $products
             ]);
         }
     }
