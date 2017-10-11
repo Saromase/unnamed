@@ -4,9 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Auth;
 use App\Models\Storage;
-use App\Models\UserStats;
 use App\Models\Inventory;
-use App\Models\Products;
 
 class StorageController extends Controller
 {
@@ -15,13 +13,11 @@ class StorageController extends Controller
     }
 
     public function displayStorages() {
+        $user = Auth::user();
         $userId = Auth::user()->id;
 
         // On recupere l'id du storage que possède l'utilisateur
-        $storageId = UserStats::where('user_id', '=', "$userId")
-            ->select('user_storage')
-            ->get()
-            ->first();
+        $storageId = $user->getUserStats();
 
         // On recupere l'ensemble des informations liée à ce storage qu'on envoie à la vue
         $playerStorage = Storage::where('id', '=', "$storageId->user_storage")

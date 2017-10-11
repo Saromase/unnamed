@@ -71,8 +71,11 @@ class User extends CustomModel implements AuthenticatableContract, AuthorizableC
         'password', 'remember_token',
     ];
 
+    /**
+     * @return UserStats|null
+     */
     public function getUserStats()
     {
-        return UserStats::whereUserId($this->getId())->first();//->select('user_storage')->get()->first();
+        return UserStats::whereUserId($this->getId())->first();
     }
 }
