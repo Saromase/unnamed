@@ -50,6 +50,6 @@ class UserStats extends CustomModel
      */
     public function getStorage()
     {
-        return Storage::whereId($this->storage_id)->first();
+        return Storage::findOneById($this->storage_id);
     }
 }

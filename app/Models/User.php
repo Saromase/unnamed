@@ -83,7 +83,7 @@ class User extends CustomModel implements AuthenticatableContract, AuthorizableC
      */
     public function getUserStats()
     {
-        return UserStats::whereUserId($this->getId())->first();
+        return UserStats::findOneById($this->getId());
     }
 
     /**
@@ -91,6 +91,6 @@ class User extends CustomModel implements AuthenticatableContract, AuthorizableC
      */
     public function getInventory()
     {
-        return Inventory::whereUserId($this->getId())->get();
+        return Inventory::findByUserId($this->getId());
     }
 }
