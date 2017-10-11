@@ -15,12 +15,14 @@ use Illuminate\Database\Eloquent\Collection;
  * @property int $user_id
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
+ * @method static Collection|Inventory[] findBy(array $value)
  * @method static Collection|Inventory[] findByBuyPrice($value)
  * @method static Collection|Inventory[] findByCreatedAt($value)
  * @method static Collection|Inventory[] findByName($value)
  * @method static Collection|Inventory[] findByQuantity($value)
  * @method static Collection|Inventory[] findByUpdatedAt($value)
  * @method static Collection|Inventory[] findByUserId($value)
+ * @method static Inventory findOneBy(array $value)
  * @method static Inventory findOneByBuyPrice($value)
  * @method static Inventory findOneByCreatedAt($value)
  * @method static Inventory findOneById($value)

@@ -12,10 +12,12 @@ use Illuminate\Database\Eloquent\Collection;
  * @property string $price
  * @property string $min_price
  * @property string $max_price
+ * @method static Collection|Products[] findBy(array $value)
  * @method static Collection|Products[] findByMaxPrice($value)
  * @method static Collection|Products[] findByMinPrice($value)
  * @method static Collection|Products[] findByName($value)
  * @method static Collection|Products[] findByPrice($value)
+ * @method static Products findOneBy(array $value)
  * @method static Products findOneById($value)
  * @method static Products findOneByMaxPrice($value)
  * @method static Products findOneByMinPrice($value)

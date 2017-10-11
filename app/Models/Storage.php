@@ -11,9 +11,11 @@ use Illuminate\Database\Eloquent\Collection;
  * @property string $name
  * @property int $length
  * @property int $price
+ * @method static Collection|Storage[] findBy(array $value)
  * @method static Collection|Storage[] findByLength($value)
  * @method static Collection|Storage[] findByName($value)
  * @method static Collection|Storage[] findByPrice($value)
+ * @method static Storage findOneBy(array $value)
  * @method static Storage findOneById($value)
  * @method static Storage findOneByLength($value)
  * @method static Storage findOneByName($value)

@@ -33,17 +33,32 @@ class CustomModel extends BaseModel
             }elseif(strpos($method, "findOneBy") !== false) {
                 $column = str_replace("findOneBy", "", $method);
                 $column = $this->fromCamelCase(lcfirst($column));
+                if (is_array($params[0])) {
+                    return $this->where($this->paramsToData($params[0]))->first();
+                }
 
                 return $this->where($column, "=", $params[0])->first();
             }elseif(strpos($method, "findBy") !== false) {
                 $column = str_replace("findBy", "", $method);
                 $column = $this->fromCamelCase(lcfirst($column));
+                if (is_array($params[0])) {
+                    return $this->where($this->paramsToData($params[0]))->get();
+                }
 
                 return $this->where($column, "=", $params[0])->get();
             }
         }
 
         return parent::__call($method, $params);
+    }
+
+    private function paramsToData($params)
+    {
+        return array_map(function ($key, $value) {
+            /** @var mixed|BaseModel $value */
+            return [$key, "=", $value instanceof BaseModel ? $value->getId() : $value];
+        }, array_keys($params), $params);
+
     }
 
     /**

@@ -26,12 +26,14 @@ use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
  * @property-read DatabaseNotificationCollection|DatabaseNotification[] $notifications
+ * @method static Collection|User[] findBy(array $value)
  * @method static Collection|User[] findByCreatedAt($value)
  * @method static Collection|User[] findByEmail($value)
  * @method static Collection|User[] findByName($value)
  * @method static Collection|User[] findByPassword($value)
  * @method static Collection|User[] findByRememberToken($value)
  * @method static Collection|User[] findByUpdatedAt($value)
+ * @method static User findOneBy(array $value)
  * @method static User findOneByCreatedAt($value)
  * @method static User findOneByEmail($value)
  * @method static User findOneById($value)

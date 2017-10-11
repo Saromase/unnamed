@@ -13,11 +13,13 @@ use Illuminate\Database\Eloquent\Collection;
  * @property int $life
  * @property int $money
  * @property int $inventory
+ * @method static Collection|UserStats[] findBy(array $value)
  * @method static Collection|UserStats[] findByInventory($value)
  * @method static Collection|UserStats[] findByLife($value)
  * @method static Collection|UserStats[] findByMoney($value)
  * @method static Collection|UserStats[] findByStorageId($value)
  * @method static Collection|UserStats[] findByUserId($value)
+ * @method static UserStats findOneBy(array $value)
  * @method static UserStats findOneById($value)
  * @method static UserStats findOneByInventory($value)
  * @method static UserStats findOneByLife($value)
