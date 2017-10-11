@@ -20,7 +20,7 @@ class StorageController extends Controller
         $storageId = $user->getUserStats();
 
         // On recupere l'ensemble des informations liée à ce storage qu'on envoie à la vue
-        $playerStorage = Storage::where('id', '=', "$storageId->user_storage")
+        $playerStorage = Storage::where('id', '=', "$storageId->storage_id")
             ->get()
             ->first();
 

@@ -23,19 +23,7 @@ class InsertInventory extends Command
     protected $description = 'Insert Inventory on inventory base';
 
     /**
-     * Create a new command instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        parent::__construct();
-    }
-
-    /**
      * Execute the console command.
-     *
-     * @return mixed
      */
     public function handle()
     {
@@ -49,10 +37,9 @@ class InsertInventory extends Command
                 'updated_at' => null
             ]
         ]);
-        UserStats::where('id', '=', 1)
-            ->update([
-            'max_inventory' => 0,
-        ]);
+
+        UserStats::where('id', '=', 1)->update(['inventory' => 0]);
+
         echo "Vous avez bien ajouté les données dans la table \n";
     }
 }

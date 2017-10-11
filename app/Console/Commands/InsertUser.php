@@ -37,10 +37,10 @@ class InsertUser extends Command
         ]);
         UserStats::insert([
             'user_id' => 1,
-            'user_storage' => 1,
+            'storage_id' => 1,
             'life' => 100,
             'money' => 10,
-            'max_inventory' => 5,
+            'inventory' => 5,
         ]);
         echo 'L\'utilisateur Admin à bien était ajoutée 
         Adresse email : admin@admin.fr

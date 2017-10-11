@@ -14,14 +14,14 @@ class CreatePlayersStatsTable extends Migration
         Schema::create('player_stats', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id')->unsigned();
-            $table->integer('user_storage')->unsigned();
+            $table->integer('storage_id')->unsigned();
             $table->integer('life');
             $table->integer('money');
-            $table->integer('max_inventory');
+            $table->integer('inventory');
             $table->engine = 'InnoDB';
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->foreign('user_storage')->references('id')->on('storage');
+            $table->foreign('storage_id')->references('id')->on('storage');
         });
     }
 

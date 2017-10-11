@@ -76,11 +76,11 @@ class RegisterController extends Controller
         $storage = array_first($storage);
         UserStats::insert([
             'user_id' => $user->id,
-            'user_storage' => 1,
+            'storage_id' => 1,
             'user_inventory' => $user->id,
             'life' => 100,
             'money' => 10,
-            'max_inventory' => $storage->length,
+            'inventory' => $storage->length,
         ]);
 
         return $user;
