@@ -17,11 +17,16 @@ use Illuminate\Database\Eloquent\Builder;
  * @method string getMinPrice()
  * @method string getName()
  * @method string getPrice()
- * @method \Illuminate\Database\Eloquent\Builder|\App\Models\Products setId($value)
- * @method \Illuminate\Database\Eloquent\Builder|\App\Models\Products setMaxPrice($value)
- * @method \Illuminate\Database\Eloquent\Builder|\App\Models\Products setMinPrice($value)
- * @method \Illuminate\Database\Eloquent\Builder|\App\Models\Products setName($value)
- * @method \Illuminate\Database\Eloquent\Builder|\App\Models\Products setPrice($value)
+ * @method Builder|Products setId($value)
+ * @method Builder|Products setMaxPrice($value)
+ * @method Builder|Products setMinPrice($value)
+ * @method Builder|Products setName($value)
+ * @method Builder|Products setPrice($value)
+ * @method static Builder|Products whereId($value)
+ * @method static Builder|Products whereMaxPrice($value)
+ * @method static Builder|Products whereMinPrice($value)
+ * @method static Builder|Products whereName($value)
+ * @method static Builder|Products wherePrice($value)
  * @mixin \Eloquent
  */
 class Products extends CustomModel

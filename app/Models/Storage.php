@@ -15,10 +15,14 @@ use Illuminate\Database\Eloquent\Builder;
  * @method integer getLength()
  * @method string getName()
  * @method integer getPrice()
- * @method \Illuminate\Database\Eloquent\Builder|\App\Models\Storage setId($value)
- * @method \Illuminate\Database\Eloquent\Builder|\App\Models\Storage setLength($value)
- * @method \Illuminate\Database\Eloquent\Builder|\App\Models\Storage setName($value)
- * @method \Illuminate\Database\Eloquent\Builder|\App\Models\Storage setPrice($value)
+ * @method Builder|Storage setId($value)
+ * @method Builder|Storage setLength($value)
+ * @method Builder|Storage setName($value)
+ * @method Builder|Storage setPrice($value)
+ * @method static Builder|Storage whereId($value)
+ * @method static Builder|Storage whereLength($value)
+ * @method static Builder|Storage whereName($value)
+ * @method static Builder|Storage wherePrice($value)
  * @mixin \Eloquent
  */
 class Storage extends CustomModel

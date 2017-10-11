@@ -30,6 +30,7 @@ class PhpDocGenerator extends ModelsCommand
     public function handle()
     {
         $this->write = true;
+        $this->write_model_magic_where = true;
         $this->dirs = $this->laravel['config']->get('ide-helper.model_locations');
         $models = $this->loadModels();
         $this->generateDocs($models, '');
