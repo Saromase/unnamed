@@ -35,11 +35,9 @@ class InsertUser extends Command
             'email' => 'admin@admin.fr',
             'password' => bcrypt('discord'),
         ]);
-        Inventory::create();
         UserStats::insert([
             'user_id' => 1,
             'user_storage' => 1,
-            'user_inventory' => 1,
             'life' => 100,
             'money' => 10,
             'max_inventory' => 5,

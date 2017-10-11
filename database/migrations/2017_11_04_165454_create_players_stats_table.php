@@ -15,7 +15,6 @@ class CreatePlayersStatsTable extends Migration
             $table->increments('id');
             $table->integer('user_id')->unsigned();
             $table->integer('user_storage')->unsigned();
-            $table->integer('user_inventory')->unsigned();
             $table->integer('life');
             $table->integer('money');
             $table->integer('max_inventory');
@@ -23,7 +22,6 @@ class CreatePlayersStatsTable extends Migration
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('user_storage')->references('id')->on('storage');
-            $table->foreign('user_inventory')->references('id')->on('inventory');
         });
     }
 
