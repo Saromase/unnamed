@@ -30,7 +30,7 @@ class MarketController extends Controller
         $playerInfo = UserStats::whereId($userId)->get();
         $debug = $productInfo[0]->id;
         $products = Products::get();
-        if ($playerInfo[0]->money >= $productInfo[0]->price && $playerInfo[0]->max_inventory > 0 ){
+        if ($playerInfo[0]->money >= $productInfo[0]->price && $playerInfo[0]->inventory > 0 ){
             UserStats::whereId($userId)->setMoney(10000);
             
             
@@ -46,7 +46,7 @@ class MarketController extends Controller
                 'products' => $products,
                 'faillure' => $message
             ]);
-        } else if ($playerInfo[0]->max_inventory == 0){
+        } else if ($playerInfo[0]->inventory == 0){
             $message = 'Vous n\'avez pas assez de place pour acheter ce ' . $productInfo[0]->name;
             return view('market', [
                 'products' => $products,

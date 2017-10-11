@@ -9,10 +9,10 @@ use Illuminate\Database\Eloquent\Builder;
  *
  * @property int $id
  * @property int $user_id
- * @property int $user_storage
+ * @property int $storage_id
  * @property int $life
  * @property int $money
- * @property int $max_inventory
+ * @property int $inventory
  * @method integer getId()
  * @method integer getLife()
  * @method integer getMaxInventory()
@@ -32,6 +32,12 @@ use Illuminate\Database\Eloquent\Builder;
  * @method static Builder whereUserId($value)
  * @method static Builder whereUserStorage($value)
  * @mixin \Eloquent
+ * @method integer getInventory()
+ * @method integer getStorageId()
+ * @method \App\Models\UserStats setInventory($value)
+ * @method \App\Models\UserStats setStorageId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder whereInventory($value)
+ * @method static \Illuminate\Database\Eloquent\Builder whereStorageId($value)
  */
 class UserStats extends CustomModel
 {
