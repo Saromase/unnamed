@@ -17,12 +17,10 @@ class StorageController extends Controller
         $userId = Auth::user()->id;
 
         // On recupere l'id du storage que possède l'utilisateur
-        $storageId = $user->getUserStats();
+        $userStats = $user->getUserStats();
 
         // On recupere l'ensemble des informations liée à ce storage qu'on envoie à la vue
-        $playerStorage = Storage::where('id', '=', "$storageId->storage_id")
-            ->get()
-            ->first();
+        $playerStorage = $userStats->getStorage();
 
         // On recupere l'ensemble des inventaires de l'utilisateur
         $inventory = Inventory::where('user_id', '=', "$userId")
