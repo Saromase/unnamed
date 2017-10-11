@@ -25,6 +25,7 @@ class CustomModel extends BaseModel
     public function __call($method, $params)
     {
         $type = substr($method, 0, 3);
+        $params[0] = $this->transformValue($params[0]);
         if (null != $var = $this->fromCamelCase(lcfirst(substr($method, 3)))) {
             if ($type == "get") {
                 return $this->__get($var);
@@ -52,13 +53,24 @@ class CustomModel extends BaseModel
         return parent::__call($method, $params);
     }
 
+    /**
+     * @param $params
+     * @return array
+     */
     private function paramsToData($params)
     {
         return array_map(function ($key, $value) {
-            /** @var mixed|BaseModel $value */
-            return [$key, "=", $value instanceof BaseModel ? $value->getId() : $value];
+            return [$key, "=", $this->transformValue($value)];
         }, array_keys($params), $params);
+    }
 
+    /**
+     * @param BaseModel|mixed $value
+     * @return mixed
+     */
+    private function transformValue($value)
+    {
+        return $value instanceof BaseModel ? $value->getId() : $value;
     }
 
     /**
