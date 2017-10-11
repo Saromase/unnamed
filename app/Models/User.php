@@ -27,6 +27,19 @@ use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
  * @property-read DatabaseNotificationCollection|DatabaseNotification[] $notifications
+ * @method static Collection|User[] findByCreatedAt($value)
+ * @method static Collection|User[] findByEmail($value)
+ * @method static Collection|User[] findByName($value)
+ * @method static Collection|User[] findByPassword($value)
+ * @method static Collection|User[] findByRememberToken($value)
+ * @method static Collection|User[] findByUpdatedAt($value)
+ * @method static User findOneByCreatedAt($value)
+ * @method static User findOneByEmail($value)
+ * @method static User findOneById($value)
+ * @method static User findOneByName($value)
+ * @method static User findOneByPassword($value)
+ * @method static User findOneByRememberToken($value)
+ * @method static User findOneByUpdatedAt($value)
  * @method Carbon getCreatedAt()
  * @method string getEmail()
  * @method integer getId()
@@ -41,13 +54,6 @@ use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
  * @method User setPassword($value)
  * @method User setRememberToken($value)
  * @method User setUpdatedAt($value)
- * @method static Builder whereCreatedAt($value)
- * @method static Builder whereEmail($value)
- * @method static Builder whereId($value)
- * @method static Builder whereName($value)
- * @method static Builder wherePassword($value)
- * @method static Builder whereRememberToken($value)
- * @method static Builder whereUpdatedAt($value)
  * @mixin \Eloquent
  */
 class User extends CustomModel implements AuthenticatableContract, AuthorizableContract, CanResetPasswordContract

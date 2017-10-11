@@ -27,9 +27,14 @@ class PhpDocGenerator extends ModelsCommand
      */
     protected $description = 'Command description';
 
+    /** @var bool $where */
+    private $where;
+
     public function handle()
     {
         $this->write = true;
+        $this->reset = true;
+        $this->where = false;
         $this->dirs = $this->laravel['config']->get('ide-helper.model_locations');
         $models = $this->loadModels();
         $this->generateDocs($models, '');
@@ -38,7 +43,7 @@ class PhpDocGenerator extends ModelsCommand
     /**
      * @param \Illuminate\Database\Eloquent\Model $model
      */
-    protected function getGetterSetterMethods($model)
+    protected function getMethods($model)
     {
         $table = $model->getConnection()->getTablePrefix() . $model->getTable();
         $schema = $model->getConnection()->getDoctrineSchemaManager($table);
@@ -95,7 +100,13 @@ class PhpDocGenerator extends ModelsCommand
 
                 $this->setMethod(Str::camel("get_" . $name), $type, [], false);
                 $this->setMethod(Str::camel("set_" . $name), '\\' . get_class($model), ['$value'], false);
-                $this->setMethod(Str::camel("where_" . $name), '\Illuminate\Database\Eloquent\Builder', ['$value']);
+                $this->setMethod(Str::camel("find_one_by_" . $name), '\\' . get_class($model), ['$value']);
+                if ($name !== "id") {
+                    $this->setMethod(Str::camel("find_by_" . $name), '\Illuminate\Database\Eloquent\Collection|\\' . get_class($model) . "[]", ['$value']);
+                }
+                if ($this->where) {
+                    $this->setMethod(Str::camel("where_" . $name), '\Illuminate\Database\Eloquent\Builder', ['$value']);
+                }
             }
         }
     }
@@ -166,9 +177,9 @@ class PhpDocGenerator extends ModelsCommand
 
                     $this->getPropertiesFromMethods($model);
                     $this->getSoftDeleteMethods($model);
-                    $this->getGetterSetterMethods($model);
-                    $output                .= $this->createPhpDocs($name);
-                    $ignore[]              = $name;
+                    $this->getMethods($model);
+                    $output .= $this->createPhpDocs($name);
+                    $ignore[] = $name;
                     $this->nullableColumns = [];
                 } catch (\Exception $e) {
                     $this->error("Exception: " . $e->getMessage() . "\nCould not analyze class $name.");
@@ -178,7 +189,7 @@ class PhpDocGenerator extends ModelsCommand
 
         if (!$hasDoctrine) {
             $this->error(
-                'Warning: `"doctrine/dbal": "~2.3"` is required to load database information. '.
+                'Warning: `"doctrine/dbal": "~2.3"` is required to load database information. ' .
                 'Please require that in your composer.json and run `composer update`.'
             );
         }
@@ -270,7 +281,7 @@ class PhpDocGenerator extends ModelsCommand
             $phpdoc->appendTag($tag);
         }
 
-        if ($this->write && ! $phpdoc->getTagsByName('mixin')) {
+        if ($this->write && !$phpdoc->getTagsByName('mixin')) {
             $phpdoc->appendTag(Tag::createInstance("@mixin \\Eloquent", $phpdoc));
         }
 
@@ -300,6 +311,4 @@ class PhpDocGenerator extends ModelsCommand
         $output = "namespace {$namespace}{\n{$docComment}\n\tclass {$classname} extends \Eloquent {}\n}\n\n";
         return $output;
     }
-
-
 }

@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection;
 
 /**
  * App\Models\UserStats
@@ -13,6 +14,17 @@ use Illuminate\Database\Eloquent\Builder;
  * @property int $life
  * @property int $money
  * @property int $inventory
+ * @method static Collection|UserStats[] findByInventory($value)
+ * @method static Collection|UserStats[] findByLife($value)
+ * @method static Collection|UserStats[] findByMoney($value)
+ * @method static Collection|UserStats[] findByStorageId($value)
+ * @method static Collection|UserStats[] findByUserId($value)
+ * @method static UserStats findOneById($value)
+ * @method static UserStats findOneByInventory($value)
+ * @method static UserStats findOneByLife($value)
+ * @method static UserStats findOneByMoney($value)
+ * @method static UserStats findOneByStorageId($value)
+ * @method static UserStats findOneByUserId($value)
  * @method integer getId()
  * @method integer getInventory()
  * @method integer getLife()
@@ -25,12 +37,6 @@ use Illuminate\Database\Eloquent\Builder;
  * @method UserStats setMoney($value)
  * @method UserStats setStorageId($value)
  * @method UserStats setUserId($value)
- * @method static Builder whereId($value)
- * @method static Builder whereInventory($value)
- * @method static Builder whereLife($value)
- * @method static Builder whereMoney($value)
- * @method static Builder whereStorageId($value)
- * @method static Builder whereUserId($value)
  * @mixin \Eloquent
  */
 class UserStats extends CustomModel

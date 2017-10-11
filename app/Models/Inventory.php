@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection;
 
 /**
  * App\Models\Inventory
@@ -15,6 +16,19 @@ use Illuminate\Database\Eloquent\Builder;
  * @property int $user_id
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
+ * @method static Collection|Inventory[] findByBuyPrice($value)
+ * @method static Collection|Inventory[] findByCreatedAt($value)
+ * @method static Collection|Inventory[] findByName($value)
+ * @method static Collection|Inventory[] findByQuantity($value)
+ * @method static Collection|Inventory[] findByUpdatedAt($value)
+ * @method static Collection|Inventory[] findByUserId($value)
+ * @method static Inventory findOneByBuyPrice($value)
+ * @method static Inventory findOneByCreatedAt($value)
+ * @method static Inventory findOneById($value)
+ * @method static Inventory findOneByName($value)
+ * @method static Inventory findOneByQuantity($value)
+ * @method static Inventory findOneByUpdatedAt($value)
+ * @method static Inventory findOneByUserId($value)
  * @method integer getBuyPrice()
  * @method Carbon getCreatedAt()
  * @method integer getId()
@@ -29,13 +43,6 @@ use Illuminate\Database\Eloquent\Builder;
  * @method Inventory setQuantity($value)
  * @method Inventory setUpdatedAt($value)
  * @method Inventory setUserId($value)
- * @method static Builder whereBuyPrice($value)
- * @method static Builder whereCreatedAt($value)
- * @method static Builder whereId($value)
- * @method static Builder whereName($value)
- * @method static Builder whereQuantity($value)
- * @method static Builder whereUpdatedAt($value)
- * @method static Builder whereUserId($value)
  * @mixin \Eloquent
  */
 class Inventory extends CustomModel

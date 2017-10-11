@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection;
 
 /**
  * App\Models\Products
@@ -12,6 +13,15 @@ use Illuminate\Database\Eloquent\Builder;
  * @property string $price
  * @property string $min_price
  * @property string $max_price
+ * @method static Collection|Products[] findByMaxPrice($value)
+ * @method static Collection|Products[] findByMinPrice($value)
+ * @method static Collection|Products[] findByName($value)
+ * @method static Collection|Products[] findByPrice($value)
+ * @method static Products findOneById($value)
+ * @method static Products findOneByMaxPrice($value)
+ * @method static Products findOneByMinPrice($value)
+ * @method static Products findOneByName($value)
+ * @method static Products findOneByPrice($value)
  * @method integer getId()
  * @method string getMaxPrice()
  * @method string getMinPrice()
@@ -22,11 +32,6 @@ use Illuminate\Database\Eloquent\Builder;
  * @method Products setMinPrice($value)
  * @method Products setName($value)
  * @method Products setPrice($value)
- * @method static Builder whereId($value)
- * @method static Builder whereMaxPrice($value)
- * @method static Builder whereMinPrice($value)
- * @method static Builder whereName($value)
- * @method static Builder wherePrice($value)
  * @mixin \Eloquent
  */
 class Products extends CustomModel

@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection;
 
 /**
  * App\Models\Storage
@@ -11,6 +11,13 @@ use Illuminate\Database\Eloquent\Builder;
  * @property string $name
  * @property int $length
  * @property int $price
+ * @method static Collection|Storage[] findByLength($value)
+ * @method static Collection|Storage[] findByName($value)
+ * @method static Collection|Storage[] findByPrice($value)
+ * @method static Storage findOneById($value)
+ * @method static Storage findOneByLength($value)
+ * @method static Storage findOneByName($value)
+ * @method static Storage findOneByPrice($value)
  * @method integer getId()
  * @method integer getLength()
  * @method string getName()
@@ -19,10 +26,6 @@ use Illuminate\Database\Eloquent\Builder;
  * @method Storage setLength($value)
  * @method Storage setName($value)
  * @method Storage setPrice($value)
- * @method static Builder whereId($value)
- * @method static Builder whereLength($value)
- * @method static Builder whereName($value)
- * @method static Builder wherePrice($value)
  * @mixin \Eloquent
  */
 class Storage extends CustomModel

@@ -11,9 +11,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model as BaseModel;
 
 /**
- * Class Model
+ * App\Models\CustomModel
  *
- * @package App\Models
  * @mixin \Eloquent
  */
 class CustomModel extends BaseModel
@@ -31,6 +30,16 @@ class CustomModel extends BaseModel
                 return $this->__get($var);
             }elseif ($type == "set") {
                 return $this->__set($var, $params[0]);
+            }elseif(strpos($method, "findOneBy") !== false) {
+                $column = str_replace("findOneBy", "", $method);
+                $column = $this->fromCamelCase(lcfirst($column));
+
+                return $this->where($column, "=", $params[0])->first();
+            }elseif(strpos($method, "findBy") !== false) {
+                $column = str_replace("findBy", "", $method);
+                $column = $this->fromCamelCase(lcfirst($column));
+
+                return $this->where($column, "=", $params[0])->get();
             }
         }
 
