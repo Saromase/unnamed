@@ -22,13 +22,14 @@ class StorageController extends Controller
         // On recupere l'ensemble des inventaires de l'utilisateur
         $inventory = Auth::user()->getInventory();
 
+        var_dump($inventory);
+
         // On verifie si il possede un inventaire si il est vide on lui met un message
-        if ($inventory == null){
+        if ($inventory->isEmpty()) {
             return view('storage', ['storage' => $playerStorage, 'warning' => 'Vous n\'avez aucun produit !', 'inventory' => $inventory]);
         } else {
             return view('storage', ['storage' => $playerStorage, 'inventory' => $inventory]);
         }
     }
-
 
 }
