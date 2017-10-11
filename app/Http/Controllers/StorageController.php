@@ -24,7 +24,7 @@ class StorageController extends Controller
 
         // On verifie si il possede un inventaire si il est vide on lui met un message
         if ($inventory == null){
-            return view('storage', ['storage' => $playerStorage, 'warning' => 'Vous n\'avez aucun produit !']);
+            return view('storage', ['storage' => $playerStorage, 'warning' => 'Vous n\'avez aucun produit !', 'inventory' => $inventory]);
         } else {
             return view('storage', ['storage' => $playerStorage, 'inventory' => $inventory]);
         }
