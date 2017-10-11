@@ -33,14 +33,31 @@ class MarketController extends Controller
             $userStatsInventory = $userStats->getInventory();
             $userStatsInventory--;
             $userStats->setInventory($userStatsInventory)->save();
-            
-            $userProductInventory = Inventory::findOneByName($productsBuy->name)->findOneByUserId($userId);
-            
-            $userProductInventoryQuantity = $userProductInventory->quantity;
-            $userProductInventoryQuantity++;
-            Inventory::findOneByName($productsBuy->name)->findOneByUserId($userId)->setQuantity($userProductInventoryQuantity)->save();
-            
             $userStats->setMoney($userStats->money - $productsBuy->price)->save();
+            
+            $inventory = Inventory::findOneBy([
+                'user_id' => $userId, 
+                'name' => $productsBuy->name
+            ]);
+            if ($inventory === null){
+                Inventory::insert([
+                    'name' => $productsBuy->getName(),
+                    'user_id' => $user->getId(),
+                    'buy_price' => $productsBuy->getPrice(),
+                    'quantity' => 1,
+                    'created_at' => null,
+                    'updated_at' => null
+                    
+                ]);
+            } else {
+                $productQuantity = $inventory->quantity;
+                $productQuantity++;
+                Inventory::findOneByUserId($userId)
+                    ->findOneByName($productsBuy->name)
+                    ->setQuantity($productQuantity)
+                    ->save();
+            }
+            
             
             $message = 'Vous avez bien buy';
             
