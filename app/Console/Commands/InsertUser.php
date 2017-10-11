@@ -3,9 +3,9 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
-use App\User;
-use App\UserStats;
-use App\Inventory;
+use App\Models\User;
+use App\Models\UserStats;
+use App\Models\Inventory;
 
 
 class InsertUser extends Command
@@ -25,19 +25,8 @@ class InsertUser extends Command
     protected $description = 'Insert One User Test ';
 
     /**
-     * Create a new command instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        parent::__construct();
-    }
-
-    /**
      * Execute the console command.
      *
-     * @return mixed
      */
     public function handle()
     {   

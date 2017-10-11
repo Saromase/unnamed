@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\UserStats;
+use App\Models\UserStats;
 
 class UserStatsController extends Controller
 {

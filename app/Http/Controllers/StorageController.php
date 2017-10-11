@@ -3,10 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Auth;
-use App\Storage;
-use App\UserStats;
-use App\Inventory;
-use App\Products;
+use App\Models\Storage;
+use App\Models\UserStats;
+use App\Models\Inventory;
+use App\Models\Products;
 
 class StorageController extends Controller
 {
@@ -16,28 +16,37 @@ class StorageController extends Controller
 
     public function displayStorages() {
         $userId = Auth::user()->id;
-        $storageId = UserStats::where('user_id', '=', "$userId")->select('user_storage')->get();
-        $inventoryId = UserStats::where('user_id', '=', "$userId")->select('user_inventory')->get();
-        foreach ($storageId as $idS){}
-        $playerStorage = Storage::where('id', '=', "$idS->user_storage")->get();
-        foreach ($inventoryId as $idI){}
-        $inventory = Inventory::where('id', '=', "$userId")->get();
-        \Log::info($inventory);
-        foreach ($inventory as $inv){}
-        \Log::info($inv->water);
-        $productsName = Products::select('name')->get();
-        $productsNumber = [];
-        foreach ($inventory as $material) {
-          foreach ($productsName as $productName) {
-            $productName = $productName->name;
-            array_push($productsNumber, $material->$productName);
-          }
-        }
+
+        // On recupere l'id du storage que possède l'utilisateur
+        $storageId = UserStats::where('user_id', '=', "$userId")
+            ->select('user_storage')
+            ->get()
+            ->first();
+
+        // On recupere l'ensemble des informations liée à ce storage qu'on envoie à la vue
+        $playerStorage = Storage::where('id', '=', "$storageId->user_storage")
+            ->get()
+            ->first();
+
+        // On recupere l'id de l'inventaire que possède l'utilisateur
+        $inventoryId = UserStats::where('user_id', '=', "$userId")
+            ->select('user_inventory')
+            ->get()
+            ->first();
+
+        // On recupere l'ensemble des informations liée à l'inventaire de l'utilisateur
+        $inventory = Inventory::where('id', '=', "$inventoryId->user_inventory")
+            ->get();
+
+        // On récupère la liste des produits
+        $productsList = Products::select('name')
+            ->get();
+
+
         return view('storage', [
             'storage' => $playerStorage,
             'inventory' => $inventory,
-            'productsName' => $productsName,
-            'productsNumber' => $productsNumber
+            'productsList' => $productsList
         ]);
     }
 

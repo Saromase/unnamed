@@ -13,18 +13,11 @@ class CreateUserInventoryTable extends Migration
     {
         Schema::create('inventory', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name')->default(0);
-            $table->integer('Eau')->default(0);
-            $table->integer('Pierre')->default(0);
-            $table->integer('Gaz naturel')->default(0);
-            $table->integer('Petrole')->default(0);
-            $table->integer('Aluminium')->default(0);
-            $table->integer('Or')->default(0);
-            $table->integer('Cuivre')->default(0);
-            $table->integer('Fer')->default(0);
-            $table->integer('Sable')->default(0);
-            $table->integer('Charbon')->default(0);
-            $table->integer('Bois')->default(0);
+            $table->string('name');
+            $table->integer('buy_price');
+            $table->integer('quantity');
+            $table->integer('user_id')->unsigned();
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamp('created_at')->nullable();
             $table->timestamp('updated_at')->nullable();
             $table->engine = 'InnoDB';

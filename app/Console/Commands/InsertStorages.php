@@ -3,7 +3,7 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
-use App\Storage;
+use App\Models\Storage;
 
 class InsertStorages extends Command
 {

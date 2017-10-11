@@ -1,29 +1,34 @@
-@extends('layouts.app') @section('content')
-<div id="storage" class="container main">
-    @foreach($storage as $local)@endforeach
-    <h1 class="<text-center></text-center>">Bienvenue dans votre {{ $local->name }}</h1>
+@extends('layouts.app')
+@section('content')
+    <div id="storage" class="container main">
+        <h1>Bienvenue dans votre {{ $storage->name }}</h1>
 
-    <div class="row">
-        <h2 class="text-center">{{ $local->name }}</h2>
-        <h3 class="text-center"> Taille du stockage : {{ $local->length }}</h3>
-        <div>
-            <table class="table">
-                <thead>
-                    <th>Nom</th>
-                    <th>Nombre</th>
-                </thead>
-                <tbody>
-                    @for($i = 0; $i < count($productsName); $i++)
-                        <tr>
-                            <td>{{ $productsName[$i]->name }}</td>
-                            <td>{{ $productsNumber[$i] }}</td>
-                        </tr>
-                    @endfor
-                </tbody>
-            </table>
+        <div class="row">
+
+            <h2 class="text-center">{{ $storage->name }}</h2>
+            <h3 class="text-center"> Taille du stockage : {{ $storage->length }}</h3>
+
+            <div>
+                <table class="table">
+                    <thead>
+                        <th>Nom</th>
+                        <th>Nombre</th>
+                    </thead>
+                    <tbody>
+                      @foreach($productsList as $product)
+                            @foreach($inventory as $item)
+                                <tr>
+                                    <td>{{ $product->name }}</td>
+                                    <td>{{ $item->{$product->name} }}</td>
+                                </tr>
+                            @endforeach
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+
         </div>
+
+
     </div>
-
-
-</div>
 @endsection
