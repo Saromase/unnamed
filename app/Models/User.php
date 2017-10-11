@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Notifications\DatabaseNotification;
 use Illuminate\Notifications\DatabaseNotificationCollection;
 use Illuminate\Notifications\Notifiable;
@@ -77,5 +78,13 @@ class User extends CustomModel implements AuthenticatableContract, AuthorizableC
     public function getUserStats()
     {
         return UserStats::whereUserId($this->getId())->first();
+    }
+
+    /**
+     * @return Collection|Inventory[]
+     */
+    public function getInventory()
+    {
+        return Inventory::whereUserId($this->getId())->get();
     }
 }
