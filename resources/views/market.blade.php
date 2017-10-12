@@ -6,9 +6,9 @@
   {{ $success}}
 </div>
 @endisset
-@isset ($faillure)
+@isset ($failure)
 <div class="alert alert-danger">
-  {{ $faillure}}
+  {{ $failure}}
 </div>
 @endisset
 

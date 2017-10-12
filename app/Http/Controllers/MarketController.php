@@ -2,81 +2,81 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use Carbon\Carbon;
+use Illuminate\Contracts\View\Factory;
 use Illuminate\Support\Facades\Auth;
 
-use App\Models\UserStats;
 use App\Models\Products;
 use App\Models\Inventory;
+use Illuminate\View\View;
 
 class MarketController extends Controller
 {
-    public function __construct() {
+    public function __construct()
+    {
         $this->middleware('auth');
     }
 
-    public function displayProducts() {
+    /**
+     * @return Factory|View
+     */
+    public function displayProducts()
+    {
         $products = Products::get();
         return view('market', [
             'products' => $products
         ]);
     }
-    public function buyProduct($id) {
+
+    /**
+     * @param $id
+     * @return Factory|View
+     */
+    public function buyProduct($id)
+    {
         $user = Auth::user();
-        $userId = Auth::user()->id;
         $userStats = $user->getUserStats();
         $productsBuy = Products::findOneById($id);
         $products = Products::get();
 
-        if($userStats->money >= $productsBuy->price && $userStats->inventory != 0){
-            
+        if ($userStats->inventory == 0) {
+            return view('market', [
+                'failure' => 'Vous n\'avez pas assez de place',
+                'products' => $products
+            ]);
+        } else if ($userStats->getMoney() < $productsBuy->getPrice()) {
+            return view('market', [
+                'failure' => 'Vous n\'avez pas assez d\'argent',
+                'products' => $products
+            ]);
+        } else {
             $userStatsInventory = $userStats->getInventory();
             $userStatsInventory--;
             $userStats->setInventory($userStatsInventory)->save();
-            $userStats->setMoney($userStats->money - $productsBuy->price)->save();
-            
-            $inventory = Inventory::findOneBy([
-                'user_id' => $userId, 
-                'name' => $productsBuy->name
-            ]);
-            if ($inventory === null){
+            $userStats->subMoney($productsBuy->getPrice())->save();
+
+            if (null === $inventory = Inventory::findOneBy(['user_id' => $user, 'name' => $productsBuy->name])) {
                 Inventory::insert([
                     'name' => $productsBuy->getName(),
                     'user_id' => $user->getId(),
                     'buy_price' => $productsBuy->getPrice(),
                     'quantity' => 1,
-                    'created_at' => null,
-                    'updated_at' => null
-                    
+                    'created_at' => new Carbon(),
+                    'updated_at' => new Carbon()
                 ]);
             } else {
-                $productQuantity = $inventory->quantity;
-                $productQuantity++;
-                Inventory::findOneByUserId($userId)
+                Inventory::findOneByUserId($user)
                     ->findOneByName($productsBuy->name)
-                    ->setQuantity($productQuantity)
+                    ->setQuantity($inventory->quantity + 1)
                     ->save();
             }
-            
-            
-            $message = 'Vous avez bien buy';
-            
+
             return view('market', [
-                'success' => $message,
-                'products' => $products
-            ]);
-        } else if ($userStats->inventory == 0){
-            $message = 'Vous n\'avez pas assez de place';
-            return view('market', [
-                'faillure' => $message,
-                'products' => $products
-            ]);
-        } else if ($userStats->money < $productsBuy->price){
-            $message = 'Vous n\'avez pas assez d\'argent ';
-            return view('market', [
-                'faillure' => $message,
+                'success' => 'Vous avez bien acheté',
                 'products' => $products
             ]);
         }
+
     }
+
 }

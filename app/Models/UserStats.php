@@ -43,7 +43,7 @@ use Illuminate\Database\Eloquent\Collection;
 class UserStats extends CustomModel
 {
     protected $table = 'player_stats';
-    
+
     public $timestamps = false;
 
     /**
@@ -52,5 +52,14 @@ class UserStats extends CustomModel
     public function getStorage()
     {
         return Storage::findOneById($this->storage_id);
+    }
+
+    /**
+     * @param int $nb
+     * @return UserStats
+     */
+    public function subMoney($nb)
+    {
+        return $this->setMoney($this->getMoney() - $nb);
     }
 }
