@@ -91,6 +91,11 @@ class MarketController extends Controller
                 'failure' => 'Vous ne posséder pas ce produit',
                 'products' => $products
             ]);
+        }else if ($inventory->quantity === 0) {
+            return view('market', [
+                'failure' => 'Vous ne posséder pas ce produit',
+                'products' => $products
+            ]);
         } else {
             $userStatsInventory = $userStats->getInventory();
             $userStatsInventory++;
@@ -102,7 +107,7 @@ class MarketController extends Controller
                     ->setQuantity($inventory->quantity - 1)
                     ->save();
             return view('market', [
-                'success' => 'Vous ne posséder pas ce produit',
+                'success' => 'Vous avez bien vendu le produit',
                 'products' => $products
             ]);
         }
