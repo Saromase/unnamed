@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\UserStats;
+use Illuminate\Support\Facades\Auth;
 
 class UserStatsController extends Controller
 {
@@ -13,12 +14,10 @@ class UserStatsController extends Controller
 
     public function displayUserStats()
     {
-        $stats = UserStats::get();
-        \Log::info($stats);
-        echo $stats;
-        foreach ($stats as $datas) {
-            echo " Argent : " . $datas->money;
-            echo " Vie : " . $datas->life;
-        }
+        $userId = Auth::user()->id;
+        $userStats = UserStats::findOneByUserId($userId);
+        return view('home', [
+            'user' => $userStats
+        ]);
     }
 }
