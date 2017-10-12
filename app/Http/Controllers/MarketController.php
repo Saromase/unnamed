@@ -78,5 +78,34 @@ class MarketController extends Controller
         }
 
     }
+    
+    public function sellProduct($id){
+        $user = Auth::user();
+        $userStats = $user->getUserStats();
+        $productsBuy = Products::findOneById($id);
+        $products = Products::get();
+        $inventory = Inventory::findOneBy(['user_id' => $user, 'name' => $productsBuy->name]);
+                
+        if ($inventory === null){
+            return view('market', [
+                'failure' => 'Vous ne posséder pas ce produit',
+                'products' => $products
+            ]);
+        } else {
+            $userStatsInventory = $userStats->getInventory();
+            $userStatsInventory++;
+            $userStats->setInventory($userStatsInventory)->save();
+            $userStats->addMoney($productsBuy->getPrice())->save();
+            
+            Inventory::findOneByUserId($user)
+                    ->findOneByName($productsBuy->name)
+                    ->setQuantity($inventory->quantity - 1)
+                    ->save();
+            return view('market', [
+                'success' => 'Vous ne posséder pas ce produit',
+                'products' => $products
+            ]);
+        }
+    }
 
 }

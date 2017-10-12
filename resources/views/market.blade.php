@@ -24,6 +24,10 @@
                     {{ csrf_field() }}
                     <button type="submit">Acheter une unité</button>
                 </form>
+                <form action='/market/sell/{{$product->id}}' method="get">
+                    {{ csrf_field() }}
+                    <button type="submit">Vendre une unité</button>
+                </form>
             </div>
         @endforeach
     </div>
