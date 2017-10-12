@@ -62,6 +62,11 @@ class UserStats extends CustomModel
     {
         return $this->setMoney($this->getMoney() - $nb);
     }
+
+    /**
+     * @param int $nb
+     * @return UserStats
+     */
     public function addMoney($nb)
     {
         return $this->setMoney($this->getMoney() + $nb);

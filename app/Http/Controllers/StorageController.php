@@ -24,7 +24,7 @@ class StorageController extends Controller
         $inventory = Auth::user()->getInventory();
 
         // On récupère la money de l'utilisateur
-        $playerMoney = Auth::user()->getUserStats()->getmoney();
+        $playerMoney = Auth::user()->getUserStats()->getMoney();
 
         // id de storage upgrader
         $playerStorageId = $playerStorage->id + 1;
@@ -45,7 +45,6 @@ class StorageController extends Controller
                 'inventory' => $inventory,
                 'playerMoney' => $playerMoney,
                 'storageUpgrade' => $storageUpgrade
-
             ]);
         }
     }
