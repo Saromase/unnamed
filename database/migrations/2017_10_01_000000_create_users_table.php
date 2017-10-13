@@ -18,8 +18,14 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();
-            $table->engine = 'InnoDB';
+            $table->integer('life');
+            $table->integer('money');
+            $table->integer('inventory_size');
 
+            $table->integer('storage_id')->unsigned();
+            $table->foreign('storage_id')->references('id')->on('storage');
+
+            $table->engine = 'InnoDB';
         });
     }
 
