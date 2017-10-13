@@ -28,20 +28,30 @@ class StorageController extends Controller {
         // On récupère la money de l'utilisateur
         $playerMoney = Auth::user()->getUserStats()->getMoney();
 
-        // id de storage upgrader
-        $playerStorageId = $playerStorage->id + 1;
+        // On récupère l'id du storage actuel
+        $playerStorageId = $playerStorage->id;
+
+        // on récupère le nombre de stockage
+        $storageMax = last(Storage::select('id')->get());
+
+        // id du futur storage
+        $futureStorageId = $playerStorageId + 1;
 
         // On récupère la valeur de l'amélioration du storage
-        $upgradePrice = Storage::findOneById($playerStorageId)->price;
+        $upgradePrice = Storage::findOneById($futureStorageId)->price;
 
         // On verifie si il possede un inventaire si il est vide on lui met un message
         if ($inventory->isEmpty()) {
+            session()->flash('warning', 'Vous n\'avez aucun produit !');
             return view('storage', [
                 'storage' => $playerStorage,
-                'warning' => 'Vous n\'avez aucun produit !',
-                'inventory' => $inventory
+                'inventory' => $inventory,
+                'playerMoney' => $playerMoney,
+                'upgradePrice' => $upgradePrice
             ]);
-        } else {
+        }
+
+        else {
             return view('storage', [
                 'storage' => $playerStorage,
                 'inventory' => $inventory,
@@ -51,7 +61,9 @@ class StorageController extends Controller {
         }
     }
 
-    // Fonction d'amélioration du storage
+    /**
+    * @return var session
+    */
     public function storageUpgrade() {
       // on récupère les stats de l'utilisateur
       $playerStats = Auth::user()->getUserStats();
@@ -79,32 +91,12 @@ class StorageController extends Controller {
               ->setMoney($playerMoney - $upgradePrice)
               ->save();
 
-          // actualise les données de l'utilisateur pour que les données renvoyé soit à jour
-          $playerStats = Auth::user()->getUserStats();
-                        
-          return view('storage', [
-              'storage' => $playerStorage,
-              'inventory' => $inventory,
-              'playerMoney' => $playerMoney,
-              'upgradePrice' => $upgradePrice,
-              'success' => 'Votre stockage a bien été améliorer.'
-          ]);
+          return redirect('storage')->with('success', 'Amélioration réussie.');
+
       } elseif ($playerMoney < $upgradePrice) {
-          return view('storage', [
-              'storage' => $playerStorage,
-              'inventory' => $inventory,
-              'playerMoney' => $playerMoney,
-              'upgradePrice' => $upgradePrice,
-              'warning' => 'Vous n\'avez pas assez d\'argent !'
-          ]);
+          return redirect('storage')->with('warning', 'Vous n\'avez pas assez d\'argent !');
       } else {
-        return view('storage', [
-            'storage' => $playerStorage,
-            'inventory' => $inventory,
-            'playerMoney' => $playerMoney,
-            'upgradePrice' => $upgradePrice,
-            'warning' => 'Erreur !!!'
-        ]);
+        return redirect('storage')->with('warning', 'Erreur !!!');
       }
 
     }
