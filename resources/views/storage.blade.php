@@ -1,5 +1,20 @@
 @extends('layouts.app')
 @section('content')
+
+    <!-- Error -->
+    @isset ($warning)
+        <div class="alert alert-danger">
+            {{ $failure}}
+        </div>
+    @endisset
+
+    <!-- Success -->
+    @isset ($success)
+        <div class="alert alert-success">
+            {{ $success }}
+        </div>
+    @endisset
+
     <div id="storage" class="container main">
         <h1>Bienvenue dans votre {{ $storage->name }}</h1>
 
@@ -35,30 +50,6 @@
     </div>
 
 @endsection
-
-<!-- Error -->
-@isset ($warning)
-    <!-- Modal -->
-    <div class="modal fade" id="warning" role="dialog">
-        <div class="modal-dialog">
-
-            <!-- Modal content-->
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title"><strong>Oups !</strong> Une erreur s'est produite !</h4>
-                </div>
-                <div class="modal-body">
-                    <p>{{ $warning }}</p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
-                </div>
-            </div>
-
-        </div>
-    </div>
-@endisset
 
 <!-- Modal -->
 <div class="modal fade" id="storageUpgrade" role="dialog">

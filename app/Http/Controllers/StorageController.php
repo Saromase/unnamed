@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
+
 use App\Models\Storage;
+use App\Models\UserStats;
 
 class StorageController extends Controller {
 
@@ -54,6 +56,8 @@ class StorageController extends Controller {
       // on récupère les stats de l'utilisateur
       $playerStats = Auth::user()->getUserStats();
 
+      $playerId = $playerStats->getId();
+
       // On recupere l'id du storage actuel
       $playerStorage = $playerStats->getStorage();
 
@@ -70,7 +74,14 @@ class StorageController extends Controller {
       $playerMoney = $playerStats->getMoney();
 
       if ($playerMoney >= $upgradePrice) {
-          $playerStats->setStorageId($futureStorageId);
+          UserStats::findOneByUserId($playerId)
+              ->setStorageId($futureStorageId)
+              ->setMoney($playerMoney - $upgradePrice)
+              ->save();
+
+          // actualise les données de l'utilisateur pour que les données renvoyé soit à jour
+          $playerStats = Auth::user()->getUserStats();
+                        
           return view('storage', [
               'storage' => $playerStorage,
               'inventory' => $inventory,
