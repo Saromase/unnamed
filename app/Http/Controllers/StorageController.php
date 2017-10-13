@@ -31,33 +31,38 @@ class StorageController extends Controller {
         // On récupère l'id du storage actuel
         $playerStorageId = $playerStorage->id;
 
-        // on récupère le nombre de stockage
-        $storageMax = last(Storage::select('id')->get());
+        
+        // On récupére l'id du dernier storage
+        $lastStorage = Storage::select('id')->get()->last()->id;
 
-        // id du futur storage
-        $futureStorageId = $playerStorageId + 1;
-
-        // On récupère la valeur de l'amélioration du storage
-        $upgradePrice = Storage::findOneById($futureStorageId)->price;
-
-        // On verifie si il possede un inventaire si il est vide on lui met un message
-        if ($inventory->isEmpty()) {
-            session()->flash('warning', 'Vous n\'avez aucun produit !');
+        if ( $lastStorage === Auth::user()->getUserStats()->storage_id) {
             return view('storage', [
                 'storage' => $playerStorage,
-                'inventory' => $inventory,
-                'playerMoney' => $playerMoney,
-                'upgradePrice' => $upgradePrice
+                'inventory' => $inventory
             ]);
-        }
+        } else {
+            // id du futur storage
+            $futureStorageId = $playerStorageId + 1;
 
-        else {
-            return view('storage', [
-                'storage' => $playerStorage,
-                'inventory' => $inventory,
-                'playerMoney' => $playerMoney,
-                'upgradePrice' => $upgradePrice
-            ]);
+            // On récupère la valeur de l'amélioration du storage
+            $upgradePrice = Storage::findOneById($futureStorageId)->price;
+            // On verifie si il possede un inventaire si il est vide on lui met un message
+            if ($inventory->isEmpty()) {
+                session()->flash('warning', 'Vous n\'avez aucun produit !');
+                return view('storage', [
+                    'storage' => $playerStorage,
+                    'inventory' => $inventory,
+                    'playerMoney' => $playerMoney,
+                    'upgradePrice' => $upgradePrice
+                ]);
+            } else {
+                return view('storage', [
+                    'storage' => $playerStorage,
+                    'inventory' => $inventory,
+                    'playerMoney' => $playerMoney,
+                    'upgradePrice' => $upgradePrice
+                ]);
+            }
         }
     }
 

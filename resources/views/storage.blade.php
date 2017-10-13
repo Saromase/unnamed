@@ -24,9 +24,9 @@
             <h3 class="text-center"> Taille du stockage : {{ $storage->length }}</h3>
 
             <!-- Button upgrade storage -->
-            @isset($buttonUpgrade)
+            @isset($upgradePrice)
                 <button class="btn btn-info" type="button" data-toggle="modal" data-target="#storageUpgrade">Plus d'espace ?</button>
-            @endisset
+           
 
 
             <!-- Modal -->
@@ -52,6 +52,7 @@
 
                 </div>
             </div>
+             @endisset
 
             <!-- List items -->
             <div>
