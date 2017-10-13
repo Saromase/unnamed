@@ -4,8 +4,6 @@ namespace App\Http\Controllers;
 
 use Carbon\Carbon;
 use Illuminate\Contracts\View\Factory;
-use Illuminate\Support\Facades\Auth;
-
 use App\Models\Products;
 use App\Models\Inventory;
 use Illuminate\View\View;
@@ -34,26 +32,25 @@ class MarketController extends Controller
      */
     public function buyProduct($id)
     {
-        $user = Auth::user();
-        $userStats = $user->getUserStats();
+        $user = $this->getUser();
         $productsBuy = Products::findOneById($id);
         $products = Products::get();
 
-        if ($userStats->inventory == 0) {
+        if ($user->inventory == 0) {
             return view('market', [
                 'failure' => 'Vous n\'avez pas assez de place',
                 'products' => $products
             ]);
-        } else if ($userStats->getMoney() < $productsBuy->getPrice()) {
+        } else if ($user->getMoney() < $productsBuy->getPrice()) {
             return view('market', [
                 'failure' => 'Vous n\'avez pas assez d\'argent',
                 'products' => $products
             ]);
         } else {
-            $userStatsInventory = $userStats->getInventory();
-            $userStatsInventory--;
-            $userStats->setInventory($userStatsInventory)->save();
-            $userStats->subMoney($productsBuy->getPrice())->save();
+            $userInventory = $user->getInventory();
+            $userInventory--;
+            $user->setInventory($userInventory)->save();
+            $user->subMoney($productsBuy->getPrice())->save();
 
             if (null === $inventory = Inventory::findOneBy(['user_id' => $user, 'name' => $productsBuy->name])) {
                 Inventory::insert([
@@ -78,34 +75,39 @@ class MarketController extends Controller
         }
 
     }
-    
-    public function sellProduct($id){
-        $user = Auth::user();
-        $userStats = $user->getUserStats();
+
+    /**
+     * @param $id
+     * @return Factory|View
+     */
+    public function sellProduct($id)
+    {
+        $user = $this->getUser();
         $productsBuy = Products::findOneById($id);
         $products = Products::get();
         $inventory = Inventory::findOneBy(['user_id' => $user, 'name' => $productsBuy->name]);
-                
-        if ($inventory === null){
+
+        if ($inventory === null) {
             return view('market', [
                 'failure' => 'Vous ne posséder pas ce produit',
                 'products' => $products
             ]);
-        }else if ($inventory->quantity === 0) {
+        } else if ($inventory->quantity === 0) {
             return view('market', [
                 'failure' => 'Vous ne posséder pas ce produit',
                 'products' => $products
             ]);
         } else {
-            $userStatsInventory = $userStats->getInventory();
-            $userStatsInventory++;
-            $userStats->setInventory($userStatsInventory)->save();
-            $userStats->addMoney($productsBuy->getPrice())->save();
-            
+            $userInventory = $user->getInventory();
+            $userInventory++;
+            $user->setInventory($userInventory)->save();
+            $user->addMoney($productsBuy->getPrice())->save();
+
             Inventory::findOneByUserId($user)
-                    ->findOneByName($productsBuy->name)
-                    ->setQuantity($inventory->quantity - 1)
-                    ->save();
+                ->findOneByName($productsBuy->name)
+                ->setQuantity($inventory->quantity - 1)
+                ->save();
+
             return view('market', [
                 'success' => 'Vous avez bien vendu le produit',
                 'products' => $products

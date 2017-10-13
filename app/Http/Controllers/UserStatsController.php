@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\UserStats;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\View\View;
 
 class UserStatsController extends Controller
 {
@@ -12,12 +12,11 @@ class UserStatsController extends Controller
         $this->middleware('auth');
     }
 
+    /**
+     * @return Factory|View
+     */
     public function displayUserStats()
     {
-        $userId = Auth::user()->id;
-        $userStats = UserStats::findOneByUserId($userId);
-        return view('home', [
-            'user' => $userStats
-        ]);
+        return view('home', ['user' => $this->getUser()]);
     }
 }

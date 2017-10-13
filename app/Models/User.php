@@ -14,7 +14,6 @@ use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 
-
 /**
  * App\Models\User
  *
@@ -22,6 +21,10 @@ use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
  * @property string $name
  * @property string $email
  * @property string $password
+ * @property int $storage_id
+ * @property int $life
+ * @property int $money
+ * @property int $inventory
  * @property string|null $remember_token
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
@@ -33,6 +36,10 @@ use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
  * @method static Collection|User[] findByPassword($value)
  * @method static Collection|User[] findByRememberToken($value)
  * @method static Collection|User[] findByUpdatedAt($value)
+ * @method static Collection|User[] findByInventory($value)
+ * @method static Collection|User[] findByLife($value)
+ * @method static Collection|User[] findByMoney($value)
+ * @method static Collection|User[] findByStorageId($value)
  * @method static User findOneBy(array $value)
  * @method static User findOneByCreatedAt($value)
  * @method static User findOneByEmail($value)
@@ -41,13 +48,24 @@ use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
  * @method static User findOneByPassword($value)
  * @method static User findOneByRememberToken($value)
  * @method static User findOneByUpdatedAt($value)
- * @method Carbon getCreatedAt()
- * @method string getEmail()
+ * @method static User findOneByInventory($value)
+ * @method static User findOneByLife($value)
+ * @method static User findOneByMoney($value)
+ * @method static User findOneByStorageId($value)
  * @method integer getId()
+ * @method string getEmail()
  * @method string getName()
  * @method string getPassword()
  * @method string getRememberToken()
  * @method Carbon getUpdatedAt()
+ * @method Carbon getCreatedAt()
+ * @method integer getLife()
+ * @method integer getMoney()
+ * @method integer getStorageId()
+ * @method User setInventory($value)
+ * @method User setLife($value)
+ * @method User setMoney($value)
+ * @method User setStorageId($value)
  * @method User setCreatedAt($value)
  * @method User setEmail($value)
  * @method User setId($value)
@@ -80,18 +98,45 @@ class User extends CustomModel implements AuthenticatableContract, AuthorizableC
     ];
 
     /**
-     * @return UserStats|null
-     */
-    public function getUserStats()
-    {
-        return UserStats::findOneById($this->getId());
-    }
-
-    /**
      * @return Collection|Inventory[]
      */
     public function getInventory()
     {
         return Inventory::findByUserId($this->getId());
+    }
+
+    /**
+     * @return Storage|null
+     */
+    public function getStorage()
+    {
+        return Storage::findOneById($this->storage_id);
+    }
+
+    /**
+     * @param int $nb
+     * @return User
+     */
+    public function subMoney($nb)
+    {
+        return $this->setMoney($this->getMoney() - $nb);
+    }
+
+    /**
+     * @param int $nb
+     * @return User
+     */
+    public function addMoney($nb)
+    {
+        return $this->setMoney($this->getMoney() + $nb);
+    }
+
+    /**
+     * @param int $nb
+     * @return User
+     */
+    public function addInventory($nb)
+    {
+        return $this->setInventory($this->getInventory() + $nb);
     }
 }
