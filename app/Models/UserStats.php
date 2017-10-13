@@ -71,4 +71,9 @@ class UserStats extends CustomModel
     {
         return $this->setMoney($this->getMoney() + $nb);
     }
+
+    public function addInventory($nb)
+    {
+        return $this->setInventory($this->getInventory() + $nb);
+    }
 }

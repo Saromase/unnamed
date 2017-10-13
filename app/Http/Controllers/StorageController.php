@@ -31,7 +31,7 @@ class StorageController extends Controller {
         // On récupère l'id du storage actuel
         $playerStorageId = $playerStorage->id;
 
-        
+
         // On récupére l'id du dernier storage
         $lastStorage = Storage::select('id')->get()->last()->id;
 
@@ -84,6 +84,12 @@ class StorageController extends Controller {
       // id de storage upgrader
       $futureStorageId = $playerStorage->getId() + 1;
 
+      $futureStorage = Storage::findOneById($futureStorageId);
+
+      // inventaire à ajouté
+      $addInventory = $futureStorage->length - $playerStorage->length;
+      \Log::info($addInventory);
+
       // prix de l'upgrade
       $upgradePrice = Storage::findOneById($futureStorageId)->price;
 
@@ -94,6 +100,7 @@ class StorageController extends Controller {
           UserStats::findOneByUserId($playerId)
               ->setStorageId($futureStorageId)
               ->setMoney($playerMoney - $upgradePrice)
+              ->addInventory($addInventory)
               ->save();
 
           return redirect('storage')->with('success', 'Amélioration réussie.');
