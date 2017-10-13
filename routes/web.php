@@ -24,3 +24,4 @@ Route::get('/market/buy/{id}', 'MarketController@buyProduct');
 Route::get('/market/sell/{id}', 'MarketController@sellProduct');
 
 Route::get('/storage', 'StorageController@displayStorages')->name('storage');
+Route::get('/storage/storageUpgrade', 'StorageController@storageUpgrade');

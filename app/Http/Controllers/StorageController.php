@@ -7,8 +7,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
 use App\Models\Storage;
 
-class StorageController extends Controller
-{
+class StorageController extends Controller {
+
     public function __construct() {
         $this->middleware('auth');
     }
@@ -30,7 +30,7 @@ class StorageController extends Controller
         $playerStorageId = $playerStorage->id + 1;
 
         // On récupère la valeur de l'amélioration du storage
-        $storageUpgrade = Storage::findOneById($playerStorageId);
+        $upgradePrice = Storage::findOneById($playerStorageId)->price;
 
         // On verifie si il possede un inventaire si il est vide on lui met un message
         if ($inventory->isEmpty()) {
@@ -44,9 +44,58 @@ class StorageController extends Controller
                 'storage' => $playerStorage,
                 'inventory' => $inventory,
                 'playerMoney' => $playerMoney,
-                'storageUpgrade' => $storageUpgrade
+                'upgradePrice' => $upgradePrice
             ]);
         }
+    }
+
+    // Fonction d'amélioration du storage
+    public function storageUpgrade() {
+      // on récupère les stats de l'utilisateur
+      $playerStats = Auth::user()->getUserStats();
+
+      // On recupere l'id du storage actuel
+      $playerStorage = $playerStats->getStorage();
+
+      // On recupere l'ensemble des inventaires de l'utilisateur
+      $inventory = Auth::user()->getInventory();
+
+      // id de storage upgrader
+      $futureStorageId = $playerStorage->getId() + 1;
+
+      // prix de l'upgrade
+      $upgradePrice = Storage::findOneById($futureStorageId)->price;
+
+      // On récupère la money de l'utilisateur
+      $playerMoney = $playerStats->getMoney();
+
+      if ($playerMoney >= $upgradePrice) {
+          $playerStats->setStorageId($futureStorageId);
+          return view('storage', [
+              'storage' => $playerStorage,
+              'inventory' => $inventory,
+              'playerMoney' => $playerMoney,
+              'upgradePrice' => $upgradePrice,
+              'success' => 'Votre stockage a bien été améliorer.'
+          ]);
+      } elseif ($playerMoney < $upgradePrice) {
+          return view('storage', [
+              'storage' => $playerStorage,
+              'inventory' => $inventory,
+              'playerMoney' => $playerMoney,
+              'upgradePrice' => $upgradePrice,
+              'warning' => 'Vous n\'avez pas assez d\'argent !'
+          ]);
+      } else {
+        return view('storage', [
+            'storage' => $playerStorage,
+            'inventory' => $inventory,
+            'playerMoney' => $playerMoney,
+            'upgradePrice' => $upgradePrice,
+            'warning' => 'Erreur !!!'
+        ]);
+      }
+
     }
 
 }
