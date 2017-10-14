@@ -98,9 +98,10 @@ class MarketController extends Controller
                 'products' => $products
             ]);
         } else {
-            $userInventory = $user->getInventory();
-            $userInventory++;
-            $user->setInventory($userInventory)->save();
+            $userInventorySize = $user->getInventorySize;
+            $userInventorySize++;
+            \Log::info($userInventorySize);
+            $user->setInventorySize($userInventorySize)->save();
             $user->addMoney($productsBuy->getPrice())->save();
 
             Inventory::findOneByUserId($user)
