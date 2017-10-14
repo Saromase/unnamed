@@ -32,6 +32,7 @@ class DatabaseContent extends Migration
             $table->string('name');
             $table->integer('quantity');
             $table->integer('percentage');
+            $table->integer('median_price');
             $table->integer('price');
             $table->integer('regeneration');
             $table->integer('supply_demand');
