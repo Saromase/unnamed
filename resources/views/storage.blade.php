@@ -26,7 +26,7 @@
             <!-- Button upgrade storage -->
             @isset($upgradePrice)
                 <button class="btn btn-info" type="button" data-toggle="modal" data-target="#storageUpgrade">Plus d'espace ?</button>
-           
+
 
 
             <!-- Modal -->
@@ -55,7 +55,7 @@
              @endisset
 
             <!-- List items -->
-            <div>
+            <div class="items">
                 <table class="table">
                     <thead>
                     <tr>
