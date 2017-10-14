@@ -9,33 +9,49 @@ use Illuminate\Database\Eloquent\Collection;
  *
  * @property int $id
  * @property string $name
- * @property string $price
- * @property string $min_price
- * @property string $max_price
- * @method static Collection|Products[] findBy(array $value)
- * @method static Collection|Products[] findByMaxPrice($value)
- * @method static Collection|Products[] findByMinPrice($value)
- * @method static Collection|Products[] findByName($value)
- * @method static Collection|Products[] findByPrice($value)
- * @method static Products findOneBy(array $value)
- * @method static Products findOneById($value)
- * @method static Products findOneByMaxPrice($value)
- * @method static Products findOneByMinPrice($value)
- * @method static Products findOneByName($value)
- * @method static Products findOneByPrice($value)
+ * @property int $quantity
+ * @property int $percentage
+ * @property int $price
+ * @property int $regeneration
+ * @property int $supply_demand
+ * @method static \Illuminate\Database\Eloquent\Collection|\App\Models\Products[] findBy(array $value)
+ * @method static \Illuminate\Database\Eloquent\Collection|\App\Models\Products[] findByName($value)
+ * @method static \Illuminate\Database\Eloquent\Collection|\App\Models\Products[] findByPercentage($value)
+ * @method static \Illuminate\Database\Eloquent\Collection|\App\Models\Products[] findByPrice($value)
+ * @method static \Illuminate\Database\Eloquent\Collection|\App\Models\Products[] findByQuantity($value)
+ * @method static \Illuminate\Database\Eloquent\Collection|\App\Models\Products[] findByRegeneration($value)
+ * @method static \Illuminate\Database\Eloquent\Collection|\App\Models\Products[] findBySupplyDemand($value)
+ * @method static \App\Models\Products findOneBy(array $value)
+ * @method static \App\Models\Products findOneById($value)
+ * @method static \App\Models\Products findOneByName($value)
+ * @method static \App\Models\Products findOneByPercentage($value)
+ * @method static \App\Models\Products findOneByPrice($value)
+ * @method static \App\Models\Products findOneByQuantity($value)
+ * @method static \App\Models\Products findOneByRegeneration($value)
+ * @method static \App\Models\Products findOneBySupplyDemand($value)
  * @method integer getId()
- * @method string getMaxPrice()
- * @method string getMinPrice()
  * @method string getName()
- * @method string getPrice()
- * @method Products setId($value)
- * @method Products setMaxPrice($value)
- * @method Products setMinPrice($value)
- * @method Products setName($value)
- * @method Products setPrice($value)
+ * @method integer getPercentage()
+ * @method integer getPrice()
+ * @method integer getQuantity()
+ * @method integer getRegeneration()
+ * @method integer getSupplyDemand()
+ * @method \App\Models\Products setId($value)
+ * @method \App\Models\Products setName($value)
+ * @method \App\Models\Products setPercentage($value)
+ * @method \App\Models\Products setPrice($value)
+ * @method \App\Models\Products setQuantity($value)
+ * @method \App\Models\Products setRegeneration($value)
+ * @method \App\Models\Products setSupplyDemand($value)
  * @mixin \Eloquent
  */
 class Products extends CustomModel
 {
     protected $table = 'products';
+    
+    public $timestamp = false;
+    
+    public function genSupply(){
+        return $this->setSupplyDemand(rand(-100,100));
+    }
 }
