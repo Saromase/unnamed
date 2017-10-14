@@ -15,9 +15,10 @@ let mix = require('laravel-mix');
 // noinspection JSUnresolvedFunction
 mix
     .js('resources/assets/js/app.js', 'public/js')
-    .js('resources/assets/js/modal.js', 'public/js')
-    .sass('resources/assets/sass/app.scss', 'public/css')
-    .sass('resources/assets/sass/market.scss', 'public/css')
-    .sass('resources/assets/sass/storage.scss', 'public/css')
-    .sass('resources/assets/sass/style.scss', 'public/css')
-    .copyDirectory('resources/assets/img', 'public/img');
+    .copyDirectory('resources/assets/css', 'public/css')
+    .sass('resources/assets/scss/app.scss', 'public/css')
+    .sass('resources/assets/sass/market.sass', 'public/css')
+    .sass('resources/assets/sass/storage.sass', 'public/css')
+    .sass('resources/assets/sass/style.sass', 'public/css')
+    .copyDirectory('resources/assets/img', 'public/img')
+;

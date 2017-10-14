@@ -8,7 +8,6 @@
         </div>
     @endif
 
-
     <!-- Success -->
     @if (session('success'))
         <div class="alert alert-success">
@@ -25,36 +24,36 @@
 
             <!-- Button upgrade storage -->
             @isset($upgradePrice)
-                <button class="btn btn-info" type="button" data-toggle="modal" data-target="#storageUpgrade">Plus d'espace ?</button>
+                <button class="btn btn-info" type="button" data-toggle="modal" data-target="#storageUpgrade">
+                    Plus d'espace ?
+                </button>
 
+                <!-- Modal -->
+                <div class="modal fade" id="storageUpgrade" role="dialog">
+                    <div class="modal-dialog">
 
-
-            <!-- Modal -->
-            <div class="modal fade" id="storageUpgrade" role="dialog">
-                <div class="modal-dialog">
-
-                    <!-- Modal content-->
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal">&times;</button>
-                            <h4 class="modal-title">Voulez-vous agrandir votre {{ $storage->name }} ?</h4>
+                        <!-- Modal content-->
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                <h4 class="modal-title">Voulez-vous agrandir votre {{ $storage->name }} ?</h4>
+                            </div>
+                            <div class="modal-body">
+                                <p>Votre argent : {{ $playerMoney }}</p>
+                                <p>Prix : {{ $upgradePrice }}</p>
+                                <form action="/storage/storageUpgrade" method="get">
+                                    {{ csrf_field() }}
+                                    <button type="submit" class="btn btn-default">Accepter</button>
+                                </form>
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
+                            </div>
                         </div>
-                        <div class="modal-body">
-                            <p>Votre argent : {{ $playerMoney }}</p>
-                            <p>Prix : {{ $upgradePrice }}</p>
-                            <form action="/storage/storageUpgrade" method="get">
-                                {{ csrf_field() }}
-                                <button type="submit" class="btn btn-default">Accepter</button>
-                            </form>
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
-                        </div>
+
                     </div>
-
                 </div>
-            </div>
-             @endisset
+        @endisset
 
-            <!-- List items -->
+        <!-- List items -->
             <div class="items">
                 <table class="table">
                     <thead>
@@ -73,7 +72,6 @@
                     </tbody>
                 </table>
             </div>
-
         </div>
 
     </div>
