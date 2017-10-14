@@ -17,7 +17,7 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', 'UserStatsController@displayUserStats')->name('home');
+Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/market', 'MarketController@displayProducts')->name('market');
 Route::get('/market/buy/{id}', 'MarketController@buyProduct');

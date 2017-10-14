@@ -100,7 +100,6 @@ class MarketController extends Controller
         } else {
             $userInventorySize = $user->getInventorySize;
             $userInventorySize++;
-            \Log::info($userInventorySize);
             $user->setInventorySize($userInventorySize)->save();
             $user->addMoney($productsBuy->getPrice())->save();
 

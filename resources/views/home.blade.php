@@ -12,6 +12,18 @@
                     Argent : {{ $user->money}} <br>
                     Capacité inventaire : {{ $user->inventory_size}} <br>
                 </div>
+                    
+                        
+                <div class="panel-body">
+                    <h1>Planete</h1>
+                    @foreach ($planet as $datas)
+                        <ul>
+                            <li>Produit : {{$datas->name}}</li>
+                            <li>Quantité : {{$datas->quantity}}</li>
+                            <li>Pourcentage : {{$datas->percentage}} %</li>
+                        </ul>
+                    @endforeach
+                </div>
             </div>
         </div>
     </div>
