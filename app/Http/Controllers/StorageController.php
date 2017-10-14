@@ -3,30 +3,31 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Contracts\View\Factory;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
-
 use App\Models\Storage;
-use App\Models\UserStats;
 
-class StorageController extends Controller {
+class StorageController extends Controller
+{
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->middleware('auth');
     }
 
     /**
      * @return Factory|View
      */
-    public function displayStorages() {
+    public function displayStorages()
+    {
         // On recupere l'ensemble des informations liée à ce storage qu'on envoie à la vue
-        $playerStorage = Auth::user()->getUserStats()->getStorage();
+        $playerStorage = $this->getUser()->getStorage();
 
         // On recupere l'ensemble des inventaires de l'utilisateur
-        $inventory = Auth::user()->getInventory();
+        $inventory = $this->getUser()->getInventory();
 
         // On récupère la money de l'utilisateur
-        $playerMoney = Auth::user()->getUserStats()->getMoney();
+        $playerMoney = $this->getUser()->getMoney();
 
         // On récupère l'id du storage actuel
         $playerStorageId = $playerStorage->id;
@@ -35,7 +36,7 @@ class StorageController extends Controller {
         // On récupére l'id du dernier storage
         $lastStorage = Storage::select('id')->get()->last()->id;
 
-        if ( $lastStorage === Auth::user()->getUserStats()->storage_id) {
+        if ($lastStorage === $this->getUser()->storage_id) {
             return view('storage', [
                 'storage' => $playerStorage,
                 'inventory' => $inventory
@@ -67,49 +68,48 @@ class StorageController extends Controller {
     }
 
     /**
-    * @return var session
-    */
-    public function storageUpgrade() {
-      // on récupère les stats de l'utilisateur
-      $playerStats = Auth::user()->getUserStats();
+     * @return RedirectResponse
+     */
+    public function storageUpgrade()
+    {
+        // on récupère les stats de l'utilisateur
+        $user = $this->getUser();
 
-      $playerId = $playerStats->getId();
+        // On recupere l'id du storage actuel
+        $playerStorage = $user->getStorage();
 
-      // On recupere l'id du storage actuel
-      $playerStorage = $playerStats->getStorage();
+        // On recupere l'ensemble des inventaires de l'utilisateur
+        $inventory = $this->getUser()->getInventory();
 
-      // On recupere l'ensemble des inventaires de l'utilisateur
-      $inventory = Auth::user()->getInventory();
+        // id de storage upgrader
+        $futureStorageId = $playerStorage->getId() + 1;
 
-      // id de storage upgrader
-      $futureStorageId = $playerStorage->getId() + 1;
+        $futureStorage = Storage::findOneById($futureStorageId);
 
-      $futureStorage = Storage::findOneById($futureStorageId);
+        // inventaire à ajouté
+        $addInventory = $futureStorage->length - $playerStorage->length;
+        \Log::info($addInventory);
 
-      // inventaire à ajouté
-      $addInventory = $futureStorage->length - $playerStorage->length;
-      \Log::info($addInventory);
+        // prix de l'upgrade
+        $upgradePrice = Storage::findOneById($futureStorageId)->price;
 
-      // prix de l'upgrade
-      $upgradePrice = Storage::findOneById($futureStorageId)->price;
+        // On récupère la money de l'utilisateur
+        $playerMoney = $user->getMoney();
 
-      // On récupère la money de l'utilisateur
-      $playerMoney = $playerStats->getMoney();
+        if ($playerMoney >= $upgradePrice) {
+            $user
+                ->setStorageId($futureStorageId)
+                ->setMoney($playerMoney - $upgradePrice)
+                ->addInventory($addInventory)
+                ->save();
 
-      if ($playerMoney >= $upgradePrice) {
-          UserStats::findOneByUserId($playerId)
-              ->setStorageId($futureStorageId)
-              ->setMoney($playerMoney - $upgradePrice)
-              ->addInventory($addInventory)
-              ->save();
+            return redirect('storage')->with('success', 'Amélioration réussie.');
 
-          return redirect('storage')->with('success', 'Amélioration réussie.');
-
-      } elseif ($playerMoney < $upgradePrice) {
-          return redirect('storage')->with('warning', 'Vous n\'avez pas assez d\'argent !');
-      } else {
-        return redirect('storage')->with('warning', 'Erreur !!!');
-      }
+        } elseif ($playerMoney < $upgradePrice) {
+            return redirect('storage')->with('warning', 'Vous n\'avez pas assez d\'argent !');
+        } else {
+            return redirect('storage')->with('warning', 'Erreur !!!');
+        }
 
     }
 
