@@ -22,14 +22,6 @@ class InsertProducts extends Command
     protected $description = 'Insert Prducts on Products base';
 
     /**
-     * Create a new command instance.
-     */
-    public function __construct()
-    {
-        parent::__construct();
-    }
-
-    /**
      * Execute the console command.
      */
     public function handle()
@@ -67,6 +59,5 @@ class InsertProducts extends Command
         }
         
         Products::insert($final);
-        
     }
 }
