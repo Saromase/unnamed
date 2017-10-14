@@ -35,6 +35,7 @@ class DatabaseContent extends Migration
             $table->integer('price');
             $table->integer('regeneration');
             $table->integer('supply_demand');
+            $table->timestamps();
 
             $table->engine = 'InnoDB';
         });
