@@ -100,11 +100,10 @@ class StorageController extends Controller
             $user
                 ->setStorageId($futureStorageId)
                 ->setMoney($playerMoney - $upgradePrice)
-                ->addInventory($addInventory)
+                ->addInventorySize($addInventory)
                 ->save();
 
             return redirect('storage')->with('success', 'Amélioration réussie.');
-
         } elseif ($playerMoney < $upgradePrice) {
             return redirect('storage')->with('warning', 'Vous n\'avez pas assez d\'argent !');
         } else {
