@@ -4,8 +4,6 @@ namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 use App\Models\Inventory;
-use App\Models\UserStats;
-use App\Models\User;
 
 class InsertInventory extends Command
 {

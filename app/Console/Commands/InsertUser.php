@@ -4,8 +4,6 @@ namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 use App\Models\User;
-use App\Models\UserStats;
-use App\Models\Inventory;
 
 
 class InsertUser extends Command
@@ -30,14 +28,14 @@ class InsertUser extends Command
      */
     public function handle()
     {   
-        User::create([
+        User::insert([
             'name' => 'admin',
             'email' => 'admin@admin.fr',
             'password' => bcrypt('discord'),
             'storage_id' => 1,
             'money' => 100,
-            'inventory_size' => 0,
-        ]); 
+            'inventory_size' => 0
+        ]);
         echo 'L\'utilisateur Admin à bien était ajoutée 
         Adresse email : admin@admin.fr
         Nom d\'utilisateur : admin

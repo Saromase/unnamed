@@ -48,6 +48,6 @@ use Illuminate\Database\Eloquent\Collection;
  */
 class Inventory extends CustomModel
 {
-    protected $table = 'inventory';
+    protected $table = 'user_inventory';
 
 }
