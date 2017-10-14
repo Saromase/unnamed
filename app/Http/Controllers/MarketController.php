@@ -36,7 +36,7 @@ class MarketController extends Controller
         $productsBuy = Products::findOneById($id);
         $products = Products::get();
 
-        if ($user->inventory == 0) {
+        if ($user->getInventorySize() == 0) {
             return view('market', [
                 'failure' => 'Vous n\'avez pas assez de place',
                 'products' => $products
@@ -47,9 +47,9 @@ class MarketController extends Controller
                 'products' => $products
             ]);
         } else {
-            $userInventory = $user->getInventory();
+            $userInventory = $user->getInventorySize();
             $userInventory--;
-            $user->setInventory($userInventory)->save();
+            $user->setInventorySize($userInventory)->save();
             $user->subMoney($productsBuy->getPrice())->save();
 
             if (null === $inventory = Inventory::findOneBy(['user_id' => $user, 'name' => $productsBuy->name])) {
