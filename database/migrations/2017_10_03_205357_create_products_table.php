@@ -14,9 +14,12 @@ class CreateProductsTable extends Migration
         Schema::create('products', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
-            $table->string('price');
-            $table->string('min_price');
-            $table->string('max_price');
+            $table->integer('quantity')
+            $table->integer('percentage');
+            $table->integer('price');
+            $table->integer('regeneration');
+            $table->integer('supply_demand');
+
             $table->engine = 'InnoDB';
         });
     }
