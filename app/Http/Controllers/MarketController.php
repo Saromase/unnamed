@@ -47,9 +47,7 @@ class MarketController extends Controller
                 'products' => $products
             ]);
         } else {
-            $userInventory = $user->getInventorySize();
-            $userInventory--;
-            $user->setInventorySize($userInventory)->save();
+            $user->subInventorySize(1)->save();
             $user->subMoney($productsBuy->getPrice())->save();
 
             if (null === $inventory = Inventory::findOneBy(['user_id' => $user, 'name' => $productsBuy->name])) {
@@ -98,10 +96,7 @@ class MarketController extends Controller
                 'products' => $products
             ]);
         } else {
-            $userInventorySize = $user->getInventorySize;
-            $userInventorySize++;
-            $user->setInventorySize($userInventorySize)->save();
-            $user->addMoney($productsBuy->getPrice())->save();
+            $user->addInventorySize(1)->addMoney($productsBuy->price)->save();
 
             Inventory::findOneByUserId($user)
                 ->findOneByName($productsBuy->name)
