@@ -21,58 +21,54 @@ use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
  * @property string $name
  * @property string $email
  * @property string $password
- * @property int $storage_id
- * @property int $life
- * @property int $money
- * @property int $inventory
  * @property string|null $remember_token
- * @property Carbon|null $created_at
- * @property Carbon|null $updated_at
- * @property-read DatabaseNotificationCollection|DatabaseNotification[] $notifications
- * @method static Collection|User[] findBy(array $value)
- * @method static Collection|User[] findByCreatedAt($value)
- * @method static Collection|User[] findByEmail($value)
- * @method static Collection|User[] findByName($value)
- * @method static Collection|User[] findByPassword($value)
- * @method static Collection|User[] findByRememberToken($value)
- * @method static Collection|User[] findByUpdatedAt($value)
- * @method static Collection|User[] findByInventory($value)
- * @method static Collection|User[] findByLife($value)
- * @method static Collection|User[] findByMoney($value)
- * @method static Collection|User[] findByStorageId($value)
- * @method static User findOneBy(array $value)
- * @method static User findOneByCreatedAt($value)
- * @method static User findOneByEmail($value)
- * @method static User findOneById($value)
- * @method static User findOneByName($value)
- * @method static User findOneByPassword($value)
- * @method static User findOneByRememberToken($value)
- * @method static User findOneByUpdatedAt($value)
- * @method static User findOneByInventory($value)
- * @method static User findOneByLife($value)
- * @method static User findOneByMoney($value)
- * @method static User findOneByStorageId($value)
- * @method integer getId()
+ * @property \Carbon\Carbon|null $created_at
+ * @property \Carbon\Carbon|null $updated_at
+ * @property int $money
+ * @property int $inventory_size
+ * @property int $storage_id
+ * @property-read \Illuminate\Notifications\DatabaseNotificationCollection|\Illuminate\Notifications\DatabaseNotification[] $notifications
+ * @method static \Illuminate\Database\Eloquent\Collection|\App\Models\User[] findBy(array $value)
+ * @method static \Illuminate\Database\Eloquent\Collection|\App\Models\User[] findByCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Collection|\App\Models\User[] findByEmail($value)
+ * @method static \Illuminate\Database\Eloquent\Collection|\App\Models\User[] findByInventorySize($value)
+ * @method static \Illuminate\Database\Eloquent\Collection|\App\Models\User[] findByMoney($value)
+ * @method static \Illuminate\Database\Eloquent\Collection|\App\Models\User[] findByName($value)
+ * @method static \Illuminate\Database\Eloquent\Collection|\App\Models\User[] findByPassword($value)
+ * @method static \Illuminate\Database\Eloquent\Collection|\App\Models\User[] findByRememberToken($value)
+ * @method static \Illuminate\Database\Eloquent\Collection|\App\Models\User[] findByStorageId($value)
+ * @method static \Illuminate\Database\Eloquent\Collection|\App\Models\User[] findByUpdatedAt($value)
+ * @method static \App\Models\User findOneBy(array $value)
+ * @method static \App\Models\User findOneByCreatedAt($value)
+ * @method static \App\Models\User findOneByEmail($value)
+ * @method static \App\Models\User findOneById($value)
+ * @method static \App\Models\User findOneByInventorySize($value)
+ * @method static \App\Models\User findOneByMoney($value)
+ * @method static \App\Models\User findOneByName($value)
+ * @method static \App\Models\User findOneByPassword($value)
+ * @method static \App\Models\User findOneByRememberToken($value)
+ * @method static \App\Models\User findOneByStorageId($value)
+ * @method static \App\Models\User findOneByUpdatedAt($value)
+ * @method \Carbon\Carbon getCreatedAt()
  * @method string getEmail()
+ * @method integer getId()
+ * @method integer getInventorySize()
+ * @method integer getMoney()
  * @method string getName()
  * @method string getPassword()
  * @method string getRememberToken()
- * @method Carbon getUpdatedAt()
- * @method Carbon getCreatedAt()
- * @method integer getLife()
- * @method integer getMoney()
  * @method integer getStorageId()
- * @method User setInventory($value)
- * @method User setLife($value)
- * @method User setMoney($value)
- * @method User setStorageId($value)
- * @method User setCreatedAt($value)
- * @method User setEmail($value)
- * @method User setId($value)
- * @method User setName($value)
- * @method User setPassword($value)
- * @method User setRememberToken($value)
- * @method User setUpdatedAt($value)
+ * @method \Carbon\Carbon getUpdatedAt()
+ * @method \App\Models\User setCreatedAt($value)
+ * @method \App\Models\User setEmail($value)
+ * @method \App\Models\User setId($value)
+ * @method \App\Models\User setInventorySize($value)
+ * @method \App\Models\User setMoney($value)
+ * @method \App\Models\User setName($value)
+ * @method \App\Models\User setPassword($value)
+ * @method \App\Models\User setRememberToken($value)
+ * @method \App\Models\User setStorageId($value)
+ * @method \App\Models\User setUpdatedAt($value)
  * @mixin \Eloquent
  */
 class User extends CustomModel implements AuthenticatableContract, AuthorizableContract, CanResetPasswordContract
