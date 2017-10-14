@@ -34,14 +34,10 @@ class InsertUser extends Command
             'name' => 'admin',
             'email' => 'admin@admin.fr',
             'password' => bcrypt('discord'),
-        ]);
-        UserStats::insert([
-            'user_id' => 1,
             'storage_id' => 1,
-            'life' => 100,
-            'money' => 10,
-            'inventory' => 5,
-        ]);
+            'money' => 100,
+            'inventory_size' => 0,
+        ]); 
         echo 'L\'utilisateur Admin à bien était ajoutée 
         Adresse email : admin@admin.fr
         Nom d\'utilisateur : admin

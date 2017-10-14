@@ -5,6 +5,7 @@ namespace App\Console\Commands;
 use Illuminate\Console\Command;
 use App\Models\Inventory;
 use App\Models\UserStats;
+use App\Models\User;
 
 class InsertInventory extends Command
 {
@@ -38,7 +39,6 @@ class InsertInventory extends Command
             ]
         ]);
 
-        UserStats::where('id', '=', 1)->update(['inventory' => 0]);
 
         echo "Vous avez bien ajouté les données dans la table \n";
     }
