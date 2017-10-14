@@ -9,9 +9,8 @@
 
                 <div class="panel-body">
                     <h1>Player Stats</h1>
-                    Vie : {{ $user->life }} <br>
                     Argent : {{ $user->money}} <br>
-                    Capacité inventaire : {{ $user->inventory}} <br>
+                    Capacité inventaire : {{ $user->inventory_size}} <br>
                 </div>
             </div>
         </div>
