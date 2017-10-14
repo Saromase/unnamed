@@ -12,7 +12,7 @@ class UpdateProduct extends Command
      *
      * @var string
      */
-    protected $signature = 'database:product:update';
+    protected $signature = 'database:products:update';
 
     /**
      * The console command description.
@@ -41,9 +41,11 @@ class UpdateProduct extends Command
         $final = [];
         $products = Products::get();
         foreach ($products as $datas){
-            $oldPrice = $datas->price;
+            $oldPrice = $datas->median_price;
             $demand = $datas->supply_demand;
-            $newPrice = $oldPrice * ($demand + 100) /100;
+            $newPrice = $oldPrice * ($demand + 100) / 100;
+            echo $datas->name . " : " . $newPrice . "\n";
+            echo $datas->getMedianPrice() . "\n";
             $datas->setPrice($newPrice)
                 ->genSupply()
                 ->save();

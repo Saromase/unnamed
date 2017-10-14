@@ -53,6 +53,7 @@ class InsertProducts extends Command
                 'quantity' => $quantity,
                 'regeneration' => round($regeneration),
                 'percentage' => round($percentage),
+                'median_price' => round($price),
                 'price' => round($price),
                 'supply_demand' => rand(-100, 100),
             ]);
