@@ -21,7 +21,7 @@
 
 
     <div class="panel-group" id="accordion">
-        <div class="panel panel-success">
+        <div class="panel panel-info">
            <div class="panel-heading">
                 <h4 class="panel-title">
                     <a data-toggle="collapse" data-parent="#accordion" href="#collapse1">Bienvenue</a>
@@ -55,15 +55,15 @@
                             <tbody>
                                 @foreach($products as $product)
                                 <tr>
-                                    <td id="productName">{{ $product->name }}</td>
-                                    <td id="productQuantity">{{ $product->quantity }}</td>
-                                    <td id="productPercentage">{{ $product->percentage }}</td>
-                                    <td id="productMedianPrice">{{ $product->median_price }}</td>
+                                    <td>{{ $product->name }}</td>
+                                    <td>{{ $product->quantity }}</td>
+                                    <td>{{ $product->percentage }}</td>
+                                    <td>{{ $product->median_price }}</td>
                                     <td id="productPrice">{{ $product->price }}</td>
                                     @if ($product->supply_demand > 0)
-                                    <td class="success" id="productDemand">{{ $product->supply_demand }}</td>
+                                    <td class="success">{{ $product->supply_demand }}</td>
                                     @else
-                                    <td class="danger" id="productDemand">{{ $product->supply_demand }}</td>
+                                    <td class="danger">{{ $product->supply_demand }}</td>
                                     @endif
                                 </tr>
                                 @endforeach

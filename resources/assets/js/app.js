@@ -1,4 +1,3 @@
-
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
@@ -23,14 +22,16 @@ const app = new Vue({
 });
 
 // actualisation des données de la page Storage
-$(document).ready(function(){
+$(document).ready(function () {
     var csrf_token = $('meta[name="csrf-token"]').attr('content');
 
     $("#acceptStorageUpgrade").click(function () {
         $.ajax({
             type: "POST",
             url: "/ajax/storage/storageUpgrade",
-            data: {_token: csrf_token},
+            data: {
+                _token: csrf_token
+            },
             success: function (res) {
                 if (res['status'] !== "warning") {
                     var storage = res['storage'];
@@ -43,25 +44,28 @@ $(document).ready(function(){
                     $("#upgradePrice").html(res['upgradePrice']);
                 }
 
-                $("#alert").show().removeClass().addClass("alert alert-"+res['status']).html(res['message']);
+                $("#alert").show().removeClass().addClass("alert alert-" + res['status']).html(res['message']);
             }
         });
     });
-    
+
     $("#refreshProductsPrice").click(function () {
         $.ajax({
             type: "POST",
             url: "/ajax/products/productsUpdate",
-            data: {_token: csrf_token},
+            data: {
+                _token: csrf_token
+            },
             success: function (res) {
                 if (res['status'] == "success") {
-                    console.log('toto');
-                    $("#alert").show().removeClass().addClass("alert alert-"+res['status']).html(res['message']);
+                    var product = res['products'];
+                    console.log(product);
+                    $("#alert").show().removeClass().addClass("alert alert-" + res['status']).html(res['message']);
                 }
             }
         });
     });
-    
+
 });
 
 // création de la chart de la page Home
@@ -81,7 +85,7 @@ var donutChart = new Chart(ctx, {
                 'rgba(153, 102, 255, 0.2)',
                 'rgba(255, 159, 64, 0.2)'
               ],
-              borderColor: [
+            borderColor: [
                 'rgba(255,99,132,1)',
                 'rgba(54, 162, 235, 1)',
                 'rgba(255, 206, 86, 1)',
@@ -89,9 +93,8 @@ var donutChart = new Chart(ctx, {
                 'rgba(153, 102, 255, 1)',
                 'rgba(255, 159, 64, 1)'
               ],
-              borderWidth: 1
+            borderWidth: 1
             }]
-          },
-          options: {
-          }
+    },
+    options: {}
 });
