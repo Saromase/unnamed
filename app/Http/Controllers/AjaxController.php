@@ -9,6 +9,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Storage;
+use App\Models\Products;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
@@ -53,6 +54,28 @@ class AjaxController extends Controller
             return new JsonResponse(['warning', 'Erreur !!!']);
         }
 
+        return new JsonResponse(null, JsonResponse::HTTP_METHOD_NOT_ALLOWED);
+    }
+    
+    public function refreshProductsPrice(Request $request){
+        \Log::info('toto');
+        if ($request->isMethod("POST")){
+            $products = Products::get();
+            foreach ($products as $datas){
+                $oldPrice = $datas->median_price;
+                $demand = $datas->supply_demand;
+                $newPrice = $oldPrice * ($demand + 100) / 100;
+                $datas->setPrice($newPrice)
+                    ->genSupply()
+                    ->save();
+            }
+             $products = Products::get();
+            return new JsonResponse([
+                "status" => 'success',
+                "message" => 'Les prix ont était mis à jour',
+                "products" => $products
+            ]);
+        }
         return new JsonResponse(null, JsonResponse::HTTP_METHOD_NOT_ALLOWED);
     }
 }

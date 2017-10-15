@@ -32,3 +32,5 @@ Route::get('/admin', 'AdminController@displayAdminPanel')->name('adminPanel');
 
 //AJAX
 Route::post('/ajax/storage/storageUpgrade', 'AjaxController@addStorageUpgrade')->name('ajaxStorageUpgrade');
+
+Route::post('/ajax/products/productsUpdate', 'AjaxController@refreshProductsPrice')->name('refreshProductsPrice');

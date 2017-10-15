@@ -14,18 +14,32 @@
             {{ session('success') }}
         </div>
         @endif
+        <div class="alert" id="alert" style="display: none;">
+            {{-- Ajax use --}}
+        </div>
     </div>
 
+
     <div class="panel-group" id="accordion">
-        <div class="panel panel-default">
-            <div class="panel-heading">
+        <div class="panel panel-success">
+           <div class="panel-heading">
                 <h4 class="panel-title">
-                    <a data-toggle="collapse" data-parent="#accordion" href="#collapse1">Produit</a>
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapse1">Bienvenue</a>
                 </h4>
             </div>
             <div id="collapse1" class="panel-collapse collapse in">
                 <div class="panel-body">
-                   <!-- Tableau des items-->
+                    Bienvenue administrateur
+                </div>
+            </div>
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapse2">Produit</a>
+                </h4>
+            </div>
+            <div id="collapse2" class="panel-collapse collapse">
+                <div class="panel-body">
+                    <!-- Tableau des items-->
                     <div class="items">
                         <table class="table">
                             <thead>
@@ -41,15 +55,15 @@
                             <tbody>
                                 @foreach($products as $product)
                                 <tr>
-                                    <td>{{ $product->name }}</td>
-                                    <td>{{ $product->quantity }}</td>
-                                    <td>{{ $product->percentage }}</td>
-                                    <td>{{ $product->median_price }}</td>
-                                    <td>{{ $product->price }}</td>
+                                    <td id="productName">{{ $product->name }}</td>
+                                    <td id="productQuantity">{{ $product->quantity }}</td>
+                                    <td id="productPercentage">{{ $product->percentage }}</td>
+                                    <td id="productMedianPrice">{{ $product->median_price }}</td>
+                                    <td id="productPrice">{{ $product->price }}</td>
                                     @if ($product->supply_demand > 0)
-                                    <td class="success">{{ $product->supply_demand }}</td>
+                                    <td class="success" id="productDemand">{{ $product->supply_demand }}</td>
                                     @else
-                                    <td class="danger">{{ $product->supply_demand }}</td>
+                                    <td class="danger" id="productDemand">{{ $product->supply_demand }}</td>
                                     @endif
                                 </tr>
                                 @endforeach
@@ -57,12 +71,12 @@
                         </table>
                     </div>
                     <!-- Option -->
-                    
+                    <button type="button" class="btn btn-primary" id="refreshProductsPrice">Raffraichir</button>
                 </div>
             </div>
+            
         </div>
     </div>
-</div>
 
 
-@endsection
+    @endsection

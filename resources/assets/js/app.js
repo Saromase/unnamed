@@ -47,6 +47,21 @@ $(document).ready(function(){
             }
         });
     });
+    
+    $("#refreshProductsPrice").click(function () {
+        $.ajax({
+            type: "POST",
+            url: "/ajax/products/productsUpdate",
+            data: {_token: csrf_token},
+            success: function (res) {
+                if (res['status'] == "success") {
+                    console.log('toto');
+                    $("#alert").show().removeClass().addClass("alert alert-"+res['status']).html(res['message']);
+                }
+            }
+        });
+    });
+    
 });
 
 // création de la chart de la page Home
