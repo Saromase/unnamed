@@ -38,14 +38,11 @@ class UpdateProduct extends Command
      */
     public function handle()
     {
-        $final = [];
         $products = Products::get();
         foreach ($products as $datas){
             $oldPrice = $datas->median_price;
             $demand = $datas->supply_demand;
             $newPrice = $oldPrice * ($demand + 100) / 100;
-            echo $datas->name . " : " . $newPrice . "\n";
-            echo $datas->getMedianPrice() . "\n";
             $datas->setPrice($newPrice)
                 ->genSupply()
                 ->save();
