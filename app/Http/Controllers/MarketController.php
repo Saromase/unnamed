@@ -36,9 +36,9 @@ class MarketController extends Controller
         $productsBuy = Products::findOneById($id);
 
         if ($user->getInventorySize() == 0) {
-            return redirect('market')->with('warning','Vous ne posséder pas ce produit');
+            return redirect('market')->with('warning','Vous ne pouvez pas acheter ce produit, il vous faut plus de place');
         } else if ($user->getMoney() < $productsBuy->getPrice()) {
-            return redirect('market')->with('warning','Vous ne posséder pas ce produit');
+            return redirect('market')->with('warning','Vous ne pouvez pas acheter ce produit, il vous faut plus d\'argent');
         } else {
             $user->subInventorySize(1)->save();
             $user->subMoney($productsBuy->getPrice())->save();
@@ -89,6 +89,7 @@ class MarketController extends Controller
             return redirect('market')->with('success','Vous avez bien vendu ce produit');
         }
     }
+    
     public function sellAll($id){
         // Je récupere l'ensemble des données utilisateur
         $user = $this->getUser();
@@ -116,6 +117,47 @@ class MarketController extends Controller
             
             return redirect('market')->with('success','Vous avez tout vendu, et ainsi obtenu '. $productsBuy->price * $quantityToSell);
         }
+    }
+    
+    public function buyMax($id){
+        // Je récupere l'ensemble des données utilisateur
+        $user = $this->getUser();
+        // Je recherche le produit qu'il souhaite vendre
+        $productsBuy = Products::findOneById($id);
+        // Je récupere la taille disponible dans l'inventaire
+        $inventorySize = $user->getInventorySize();
+        if ($inventorySize === 0){
+            return redirect('market')->with('warning','Vous ne pouvez pas acheter ce produit, vous n\'avez pas assez de place');
+        }
+        
+        $numberMaxBuy = $user->getMoney() / $productsBuy->price;
+        if ($numberMaxBuy < 1){
+            return redirect('market')->with('warning','Vous ne pouvez pas acheter ce produit, vous n\'avez pas assez d\'argent');
+        } else {
+            $numberMaxBuy = floor($numberMaxBuy);
+            if ($numberMaxBuy > $inventorySize){
+                $numberMaxBuy = $inventorySize;
+            }
+            $user->subMoney($numberMaxBuy * $productsBuy->price)->subInventorySize($numberMaxBuy)->save();
+            
+            if (null === $inventory = Inventory::findOneBy(['user_id' => $user, 'name' => $productsBuy->name])) {
+                Inventory::insert([
+                    'name' => $productsBuy->getName(),
+                    'user_id' => $user->getId(),
+                    'buy_price' => $productsBuy->getPrice(),
+                    'quantity' => $numberMaxBuy,
+                    'created_at' => new Carbon(),
+                    'updated_at' => new Carbon()
+                ]);
+                return redirect('market')->with('success',"Vous avez acheter $numberMaxBuy pour " . $numberMaxBuy * $productsBuy->price);
+            } else {
+                $inventory->addQuantity($numberMaxBuy)->save();
+                return redirect('market')->with('success',"Vous avez acheter $numberMaxBuy pour " . $numberMaxBuy * $productsBuy->price);
+            }
+        }
+            
+        
+        \Log::info($inventorySize);
     }
 
 }

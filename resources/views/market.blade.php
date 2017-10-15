@@ -35,6 +35,10 @@
                         {{ csrf_field() }}
                         <button type="submit">Tout vendre</button>
                     </form>
+                    <form action='/market/buy/all/{{$product->id}}}' method="get">
+                        {{ csrf_field() }}
+                        <button type="submit">Tout acheter</button>
+                    </form>
                 </div>
             @endforeach
         </div>

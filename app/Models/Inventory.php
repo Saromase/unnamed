@@ -49,5 +49,8 @@ use Illuminate\Database\Eloquent\Collection;
 class Inventory extends CustomModel
 {
     protected $table = 'user_inventory';
-
+    
+    public function addQuantity($nb){
+        return $this->setQuantity($this->getQuantity() + $nb);
+    }
 }
