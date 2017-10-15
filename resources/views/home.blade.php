@@ -11,15 +11,7 @@
                         <p id="money" class="fa fa-2x fa-eur" aria-hidden="true"> {{ $user->money}}</p>
                         <p id="inventory" class="fa fa-2x fa-archive" aria-hidden="true"> {{ $user->inventory_size}}</p>
 
-                        <!-- Donut ressouces -->
-                        <div class="chart">
-                            <center>
-                                {!! $chart->html() !!}
-                            </center>
-                        </div>
-                        <!-- End Of donut -->
-                        {!! Charts::scripts() !!}
-                        {!! $chart->script() !!}
+                        <canvas id="donutChart"></canvas>
                     </div>
                 </div>
             </div>
