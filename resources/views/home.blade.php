@@ -1,41 +1,28 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-            <div class="panel panel-default">
-                <div class="panel-heading">Dashboard</div>
+    <div id="home" class="container">
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <div class="panel panel-default">
+                    <div class="panel-heading">Dashboard</div>
 
-                <div class="panel-body">
-                    <h1>Player Stats</h1>
-                    Argent : {{ $user->money}} <br>
-                    Capacité inventaire : {{ $user->inventory_size}} <br>
-                </div>
+                    <div class="panel-body">
+                        <p id="money" class="fa fa-2x fa-eur" aria-hidden="true"> {{ $user->money}}</p>
+                        <p id="inventory" class="fa fa-2x fa-archive" aria-hidden="true"> {{ $user->inventory_size}}</p>
 
-
-                <div class="panel-body">
-                    <h1>Planete</h1>
-                    <!-- @foreach ($planet as $datas)
-                        <ul>
-                            <li>Produit : {{$datas->name}}</li>
-                            <li>Quantité : {{$datas->quantity}}</li>
-                            <li>Pourcentage : {{$datas->percentage}} %</li>
-                        </ul>
-                    @endforeach -->
-
-                    <!-- Main Application (Can be VueJS or other JS framework) -->
-                    <div class="app">
-                        <center>
-                            {!! $chart->html() !!}
-                        </center>
+                        <!-- Donut ressouces -->
+                        <div class="chart">
+                            <center>
+                                {!! $chart->html() !!}
+                            </center>
+                        </div>
+                        <!-- End Of donut -->
+                        {!! Charts::scripts() !!}
+                        {!! $chart->script() !!}
                     </div>
-                    <!-- End Of Main Application -->
-                    {!! Charts::scripts() !!}
-                    {!! $chart->script() !!}
                 </div>
             </div>
         </div>
     </div>
-</div>
 @endsection
