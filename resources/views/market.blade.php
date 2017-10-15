@@ -21,8 +21,8 @@
             @foreach($products as $product)
                 <div class="flex-item">
                     <div class="product-picture"></div>
-                    <h3>{{ $product->name }}</h3>
-                    <p>{{ $product->price }} €</p>
+                    <h3 class="text-center">{{ $product->name }}</h3>
+                    <p class="text-center">{{ $product->price }} €</p>
                     <form action='/market/buy/{{$product->id}}' method="get">
                         {{ csrf_field() }}
                         <button type="submit">Acheter une unité</button>
