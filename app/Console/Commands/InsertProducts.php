@@ -19,7 +19,7 @@ class InsertProducts extends Command
      *
      * @var string
      */
-    protected $description = 'Insert Prducts on Products base';
+    protected $description = 'Insert Products on Products base';
 
     /**
      * Execute the console command.
@@ -30,8 +30,34 @@ class InsertProducts extends Command
         $final = [];
         $total = 0;
 
-        $name = ['Eau', 'Pierre', 'Gaz Naturel', 'Petrole', 'Aluminium', 'Or', 'Cuivre', 'Fer', 'Sable', 'Charbon', 'Bois'];
-        
+        $name = [
+          'Eau',
+          'Pierre',
+          'Gaz Naturel',
+          'Petrole',
+          'Aluminium',
+          'Or',
+          'Cuivre',
+          'Fer',
+          'Sable',
+          'Charbon',
+          'Bois'
+        ];
+
+        $color = [
+          'rgba(30, 55, 252, 0.8)',
+          'rgba(175, 42, 97, 0.8)',
+          'rgba(202, 247, 204, 0.8)',
+          'rgba(15, 15, 252, 0.8)',
+          'rgba(120, 60, 128, 0.8)',
+          'rgba(29, 34, 205, 0.8)',
+          'rgba(128, 22, 54, 0.8)',
+          'rgba(58, 215, 111, 0.8)',
+          'rgba(88, 126, 86, 0.8)',
+          'rgba(43, 121, 251, 0.8)',
+          'rgba(222, 255, 225, 0.8)'
+        ];
+
         for ($i = 0; $i < count($name); $i++){
             $quantity = rand(0,15000);
             $regeneration = $quantity / 100;
@@ -42,7 +68,7 @@ class InsertProducts extends Command
                 'regeneration' => round($regeneration),
             ]);
         }
-        
+
         for ($j = 0; $j < count($name); $j++){
             $quantity = $temp[$j]['quantity'];
             $regeneration = $temp[$j]['regeneration'];
@@ -56,9 +82,10 @@ class InsertProducts extends Command
                 'median_price' => round($price),
                 'price' => round($price),
                 'supply_demand' => rand(-100, 100),
+                'color' => $color[$j]
             ]);
         }
-        
+
         Products::insert($final);
     }
 }
