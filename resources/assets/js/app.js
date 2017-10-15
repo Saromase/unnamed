@@ -20,3 +20,31 @@ Vue.component('example', require('./components/Example.vue'));
 const app = new Vue({
     el: '#app'
 });
+
+
+
+$(document).ready(function(){
+    var csrf_token = $('meta[name="csrf-token"]').attr('content');
+
+    $("#acceptStorageUpgrade").click(function () {
+        $.ajax({
+            type: "POST",
+            url: "/ajax/storage/storageUpgrade",
+            data: {_token: csrf_token},
+            success: function (res) {
+                if (res[0] !== "warning") {
+                    $("#storageSize").html(res[2]);
+                }
+
+                forceCloseModal($("#storageUpgrade"));
+                $("#alert").show().removeClass().addClass("alert alert-"+res[0]).html(res[1]);
+            }
+        });
+    });
+
+    function forceCloseModal(modal) {
+        modal.modal('hide');
+        $('body').removeClass('modal-open');
+        $('.modal-backdrop').remove();
+    }
+});

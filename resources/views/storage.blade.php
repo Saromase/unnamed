@@ -15,12 +15,16 @@
         </div>
     @endif
 
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
+
+
     <div id="storage" class="container main">
+        <div class="alert" id="alert" style="display: none;">{{-- Ajax use --}}</div>
         <h1>Bienvenue dans votre {{ $storage->name }}</h1>
 
         <div class="row">
             <h2 class="text-center">{{ $storage->name }}</h2>
-            <h3 class="text-center"> Taille du stockage : {{ $storage->length }}</h3>
+            <h3 class="text-center"> Taille du stockage : <span id="storageSize">{{ $storage->length }}</span></h3>
 
             <!-- Button upgrade storage -->
             @isset($upgradePrice)
@@ -30,25 +34,23 @@
 
                 <!-- Modal -->
                 <div class="modal fade" id="storageUpgrade" role="dialog">
-                    <div class="modal-dialog">
-
-                        <!-- Modal content-->
+                    <div class="modal-dialog" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                            aria-hidden="true">&times;</span></button>
                                 <h4 class="modal-title">Voulez-vous agrandir votre {{ $storage->name }} ?</h4>
                             </div>
                             <div class="modal-body">
                                 <p>Votre argent : {{ $playerMoney }}</p>
                                 <p>Prix : {{ $upgradePrice }}</p>
-                                <form action="/storage/storageUpgrade" method="get">
-                                    {{ csrf_field() }}
-                                    <button type="submit" class="btn btn-default">Accepter</button>
-                                </form>
+                                {{ csrf_field() }}
+                            </div>
+                            <div class="modal-footer">
                                 <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
+                                <button type="button" class="btn btn-primary" id="acceptStorageUpgrade">Accepter</button>
                             </div>
                         </div>
-
                     </div>
                 </div>
         @endisset

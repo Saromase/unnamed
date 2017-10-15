@@ -135,6 +135,11 @@ class User extends CustomModel implements AuthenticatableContract, AuthorizableC
     {
         return $this->setInventorySize($this->getInventorySize() + $nb);
     }
+
+    /**
+     * @param int $nb
+     * @return User
+     */
     public function subInventorySize($nb)
     {
         return $this->setInventorySize($this->getInventorySize() - $nb);

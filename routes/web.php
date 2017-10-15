@@ -27,3 +27,7 @@ Route::get('/market/buy/all/{id}', 'MarketController@buyMax');
 
 Route::get('/storage', 'StorageController@displayStorages')->name('storage');
 Route::get('/storage/storageUpgrade', 'StorageController@storageUpgrade');
+
+
+//AJAX
+Route::post('/ajax/storage/storageUpgrade', 'AjaxController@addStorageUpgrade')->name('ajaxStorageUpgrade');
