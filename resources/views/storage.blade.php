@@ -20,10 +20,10 @@
 
     <div id="storage" class="container main">
         <div class="alert" id="alert" style="display: none;">{{-- Ajax use --}}</div>
-        <h1>Bienvenue dans votre {{ $storage->name }}</h1>
+        <h1>Bienvenue dans votre <span class="storage-name">{{ $storage->name }}</span></h1>
 
         <div class="row">
-            <h2 class="text-center">{{ $storage->name }}</h2>
+            <h2 class="text-center storage-name">{{ $storage->name }}</h2>
             <h3 class="text-center"> Taille du stockage : <span id="storageSize">{{ $storage->length }}</span></h3>
 
             <!-- Button upgrade storage -->
@@ -39,12 +39,11 @@
                             <div class="modal-header">
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                                             aria-hidden="true">&times;</span></button>
-                                <h4 class="modal-title">Voulez-vous agrandir votre {{ $storage->name }} ?</h4>
+                                <h4 class="modal-title">Voulez-vous agrandir votre <span class="storage-name">{{ $storage->name }}</span> ?</h4>
                             </div>
                             <div class="modal-body">
-                                <p>Votre argent : {{ $playerMoney }}</p>
-                                <p>Prix : {{ $upgradePrice }}</p>
-                                {{ csrf_field() }}
+                                <p>Votre argent : <span id="playerMoney">{{ $playerMoney }}</span></p>
+                                <p>Prix : <span id="upgradePrice">{{ $upgradePrice }}</span></p>
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>

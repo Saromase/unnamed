@@ -22,7 +22,6 @@ const app = new Vue({
 });
 
 
-
 $(document).ready(function(){
     var csrf_token = $('meta[name="csrf-token"]').attr('content');
 
@@ -32,11 +31,18 @@ $(document).ready(function(){
             url: "/ajax/storage/storageUpgrade",
             data: {_token: csrf_token},
             success: function (res) {
-                if (res[0] !== "warning") {
-                    $("#storageSize").html(res[2]);
+                if (res['status'] !== "warning") {
+                    var storage = res['storage'];
+                    $("#storageSize").html(storage['length']);
+                    $(".storage-name").each(function () {
+                        $(this).html(storage['name']);
+                    });
+
+                    $("#playerMoney").html(res['playerMoney']);
+                    $("#upgradePrice").html(res['upgradePrice']);
                 }
 
-                $("#alert").show().removeClass().addClass("alert alert-"+res[0]).html(res[1]);
+                $("#alert").show().removeClass().addClass("alert alert-"+res['status']).html(res['message']);
             }
         });
     });

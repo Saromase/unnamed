@@ -38,8 +38,15 @@ class AjaxController extends Controller
                     ->addInventorySize($inventorySize)
                     ->save();
 
-                return new JsonResponse(['success', 'Amélioration réussie.', $futureStorage->getLength()]);
-            }elseif($playerMoney < $upgradePrice) {
+                return new JsonResponse([
+                    "status" => 'success',
+                    "message" => 'Amélioration réussie.',
+                    "storage" => $futureStorage,
+                    "playerMoney" => $this->getUser()->getMoney(),
+                    "upgradePrice" => Storage::findOneById($futureStorageId + 1)->getPrice()
+                ]);
+
+            } elseif ($playerMoney < $upgradePrice) {
                 return new JsonResponse(['warning', 'Vous n\'avez pas assez d\'argent !']);
             }
 
