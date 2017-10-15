@@ -36,15 +36,8 @@ $(document).ready(function(){
                     $("#storageSize").html(res[2]);
                 }
 
-                forceCloseModal($("#storageUpgrade"));
                 $("#alert").show().removeClass().addClass("alert alert-"+res[0]).html(res[1]);
             }
         });
     });
-
-    function forceCloseModal(modal) {
-        modal.modal('hide');
-        $('body').removeClass('modal-open');
-        $('.modal-backdrop').remove();
-    }
 });
