@@ -12,17 +12,27 @@
                     Argent : {{ $user->money}} <br>
                     Capacité inventaire : {{ $user->inventory_size}} <br>
                 </div>
-                    
-                        
+
+
                 <div class="panel-body">
                     <h1>Planete</h1>
-                    @foreach ($planet as $datas)
+                    <!-- @foreach ($planet as $datas)
                         <ul>
                             <li>Produit : {{$datas->name}}</li>
                             <li>Quantité : {{$datas->quantity}}</li>
                             <li>Pourcentage : {{$datas->percentage}} %</li>
                         </ul>
-                    @endforeach
+                    @endforeach -->
+
+                    <!-- Main Application (Can be VueJS or other JS framework) -->
+                    <div class="app">
+                        <center>
+                            {!! $chart->html() !!}
+                        </center>
+                    </div>
+                    <!-- End Of Main Application -->
+                    {!! Charts::scripts() !!}
+                    {!! $chart->script() !!}
                 </div>
             </div>
         </div>
