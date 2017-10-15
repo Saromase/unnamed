@@ -22,6 +22,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/market', 'MarketController@displayProducts')->name('market');
 Route::get('/market/buy/{id}', 'MarketController@buyProduct');
 Route::get('/market/sell/{id}', 'MarketController@sellProduct');
+Route::get('/market/sell/all/{id}', 'MarketController@sellAll');
 
 Route::get('/storage', 'StorageController@displayStorages')->name('storage');
 Route::get('/storage/storageUpgrade', 'StorageController@storageUpgrade');
