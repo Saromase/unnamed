@@ -83,11 +83,13 @@ class AjaxController extends Controller
         return new JsonResponse(null, JsonResponse::HTTP_METHOD_NOT_ALLOWED);
     }
 
+    /**
+     * @param Request $request
+     * @return JsonResponse
+     */
     public function refreshChartDonut(Request $request)
     {
         if ($request->isMethod("POST")){
-            $products = Product::get();
-
             return new JsonResponse([
                 "status" => 'success',
                 "message" => 'Les prix ont était mis à jour',

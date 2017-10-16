@@ -84,41 +84,38 @@ $(document).ready(function () {
             _token: csrf_token
         },
         success: function (res) {
-            if (res['status'] !== "warning") {
+            if (res['status'] == "success") {
                 // récupère les produits
                 var product = res['products'];
                 var ctx = $("#donutChart");
 
-                // labels
-                var label = [];
-                for (let i =0; i < product.length; i++) {
-                    label.push(product['name']);
-                }
-
-                // datas
+                // tableau pour l'insertion des données dans la chart
+                var labels = [];
                 var datas = [];
-                for (let i =0; i < product.length; i++) {
-                    datas.push(product['quantity']);
-                }
-
-                // background-colors
                 var backgroundColors = [];
-                for (let i =0; i < product.length; i++) {
-                    backgroundColors.push(product['color']);
+
+                for (var i = 0; i < product.length; i++) {
+                    // labels
+                    labels.push(product[i].name);
+                    // datas
+                    datas.push(product[i].quantity);
+                    // background-colors
+                    backgroundColors.push(product[i].color);
                 }
+                console.log(product);
+
                 var donutChart = new Chart(ctx, {
                     type: 'doughnut',
                     data: {
-                        labels: labels,
-                        datasets: [{
-                            label: '# of Votes',
-                            data: datas,
-                            backgroundColor: backgroundColors
-                        }]
-                    },
+                    labels: labels,
+                    datasets: [{
+                        label: '# of Votes',
+                        data: datas,
+                        backgroundColor: backgroundColors
+                    }]
+                },
                     options: {}
                 });
-                console.log(labels);
                 $("#alert").show().removeClass().addClass("alert alert-" + res['status']).html(res['message']);
             }
         }
