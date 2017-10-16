@@ -59,6 +59,16 @@ $(document).ready(function () {
             success: function (res) {
                 if (res['status'] == "success") {
                     var product = res['products'];
+                    for(let i = 0; i < product.length; i++){
+                        var name = product[i]['name'];
+                        $('#'+name+"Price").html(product[i]['price']);
+                        var demand = product[i]['supply_demand'];
+                        if (demand > 0){
+                            $('#'+name+"Demand").removeClass().addClass('success').html(product[i]['supply_demand']);
+                        } else {
+                           $('#'+name+"Demand").removeClass().addClass('danger').html(product[i]['supply_demand']); 
+                        }
+                    }
                     console.log(product);
                     $("#alert").show().removeClass().addClass("alert alert-" + res['status']).html(res['message']);
                 }

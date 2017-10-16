@@ -34,7 +34,7 @@
             </div>
             <div class="panel-heading">
                 <h4 class="panel-title">
-                    <a data-toggle="collapse" data-parent="#accordion" href="#collapse2">Produit</a>
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapse2">Produits</a>
                 </h4>
             </div>
             <div id="collapse2" class="panel-collapse collapse">
@@ -59,12 +59,11 @@
                                     <td>{{ $product->quantity }}</td>
                                     <td>{{ $product->percentage }}</td>
                                     <td>{{ $product->median_price }}</td>
-                                    <td id="productPrice">{{ $product->price }}</td>
-                                    @if ($product->supply_demand > 0)
-                                    <td class="success">{{ $product->supply_demand }}</td>
-                                    @else
-                                    <td class="danger">{{ $product->supply_demand }}</td>
+                                    <td id="{{$product->name}}Price">{{ $product->price }}</td>
+                                    @if ($product->supply_demand > 0) <td class="success" id="{{$product->name}}Demand"> 
+                                    @else <td class="danger" id="{{$product->name}}Demand"> 
                                     @endif
+                                    {{ $product->supply_demand }}</td>
                                 </tr>
                                 @endforeach
                             </tbody>
