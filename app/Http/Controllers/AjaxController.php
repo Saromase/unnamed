@@ -56,9 +56,8 @@ class AjaxController extends Controller
 
         return new JsonResponse(null, JsonResponse::HTTP_METHOD_NOT_ALLOWED);
     }
-    
+
     public function refreshProductsPrice(Request $request){
-        \Log::info('toto');
         if ($request->isMethod("POST")){
             $products = Products::get();
             foreach ($products as $datas){
@@ -69,7 +68,7 @@ class AjaxController extends Controller
                     ->genSupply()
                     ->save();
             }
-             $products = Products::get();
+            $products = Products::get();
             return new JsonResponse([
                 "status" => 'success',
                 "message" => 'Les prix ont était mis à jour',
@@ -77,5 +76,19 @@ class AjaxController extends Controller
             ]);
         }
         return new JsonResponse(null, JsonResponse::HTTP_METHOD_NOT_ALLOWED);
+    }
+
+    public function refreshChartDonut(Request $request)
+    {
+        if ($request->isMethod("POST")){
+            $products = Product::get();
+            return new JsonResponse([
+                "status" => 'success',
+                "message" => 'Les prix ont était mis à jour',
+                "products" => $products
+            ]);
+        }
+        return new JsonResponse(null, JsonResponse::HTTP_METHOD_NOT_ALLOWED);
+
     }
 }
