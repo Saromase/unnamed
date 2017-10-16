@@ -31,31 +31,31 @@ class InsertProducts extends Command
         $total = 0;
 
         $name = [
-          'Eau',
-          'Pierre',
-          'Gaz Naturel',
-          'Petrole',
-          'Aluminium',
-          'Or',
-          'Cuivre',
-          'Fer',
-          'Sable',
-          'Charbon',
-          'Bois'
+            'Eau',
+            'Pierre',
+            'Gaz Naturel',
+            'Petrole',
+            'Aluminium',
+            'Or',
+            'Cuivre',
+            'Fer',
+            'Sable',
+            'Charbon',
+            'Bois'
         ];
 
         $color = [
-          'rgba(30, 55, 252, 0.8)',
-          'rgba(175, 42, 97, 0.8)',
-          'rgba(202, 247, 204, 0.8)',
-          'rgba(15, 15, 252, 0.8)',
-          'rgba(120, 60, 128, 0.8)',
-          'rgba(29, 34, 205, 0.8)',
-          'rgba(128, 22, 54, 0.8)',
-          'rgba(58, 215, 111, 0.8)',
-          'rgba(88, 126, 86, 0.8)',
-          'rgba(43, 121, 251, 0.8)',
-          'rgba(222, 255, 225, 0.8)'
+            '#00c2d0',
+            '#4e4e55',
+            '#e4e4e4',
+            '#1f1f1f',
+            '#bf675a',
+            '#ffd600',
+            '#df9169',
+            '#897474',
+            '#f3ad48',
+            '#445055',
+            '#b77400',
         ];
 
         for ($i = 0; $i < count($name); $i++){
