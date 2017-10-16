@@ -22,10 +22,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $planete = Products::get();
-
         return view('home', [
-          'planet' => $planete,
+          'planet' => Products::get(),
           'user' => $this->getUser()
         ]);
     }
