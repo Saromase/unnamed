@@ -64,7 +64,6 @@ class AjaxController extends Controller
     public function refreshProductsPrice(Request $request)
     {
         if ($request->isMethod("POST")) {
-            $products = Products::get();
             /** @var Products $datas */
             foreach ($products as $datas) {
                 $oldPrice = $datas->getMedianPrice();
@@ -76,7 +75,7 @@ class AjaxController extends Controller
             }
             return new JsonResponse([
                 "status" => 'success',
-                "message" => 'Les prix ont était mis à jour',
+                "message" => 'Les prix ont été mis à jour',
                 "products" => Products::get()
             ]);
         }
@@ -92,7 +91,6 @@ class AjaxController extends Controller
         if ($request->isMethod("POST")){
             return new JsonResponse([
                 "status" => 'success',
-                "message" => 'Les prix ont était mis à jour',
                 "products" => Products::get()
             ]);
         }
