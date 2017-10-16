@@ -67,6 +67,6 @@ class Products extends CustomModel
     public $timestamp = false;
     
     public function genSupply(){
-        return $this->setSupplyDemand(rand(-100,100));
+        return $this->setSupplyDemand(rand(-50,50));
     }
 }

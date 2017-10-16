@@ -33,7 +33,7 @@ class InsertProducts extends Command
         $name = [
           'Eau',
           'Pierre',
-          'Gaz Naturel',
+          'Gaz',
           'Petrole',
           'Aluminium',
           'Or',
@@ -81,7 +81,7 @@ class InsertProducts extends Command
                 'percentage' => round($percentage),
                 'median_price' => round($price),
                 'price' => round($price),
-                'supply_demand' => rand(-100, 100),
+                'supply_demand' => rand(-50, 50),
                 'color' => $color[$j]
             ]);
         }
