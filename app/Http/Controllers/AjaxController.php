@@ -57,17 +57,29 @@ class AjaxController extends Controller
         return new JsonResponse(null, JsonResponse::HTTP_METHOD_NOT_ALLOWED);
     }
 
+<<<<<<< HEAD
     public function refreshProductsPrice(Request $request){
         if ($request->isMethod("POST")){
+=======
+    /**
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function refreshProductsPrice(Request $request)
+    {
+        if ($request->isMethod("POST")) {
+>>>>>>> ae876137971da02e5946c3d2fe3e0e6caa6dcbfa
             $products = Products::get();
-            foreach ($products as $datas){
-                $oldPrice = $datas->median_price;
-                $demand = $datas->supply_demand;
+            /** @var Products $datas */
+            foreach ($products as $datas) {
+                $oldPrice = $datas->getMedianPrice();
+                $demand = $datas->getSupplyDemand();
                 $newPrice = $oldPrice * ($demand + 100) / 100;
                 $datas->setPrice($newPrice)
                     ->genSupply()
                     ->save();
             }
+<<<<<<< HEAD
             $products = Products::get();
             return new JsonResponse([
                 "status" => 'success',
@@ -82,10 +94,13 @@ class AjaxController extends Controller
     {
         if ($request->isMethod("POST")){
             $products = Product::get();
+=======
+
+>>>>>>> ae876137971da02e5946c3d2fe3e0e6caa6dcbfa
             return new JsonResponse([
                 "status" => 'success',
                 "message" => 'Les prix ont était mis à jour',
-                "products" => $products
+                "products" => Products::get()
             ]);
         }
         return new JsonResponse(null, JsonResponse::HTTP_METHOD_NOT_ALLOWED);

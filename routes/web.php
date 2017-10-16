@@ -26,7 +26,6 @@ Route::get('/market/sell/all/{id}', 'MarketController@sellAll');
 Route::get('/market/buy/all/{id}', 'MarketController@buyMax');
 
 Route::get('/storage', 'StorageController@displayStorages')->name('storage');
-Route::get('/storage/storageUpgrade', 'StorageController@storageUpgrade');
 
 Route::get('/admin', 'AdminController@displayAdminPanel')->name('adminPanel');
 

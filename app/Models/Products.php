@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
 
 /**
@@ -15,30 +16,30 @@ use Illuminate\Database\Eloquent\Collection;
  * @property int $price
  * @property int $regeneration
  * @property int $supply_demand
- * @property \Carbon\Carbon|null $created_at
- * @property \Carbon\Carbon|null $updated_at
- * @method static \Illuminate\Database\Eloquent\Collection|\App\Models\Products[] findBy(array $value)
- * @method static \Illuminate\Database\Eloquent\Collection|\App\Models\Products[] findByCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Collection|\App\Models\Products[] findByMedianPrice($value)
- * @method static \Illuminate\Database\Eloquent\Collection|\App\Models\Products[] findByName($value)
- * @method static \Illuminate\Database\Eloquent\Collection|\App\Models\Products[] findByPercentage($value)
- * @method static \Illuminate\Database\Eloquent\Collection|\App\Models\Products[] findByPrice($value)
- * @method static \Illuminate\Database\Eloquent\Collection|\App\Models\Products[] findByQuantity($value)
- * @method static \Illuminate\Database\Eloquent\Collection|\App\Models\Products[] findByRegeneration($value)
- * @method static \Illuminate\Database\Eloquent\Collection|\App\Models\Products[] findBySupplyDemand($value)
- * @method static \Illuminate\Database\Eloquent\Collection|\App\Models\Products[] findByUpdatedAt($value)
- * @method static \App\Models\Products findOneBy(array $value)
- * @method static \App\Models\Products findOneByCreatedAt($value)
- * @method static \App\Models\Products findOneById($value)
- * @method static \App\Models\Products findOneByMedianPrice($value)
- * @method static \App\Models\Products findOneByName($value)
- * @method static \App\Models\Products findOneByPercentage($value)
- * @method static \App\Models\Products findOneByPrice($value)
- * @method static \App\Models\Products findOneByQuantity($value)
- * @method static \App\Models\Products findOneByRegeneration($value)
- * @method static \App\Models\Products findOneBySupplyDemand($value)
- * @method static \App\Models\Products findOneByUpdatedAt($value)
- * @method \Carbon\Carbon getCreatedAt()
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
+ * @method static Collection|Products[] findBy(array $value)
+ * @method static Collection|Products[] findByCreatedAt($value)
+ * @method static Collection|Products[] findByMedianPrice($value)
+ * @method static Collection|Products[] findByName($value)
+ * @method static Collection|Products[] findByPercentage($value)
+ * @method static Collection|Products[] findByPrice($value)
+ * @method static Collection|Products[] findByQuantity($value)
+ * @method static Collection|Products[] findByRegeneration($value)
+ * @method static Collection|Products[] findBySupplyDemand($value)
+ * @method static Collection|Products[] findByUpdatedAt($value)
+ * @method static Products findOneBy(array $value)
+ * @method static Products findOneByCreatedAt($value)
+ * @method static Products findOneById($value)
+ * @method static Products findOneByMedianPrice($value)
+ * @method static Products findOneByName($value)
+ * @method static Products findOneByPercentage($value)
+ * @method static Products findOneByPrice($value)
+ * @method static Products findOneByQuantity($value)
+ * @method static Products findOneByRegeneration($value)
+ * @method static Products findOneBySupplyDemand($value)
+ * @method static Products findOneByUpdatedAt($value)
+ * @method Carbon getCreatedAt()
  * @method integer getId()
  * @method integer getMedianPrice()
  * @method string getName()
@@ -47,17 +48,17 @@ use Illuminate\Database\Eloquent\Collection;
  * @method integer getQuantity()
  * @method integer getRegeneration()
  * @method integer getSupplyDemand()
- * @method \Carbon\Carbon getUpdatedAt()
- * @method \App\Models\Products setCreatedAt($value)
- * @method \App\Models\Products setId($value)
- * @method \App\Models\Products setMedianPrice($value)
- * @method \App\Models\Products setName($value)
- * @method \App\Models\Products setPercentage($value)
- * @method \App\Models\Products setPrice($value)
- * @method \App\Models\Products setQuantity($value)
- * @method \App\Models\Products setRegeneration($value)
- * @method \App\Models\Products setSupplyDemand($value)
- * @method \App\Models\Products setUpdatedAt($value)
+ * @method Carbon getUpdatedAt()
+ * @method Products setCreatedAt($value)
+ * @method Products setId($value)
+ * @method Products setMedianPrice($value)
+ * @method Products setName($value)
+ * @method Products setPercentage($value)
+ * @method Products setPrice($value)
+ * @method Products setQuantity($value)
+ * @method Products setRegeneration($value)
+ * @method Products setSupplyDemand($value)
+ * @method Products setUpdatedAt($value)
  * @mixin \Eloquent
  */
 class Products extends CustomModel
@@ -65,7 +66,10 @@ class Products extends CustomModel
     protected $table = 'products';
     
     public $timestamp = false;
-    
+
+    /**
+     * @return Products
+     */
     public function genSupply(){
         return $this->setSupplyDemand(rand(-100,100));
     }
