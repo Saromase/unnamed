@@ -1,0 +1,67 @@
+.navbar-vertical
+  position: relative
+  float: left
+  height: 100%
+  width: 150px
+  margin-top: -22px
+  background-color: $dark-blue
+  box-shadow: $shadow
+  z-index: 10
+
+  .navbar
+    border: 0 solid transparent
+
+    a
+      color: $white
+
+    a:hover
+      background-color: $light-blue
+
+  #reduce
+    position: absolute
+    top: 50%
+    right: -20px
+    height: 40px
+    width: 40px
+    background-color: $dark-blue
+    border-radius: 50%
+    border: 0 solid transparent
+
+    .fa
+      position: absolute
+      top: calc(50% - 7px)
+      left: 50%
+      color: $white
+
+    .fa-plus
+      display: none
+
+#admin
+  width: calc(100% - 150px)
+  float: left
+  height: 100%
+  padding-left: 50px
+  padding-right: 20px
+  overflow-x: hidden
+
+  .jumbottron
+    position: relative
+    margin: -22px -20px 20px -50px
+    padding: 30px 50px
+    background-color: #dedede
+
+    h1
+      color: $light-grey
+      font-size: 75px
+
+    p
+      color: $light-grey
+      margin-top: -20px
+
+      span
+        color: $dark-blue
+
+    .options
+      position: absolute
+      bottom: 20px
+      right: 30px
