@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use Illuminate\Contracts\View\Factory;
 use App\Models\Products;
 use App\Models\Inventory;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 
 class MarketController extends Controller
@@ -28,7 +29,7 @@ class MarketController extends Controller
 
     /**
      * @param $id
-     * @return Factory|View
+     * @return RedirectResponse
      */
     public function buyProduct($id)
     {
@@ -66,7 +67,7 @@ class MarketController extends Controller
 
     /**
      * @param $id
-     * @return Factory|View
+     * @return RedirectResponse
      */
     public function sellProduct($id)
     {
@@ -89,7 +90,11 @@ class MarketController extends Controller
             return redirect('market')->with('success','Vous avez bien vendu ce produit');
         }
     }
-    
+
+    /**
+     * @param $id
+     * @return RedirectResponse
+     */
     public function sellAll($id){
         // Je récupere l'ensemble des données utilisateur
         $user = $this->getUser();
@@ -118,7 +123,11 @@ class MarketController extends Controller
             return redirect('market')->with('success','Vous avez tout vendu, et ainsi obtenu '. $productsBuy->price * $quantityToSell);
         }
     }
-    
+
+    /**
+     * @param $id
+     * @return RedirectResponse
+     */
     public function buyMax($id){
         // Je récupere l'ensemble des données utilisateur
         $user = $this->getUser();

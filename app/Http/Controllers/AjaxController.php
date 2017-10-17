@@ -56,26 +56,45 @@ class AjaxController extends Controller
 
         return new JsonResponse(null, JsonResponse::HTTP_METHOD_NOT_ALLOWED);
     }
-    
-    public function refreshProductsPrice(Request $request){
-        \Log::info('toto');
-        if ($request->isMethod("POST")){
-            $products = Products::get();
-            foreach ($products as $datas){
-                $oldPrice = $datas->median_price;
-                $demand = $datas->supply_demand;
+
+    /**
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function refreshProductsPrice(Request $request)
+    {
+        if ($request->isMethod("POST")) {
+            /** @var Products $datas */
+            foreach ($products as $datas) {
+                $oldPrice = $datas->getMedianPrice();
+                $demand = $datas->getSupplyDemand();
                 $newPrice = $oldPrice * ($demand + 100) / 100;
                 $datas->setPrice($newPrice)
                     ->genSupply()
                     ->save();
             }
-             $products = Products::get();
             return new JsonResponse([
                 "status" => 'success',
-                "message" => 'Les prix ont était mis à jour',
-                "products" => $products
+                "message" => 'Les prix ont été mis à jour',
+                "products" => Products::get()
             ]);
         }
         return new JsonResponse(null, JsonResponse::HTTP_METHOD_NOT_ALLOWED);
+    }
+
+    /**
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function refreshChartDonut(Request $request)
+    {
+        if ($request->isMethod("POST")){
+            return new JsonResponse([
+                "status" => 'success',
+                "products" => Products::get()
+            ]);
+        }
+        return new JsonResponse(null, JsonResponse::HTTP_METHOD_NOT_ALLOWED);
+
     }
 }
