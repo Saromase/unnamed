@@ -31,7 +31,6 @@ class InsertProducts extends Command
         $total = 0;
 
         $name = [
-<<<<<<< HEAD
           'Eau',
           'Pierre',
           'Gaz',
