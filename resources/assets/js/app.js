@@ -161,7 +161,7 @@ $(document).ready(function () {
                     },
                         options: {
                             animation: {
-                                duration: 0
+                                animateRotate: false
                             }
                         }
                     });
