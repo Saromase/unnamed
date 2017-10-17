@@ -102,7 +102,6 @@ $(document).ready(function () {
                     // background-colors
                     backgroundColors.push(product[i].color);
                 }
-                console.log(product);
 
                 var donutChart = new Chart(ctx, {
                     type: 'doughnut',
@@ -119,6 +118,57 @@ $(document).ready(function () {
                 $("#alert").show().removeClass().addClass("alert alert-" + res['status']).html(res['message']);
             }
         }
+    });
+
+    // actualise au passage de la souris sur la chart
+    $("#donutChart").mouseenter(function () {
+        $.ajax({
+            type: "POST",
+            url: "/ajax/home/chartUpdate",
+            data: {
+                _token: csrf_token
+            },
+            success: function (res) {
+                if (res['status'] == "success") {
+                    // récupère les produits
+                    var product = res['products'];
+                    var ctx = $("#donutChart");
+
+                    // tableau pour l'insertion des données dans la chart
+                    var labels = [];
+                    var datas = [];
+                    var backgroundColors = [];
+
+                    for (var i = 0; i < product.length; i++) {
+                        // labels
+                        labels.push(product[i].name);
+                        // datas
+                        datas.push(product[i].quantity);
+                        // background-colors
+                        backgroundColors.push(product[i].color);
+                    }
+                    console.log(product);
+
+                    var donutChart = new Chart(ctx, {
+                        type: 'doughnut',
+                        data: {
+                        labels: labels,
+                        datasets: [{
+                            label: '# of Votes',
+                            data: datas,
+                            backgroundColor: backgroundColors
+                        }]
+                    },
+                        options: {
+                            animation: {
+                                duration: 0
+                            }
+                        }
+                    });
+                    $("#alert").show().removeClass().addClass("alert alert-" + res['status']).html(res['message']);
+                }
+            }
+        });
     });
 
 });
