@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use Illuminate\Contracts\View\Factory;
 use App\Models\Products;
 use App\Models\Inventory;
+use App\Models\Factory as GameFactory;
 use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
@@ -36,6 +37,13 @@ class MarketController extends Controller
         return view('market.tier_two', [
             'products' => $products
         ]);
+    }
+    public function displayFactory()
+    {
+      $factory = GameFactory::get();
+      return view('market.factory', [
+          'factorys' => $factory
+      ]);
     }
 
     /**

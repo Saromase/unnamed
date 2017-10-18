@@ -26,7 +26,10 @@ Route::get('/market', function() {
 // Market display
 Route::get('/market/home', 'MarketController@displayMarketHome')->name('market');
 Route::get('/market/tier/one', 'MarketController@displayProductsTierOne')->name('marketTierOne');
+
 Route::get('/market/tier/two', 'MarketController@displayProductsTierTwo')->name('marketTierTwo');
+
+Route::get('/market/factory', 'MarketController@displayFactory')->name('marketFactory');
 
 // Market Achat-Vente
 Route::get('/market/buy/{id}', 'MarketController@buyProduct');
