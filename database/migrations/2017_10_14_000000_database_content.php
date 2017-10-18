@@ -37,7 +37,7 @@ class DatabaseContent extends Migration
             $table->integer('regeneration');
             $table->integer('supply_demand');
             $table->string('color');
-            $table->integer(1);
+            $table->integer('tier');
             $table->timestamps();
 
             $table->engine = 'InnoDB';
