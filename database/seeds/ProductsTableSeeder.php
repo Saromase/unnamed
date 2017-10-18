@@ -40,7 +40,8 @@ class ProductsTableSeeder extends Seeder
                 'median_price' => round($price),
                 'price' => round($price),
                 'supply_demand' => rand(-50, 50),
-                'color' => $color[$j]
+                'color' => $color[$j],
+                'tier' => 1
             ]);
         }
 
