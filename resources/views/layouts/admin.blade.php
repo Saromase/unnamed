@@ -75,8 +75,8 @@
 
     <nav class="navbar-vertical">
         <ul class="nav navbar">
-            <li><a href="/adminPanel/products"><i class="fa fa-chevron-right" aria-hidden="true"></i> Produits</a></li>
-            <li><a href="/adminPanel/users"><i class="fa fa-chevron-right" aria-hidden="true"></i> Utilisateurs</a></li>
+            <li><a href="{{route('adminPanelProducts')}}"><i class="fa fa-chevron-right" aria-hidden="true"></i> Produits</a></li>
+            <li><a href="{{route('adminPanelUsers')}}"><i class="fa fa-chevron-right" aria-hidden="true"></i> Utilisateurs</a></li>
         </ul>
         <button id="reduce" type="button">
             <i class="fa fa-minus" aria-hidden="true"></i>
