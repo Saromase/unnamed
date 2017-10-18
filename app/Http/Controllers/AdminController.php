@@ -26,7 +26,12 @@ class AdminController extends Controller
     {
         $products = Products::get();
         $dateUpdate = $products->first()->updated_at;
-        $hourUpdate = explode(" ", $dateUpdate);
+        if ($dateUpdate == null){
+          $hourUpdate = [ 1 => 'never'];
+        } else {
+          $hourUpdate = explode(" ", $dateUpdate);
+        }
+
 
         return view('/adminPanel/products', [
             'products' => $products,
