@@ -21,6 +21,12 @@ const app = new Vue({
     el: '#app'
 });
 
+// ajoute le fichier modal.js
+require('./modal.js');
+
+// ajoute le fichier reduce-nav.js
+require('./reduce-nav.js');
+
 $(document).ready(function () {
     var csrf_token = $('meta[name="csrf-token"]').attr('content');
 

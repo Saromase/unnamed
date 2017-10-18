@@ -73,7 +73,7 @@
         </div>
     </nav>
 
-    <nav class="navbar-vertical">
+    <nav id="navbar-vertical">
         <ul class="nav navbar">
             <li><a href="{{route('adminPanelProducts')}}"><i class="fa fa-chevron-right" aria-hidden="true"></i> Produits</a></li>
             <li><a href="{{route('adminPanelUsers')}}"><i class="fa fa-chevron-right" aria-hidden="true"></i> Utilisateurs</a></li>
