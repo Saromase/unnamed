@@ -15,13 +15,11 @@ class UserTableSeeder extends Seeder
             'password' => bcrypt('discord'),
             'storage_id' => 1,
             'money' => 100,
-            'inventory_size' => 0
+            'inventory_size' => 0,
+            'factory_price' => 15000
         ]);
 
-        echo 'L\'utilisateur Admin à bien était ajoutée 
-            Adresse email : admin@admin.fr
-            Nom d\'utilisateur : admin
-            Mot de passe : discord
+        echo "L\'utilisateur Admin à bien était ajoutée \n Adresse email : admin@admin.fr \n Nom d\'utilisateur : admin \n Mot de passe : discord";
         ';
     }
 }

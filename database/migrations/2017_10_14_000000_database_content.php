@@ -61,6 +61,7 @@ class DatabaseContent extends Migration
             $table->timestamps();
             $table->integer('money');
             $table->integer('inventory_size');
+            $table->integer('factory_price');
             $table->integer('storage_id')->unsigned();
             $table->foreign('storage_id')->references('id')->on('storage');
 
@@ -72,6 +73,16 @@ class DatabaseContent extends Migration
             $table->string('name');
             $table->integer('buy_price');
             $table->integer('quantity');
+            $table->integer('user_id')->unsigned();
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->timestamps();
+
+            $table->engine = 'InnoDB';
+        });
+        Schema::connection($connection)->create('user_factory', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('name');
+            $table->integer('level');
             $table->integer('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
