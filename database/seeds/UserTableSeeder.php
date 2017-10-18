@@ -19,7 +19,6 @@ class UserTableSeeder extends Seeder
             'factory_price' => 15000
         ]);
 
-        echo "L\'utilisateur Admin à bien était ajoutée \n Adresse email : admin@admin.fr \n Nom d\'utilisateur : admin \n Mot de passe : discord";
-        ';
+        echo "L\'utilisateur Admin à bien était ajoutée \n Adresse email : admin@admin.fr \n Nom d\'utilisateur : admin \n Mot de passe : discord \n";
     }
 }
