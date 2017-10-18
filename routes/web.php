@@ -27,7 +27,8 @@ Route::get('/market/buy/all/{id}', 'MarketController@buyMax');
 
 Route::get('/storage', 'StorageController@displayStorages')->name('storage');
 
-Route::get('/admin', 'AdminController@displayAdminPanel')->name('adminPanel');
+Route::get('/admin', 'AdminController@displayHomeAdminPanel')->name('adminPanel');
+Route::get('/admin/products', 'AdminController@displayProductsAdminPanel')->name('adminPanelProducts');
 
 //AJAX
 Route::post('/ajax/home/chartUpdate', 'AjaxController@refreshChartDonut')->name('refreshChartDonut');

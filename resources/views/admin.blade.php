@@ -1,7 +1,7 @@
 @extends('layouts.app') @section('content')
 <nav class="navbar-vertical">
     <ul class="nav navbar">
-        <li><a href="#"><i class="fa fa-chevron-right" aria-hidden="true"></i> Produits</a></li>
+        <li><a href="admin/products"><i class="fa fa-chevron-right" aria-hidden="true"></i> Produits</a></li>
         <li><a href="#"><i class="fa fa-chevron-right" aria-hidden="true"></i> Utilisateurs</a></li>
         <li><a href="#"><i class="fa fa-chevron-right" aria-hidden="true"></i> Inventaires</a></li>
     </ul>
