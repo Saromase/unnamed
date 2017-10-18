@@ -19,22 +19,38 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('/market', 'MarketController@displayProducts')->name('market');
+// Market
+// Market display
+Route::get('/market/tier/one', 'MarketController@displayProductsTierOne')->name('marketTierOne');
+Route::get('/market/tier/two', 'MarketController@displayProductsTierTwo')->name('marketTierTwo');
+
+// Market Achat-Vente
 Route::get('/market/buy/{id}', 'MarketController@buyProduct');
+
 Route::get('/market/sell/{id}', 'MarketController@sellProduct');
+
 Route::get('/market/sell/all/{id}', 'MarketController@sellAll');
+
 Route::get('/market/buy/all/{id}', 'MarketController@buyMax');
 
+// Storage
 Route::get('/storage', 'StorageController@displayStorages')->name('storage');
+
+
+// Admin Panel
 
 Route::get('/adminPanel', function() {
     return redirect('/adminPanel/home');
 });
+
 Route::get('/adminPanel/home', 'AdminController@displayHomeAdminPanel')->name('adminPanel');
+
 Route::get('/adminPanel/products', 'AdminController@displayProductsAdminPanel')->name('adminPanelProducts');
+
 Route::get('/adminPanel/users', 'AdminController@displayUsersAdminPanel')->name('adminPanelUsers');
 
-//AJAX
+
+// AJAX
 Route::post('/ajax/home/chartUpdate', 'AjaxController@refreshChartDonut')->name('refreshChartDonut');
 
 Route::post('/ajax/storage/storageUpgrade', 'AjaxController@addStorageUpgrade')->name('ajaxStorageUpgrade');
