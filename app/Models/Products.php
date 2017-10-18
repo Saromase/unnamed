@@ -17,6 +17,7 @@ use Illuminate\Database\Eloquent\Collection;
  * @property int $regeneration
  * @property int $supply_demand
  * @property string $color
+ * @property int $tier
  * @property \Carbon\Carbon|null $created_at
  * @property \Carbon\Carbon|null $updated_at
  * @method static \Illuminate\Database\Eloquent\Collection|\App\Models\Products[] findBy(array $value)
@@ -29,6 +30,7 @@ use Illuminate\Database\Eloquent\Collection;
  * @method static \Illuminate\Database\Eloquent\Collection|\App\Models\Products[] findByQuantity($value)
  * @method static \Illuminate\Database\Eloquent\Collection|\App\Models\Products[] findByRegeneration($value)
  * @method static \Illuminate\Database\Eloquent\Collection|\App\Models\Products[] findBySupplyDemand($value)
+ * @method static \Illuminate\Database\Eloquent\Collection|\App\Models\Products[] findByTier($value)
  * @method static \Illuminate\Database\Eloquent\Collection|\App\Models\Products[] findByUpdatedAt($value)
  * @method static \App\Models\Products findOneBy(array $value)
  * @method static \App\Models\Products findOneByColor($value)
@@ -41,6 +43,7 @@ use Illuminate\Database\Eloquent\Collection;
  * @method static \App\Models\Products findOneByQuantity($value)
  * @method static \App\Models\Products findOneByRegeneration($value)
  * @method static \App\Models\Products findOneBySupplyDemand($value)
+ * @method static \App\Models\Products findOneByTier($value)
  * @method static \App\Models\Products findOneByUpdatedAt($value)
  * @method string getColor()
  * @method \Carbon\Carbon getCreatedAt()
@@ -52,6 +55,7 @@ use Illuminate\Database\Eloquent\Collection;
  * @method integer getQuantity()
  * @method integer getRegeneration()
  * @method integer getSupplyDemand()
+ * @method integer getTier()
  * @method \Carbon\Carbon getUpdatedAt()
  * @method \App\Models\Products setColor($value)
  * @method \App\Models\Products setCreatedAt($value)
@@ -63,6 +67,7 @@ use Illuminate\Database\Eloquent\Collection;
  * @method \App\Models\Products setQuantity($value)
  * @method \App\Models\Products setRegeneration($value)
  * @method \App\Models\Products setSupplyDemand($value)
+ * @method \App\Models\Products setTier($value)
  * @method \App\Models\Products setUpdatedAt($value)
  * @mixin \Eloquent
  */

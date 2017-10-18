@@ -26,11 +26,13 @@ use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
  * @property \Carbon\Carbon|null $updated_at
  * @property int $money
  * @property int $inventory_size
+ * @property int $factory_price
  * @property int $storage_id
  * @property-read \Illuminate\Notifications\DatabaseNotificationCollection|\Illuminate\Notifications\DatabaseNotification[] $notifications
  * @method static \Illuminate\Database\Eloquent\Collection|\App\Models\User[] findBy(array $value)
  * @method static \Illuminate\Database\Eloquent\Collection|\App\Models\User[] findByCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Collection|\App\Models\User[] findByEmail($value)
+ * @method static \Illuminate\Database\Eloquent\Collection|\App\Models\User[] findByFactoryPrice($value)
  * @method static \Illuminate\Database\Eloquent\Collection|\App\Models\User[] findByInventorySize($value)
  * @method static \Illuminate\Database\Eloquent\Collection|\App\Models\User[] findByMoney($value)
  * @method static \Illuminate\Database\Eloquent\Collection|\App\Models\User[] findByName($value)
@@ -41,6 +43,7 @@ use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
  * @method static \App\Models\User findOneBy(array $value)
  * @method static \App\Models\User findOneByCreatedAt($value)
  * @method static \App\Models\User findOneByEmail($value)
+ * @method static \App\Models\User findOneByFactoryPrice($value)
  * @method static \App\Models\User findOneById($value)
  * @method static \App\Models\User findOneByInventorySize($value)
  * @method static \App\Models\User findOneByMoney($value)
@@ -51,6 +54,7 @@ use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
  * @method static \App\Models\User findOneByUpdatedAt($value)
  * @method \Carbon\Carbon getCreatedAt()
  * @method string getEmail()
+ * @method integer getFactoryPrice()
  * @method integer getId()
  * @method integer getInventorySize()
  * @method integer getMoney()
@@ -61,6 +65,7 @@ use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
  * @method \Carbon\Carbon getUpdatedAt()
  * @method \App\Models\User setCreatedAt($value)
  * @method \App\Models\User setEmail($value)
+ * @method \App\Models\User setFactoryPrice($value)
  * @method \App\Models\User setId($value)
  * @method \App\Models\User setInventorySize($value)
  * @method \App\Models\User setMoney($value)
