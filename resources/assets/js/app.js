@@ -115,7 +115,6 @@ $(document).ready(function () {
                 },
                     options: {}
                 });
-                $("#alert").show().removeClass().addClass("alert alert-" + res['status']).html(res['message']);
             }
         }
     });
@@ -165,7 +164,6 @@ $(document).ready(function () {
                             }
                         }
                     });
-                    $("#alert").show().removeClass().addClass("alert alert-" + res['status']).html(res['message']);
                 }
             }
         });
