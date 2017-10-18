@@ -89,6 +89,13 @@ class DatabaseContent extends Migration
 
             $table->engine = 'InnoDB';
         });
+        Schema::connection($connection)->create('factory', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('name');
+            $table->timestamps();
+
+            $table->engine = 'InnoDB';
+        });
     }
 
     /**
