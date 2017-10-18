@@ -64,7 +64,7 @@ class AjaxController extends Controller
     public function refreshProductsPrice(Request $request)
     {
         if ($request->isMethod("POST")) {
-            /** @var Products $datas */
+          $products = Products::get();
             foreach ($products as $datas) {
                 $oldPrice = $datas->getMedianPrice();
                 $demand = $datas->getSupplyDemand();
