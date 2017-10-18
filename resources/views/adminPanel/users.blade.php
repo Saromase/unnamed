@@ -44,6 +44,7 @@
                         <th>Argent</th>
                         <th>Taille de l'inventaire</th>
                         <th>Id de stockage</th>
+                        <th>Prix Industrie</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -55,6 +56,7 @@
                             <td>{{ $user->money }}</td>
                             <td>{{ $user->inventory_size }}</td>
                             <td>{{ $user->storage_id }}</td>
+                            <td>{{ $user->factory_price }}</td>
                         </tr>
                     @endforeach
                 </tbody>

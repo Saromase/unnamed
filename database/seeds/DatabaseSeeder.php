@@ -13,7 +13,8 @@ class DatabaseSeeder extends Seeder
             StorageTableSeeder::class,
             ProductsTableSeeder::class,
             UserTableSeeder::class,
-            InventoryTableSeeder::class
+            InventoryTableSeeder::class,
+            FactoryTableSeeder::class
         ]);
     }
 
