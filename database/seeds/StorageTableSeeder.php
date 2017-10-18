@@ -1,42 +1,15 @@
 <?php
 
-namespace App\Console\Commands;
+use Illuminate\Database\Seeder;
 
-use Illuminate\Console\Command;
-use App\Models\Storage;
-
-class InsertStorages extends Command
+class StorageTableSeeder extends Seeder
 {
     /**
-     * The name and signature of the console command.
-     *
-     * @var string
+     * Run the database seeds.
      */
-    protected $signature = 'database:storages:insert';
-
-    /**
-     * The console command description.
-     *
-     * @var string
-     */
-    protected $description = 'add storages datas';
-
-    /**
-     * Create a new command instance.
-     */
-    public function __construct()
+    public function run()
     {
-        parent::__construct();
-    }
-
-    /**
-     * Execute the console command.
-     *
-     * @return mixed
-     */
-      public function handle()
-    {
-        Storage::insert([
+        DB::table('storage')->insert([
             [
                 'name' => 'Chambre',
                 'length' => '5',
