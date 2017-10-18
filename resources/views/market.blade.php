@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('test')
-    <nav class="navbar-vertical">
+    <nav id="navbar-vertical">
         <ul class="nav navbar">
             <li><a href="{{ route('market') }}"><i class="fa fa-chevron-right" aria-hidden="true"></i> Tier 1 </a></li>
             <li><a href="{{ route('market') }}"><i class="fa fa-chevron-right" aria-hidden="true"></i> Tier 2</a></li>
