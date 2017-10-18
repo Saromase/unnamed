@@ -27,10 +27,12 @@ Route::get('/market/buy/all/{id}', 'MarketController@buyMax');
 
 Route::get('/storage', 'StorageController@displayStorages')->name('storage');
 
-Route::get('/admin', 'AdminController@displayProductsAdminPanel')->name('adminPanel');
-Route::get('/admin/products', 'AdminController@displayProductsAdminPanel')->name('adminPanelProducts');
-Route::get('/admin/users', 'AdminController@displayProductsAdminPanel')->name('adminPanelUsers');
-Route::get('/admin/inventories', 'AdminController@displayProductsAdminPanel')->name('adminPanelInventories');
+Route::get('/adminPanel', function() {
+    return redirect('/adminPanel/home');
+});
+Route::get('/adminPanel/home', 'AdminController@displayHomeAdminPanel')->name('adminPanel');
+Route::get('/adminPanel/products', 'AdminController@displayProductsAdminPanel')->name('adminPanelProducts');
+Route::get('/adminPanel/users', 'AdminController@displayUsersAdminPanel')->name('adminPanelUsers');
 
 //AJAX
 Route::post('/ajax/home/chartUpdate', 'AjaxController@refreshChartDonut')->name('refreshChartDonut');
