@@ -23,8 +23,10 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/market', function() {
     return redirect('/market/home');
 });
+
 // Market display
 Route::get('/market/home', 'MarketController@displayMarketHome')->name('market');
+
 Route::get('/market/tier/one', 'MarketController@displayProductsTierOne')->name('marketTierOne');
 
 Route::get('/market/tier/two', 'MarketController@displayProductsTierTwo')->name('marketTierTwo');
