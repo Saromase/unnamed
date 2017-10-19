@@ -14,11 +14,15 @@ $(document).ready(function() {
     $(buttonReduce).click(function() {
         if (open == true) {
             nav.animate({
-                left: "-=150"
+                width: "-=150"
             }, speed, function() {});
 
-            $(this).animate({
-            }, speed, function() {});
+            onglets.each(function() {
+                $(this).animate({
+                    left: "-=150",
+                    width: "+=150"
+                }, speed, function() {});
+            });
 
             minus.animate({
                 opacity: 0
@@ -29,16 +33,24 @@ $(document).ready(function() {
             }, speed, function() {});
 
             main.animate({
+                marginLeft: "-=150",
                 width: "+=150"
-            }, 600, function() {});
+            }, speed, function() {});
 
             return open = false;
         }
 
         else {
             nav.animate({
-                left: "+=150"
+                width: "+=150"
             }, speed, function() {});
+
+            onglets.each(function() {
+                $(this).animate({
+                    left: "+=150",
+                    width: "-=150"
+                }, speed, function() {});
+            });
 
             minus.animate({
                 opacity: 1
@@ -49,6 +61,7 @@ $(document).ready(function() {
             }, speed, function() {});
 
             main.animate({
+                marginLeft: "+=150px",
                 width: "-=150"
             }, speed, function() {});
 
