@@ -41,8 +41,15 @@ class MarketController extends Controller
     public function displayFactory()
     {
       $factory = GameFactory::get();
+      $user = $this->getUser();
+      if ($user->factory_number == 0){
+          $price = 50000;
+      } else {
+          $price = 50000 * (2.5 * $user->factory_number);
+      }
       return view('market.factory', [
-          'factorys' => $factory
+          'factorys' => $factory,
+          'price' => $price
       ]);
     }
 

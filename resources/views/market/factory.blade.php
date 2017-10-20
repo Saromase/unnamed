@@ -19,13 +19,16 @@
                 <thead>
                     <tr>
                         <th>Nom</th>
+                        <th>Prix</th>
+                        <th>Acheter</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach($factorys as $factory)
                         <tr>
                             <td>{{ $factory->name }}</td>
-                            <td id="{{$factory->name}}Price">{{ $factory->price }}</td>
+                            <td>{{ $price }}</td>
+                            <td><button type="button" id="factory{{ $factory->id }}" >Acheter</button></td>
                         </tr>
                     @endforeach
                 </tbody>
