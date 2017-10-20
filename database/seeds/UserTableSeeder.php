@@ -16,7 +16,7 @@ class UserTableSeeder extends Seeder
             'storage_id' => 1,
             'money' => 100,
             'inventory_size' => 0,
-            'factory_price' => 15000
+            'factory_number' => 0
         ]);
 
         echo "L\'utilisateur Admin à bien était ajoutée \n Adresse email : admin@admin.fr \n Nom d\'utilisateur : admin \n Mot de passe : discord \n";
