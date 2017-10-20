@@ -61,7 +61,6 @@ class DatabaseContent extends Migration
             $table->timestamps();
             $table->integer('money');
             $table->integer('inventory_size');
-            $table->integer('factory_number');
             $table->integer('storage_id')->unsigned();
             $table->foreign('storage_id')->references('id')->on('storage');
 

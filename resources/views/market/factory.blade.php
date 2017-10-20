@@ -19,16 +19,18 @@
                 <thead>
                     <tr>
                         <th>Nom</th>
+                        <th>Level</th>
                         <th>Prix</th>
                         <th>Acheter</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($factorys as $factory)
+                    @foreach($userFactoryDatas as $userFactory)
                         <tr>
-                            <td>{{ $factory->name }}</td>
-                            <td>{{ $price }}</td>
-                            <td><button type="button" id="factory{{ $factory->id }}" >Acheter</button></td>
+                            <td>{{ $userFactory->name }}</td>
+                            <td>{{ $userFactory->level }}</td>
+                            <td>{{ $UserFactory->price }}</td>
+                            <td><button onclick="">Acheter</button></td>
                         </tr>
                     @endforeach
                 </tbody>
