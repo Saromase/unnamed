@@ -39,6 +39,7 @@
                     @auth
                         <li><a href="{{ route('market') }}">Market</a></li>
                         <li><a href="{{ route('storage') }}">Storage</a></li>
+                        <li><a href="{{ route('skills') }}">Skills</a></li>
                     @endauth
                 </ul>
 

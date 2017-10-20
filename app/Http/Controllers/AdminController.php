@@ -14,7 +14,7 @@ class AdminController extends Controller
     */
     public function displayHomeAdminPanel()
     {
-        return view('/adminPanel/home', [
+        return view('adminPanel.home', [
             'user' => User::get()->first()
         ]);
     }
@@ -33,7 +33,7 @@ class AdminController extends Controller
         }
 
 
-        return view('/adminPanel/products', [
+        return view('adminPanel.products', [
             'products' => $products,
             'lastUpdate' => $hourUpdate[1]
         ]);
@@ -47,7 +47,7 @@ class AdminController extends Controller
         $users = User::get();
         $lastUserName = $users->last()->name;
 
-        return view('/adminPanel/users', [
+        return view('adminPanel.users', [
             'users' => $users,
             'lastUserName' => $lastUserName
         ]);
