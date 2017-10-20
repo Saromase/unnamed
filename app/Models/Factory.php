@@ -33,4 +33,8 @@ use Illuminate\Database\Eloquent\Model;
 class Factory extends Model
 {
     protected $table = 'factory';
+
+    public function getFactoryPrice(){
+        return 50000 * (2.5 * $this->getUser()->factory_number);
+    }
 }

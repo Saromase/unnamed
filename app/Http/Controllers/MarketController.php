@@ -45,7 +45,7 @@ class MarketController extends Controller
       if ($user->factory_number == 0){
           $price = 50000;
       } else {
-          $price = 50000 * (2.5 * $user->factory_number);
+          $price = Factory::getFactoryPrice();
       }
       return view('market.factory', [
           'factorys' => $factory,
