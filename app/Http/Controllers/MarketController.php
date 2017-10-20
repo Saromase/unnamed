@@ -8,6 +8,7 @@ use App\Models\Products;
 use App\Models\Inventory;
 use App\Models\Factory as GameFactory;
 use App\Models\User;
+use App\Models\UserFactory;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 
@@ -42,14 +43,25 @@ class MarketController extends Controller
     {
       $factory = GameFactory::get();
       $user = $this->getUser();
-      if ($user->factory_number == 0){
-          $price = 50000;
-      } else {
-          $price = Factory::getFactoryPrice();
+      $datas = [];
+      for ($i = 0; $i < count($factory); $i++){
+          $id = $factory[$i]->id;
+          $currentFactory = UserFactory::findByUserId($id)->findOneById($id);
+          if ($currentFactory == []){
+              $level = 0;
+              $price = 20000;
+          } else {
+              $level = $currentFactory->level;
+              $price = Factory::getFactoryPrice($id);
+          }
+          array_push($datas, [
+              'name' => $factory[$i]->name,
+              'level' => $level,
+              'price' => $price
+          ]);
       }
       return view('market.factory', [
-          'factorys' => $factory,
-          'price' => $price
+          'userFactoryDatas' => $datas
       ]);
     }
 

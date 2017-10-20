@@ -10,6 +10,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Storage;
 use App\Models\Products;
+use App\Models\Factory;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
@@ -96,5 +97,14 @@ class AjaxController extends Controller
         }
         return new JsonResponse(null, JsonResponse::HTTP_METHOD_NOT_ALLOWED);
 
+    }
+
+    public function addFactory($number){
+        $user = $this->getUser();
+        $factory = Factory::findOneById($number);
+        $factoryPrice = Factory::getFactoryPrice();
+        if ($user->money >= $factoryPrice){
+            echo 'toto';
+        }
     }
 }

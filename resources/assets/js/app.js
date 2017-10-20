@@ -27,6 +27,9 @@ require('./modal.js');
 // ajoute le fichier reduce-nav.js
 require('./reduce-nav.js');
 
+// ajoute le fichier market.js
+require('./market.js');
+
 $(document).ready(function () {
     var csrf_token = $('meta[name="csrf-token"]').attr('content');
 

@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Models\UserFactory;
 
 /**
  * App\Models\Factory
@@ -34,7 +35,13 @@ class Factory extends Model
 {
     protected $table = 'factory';
 
-    public function getFactoryPrice(){
-        return 50000 * (2.5 * $this->getUser()->factory_number);
+    public function getFactoryPrice($id){
+        $user = $this->getUser();
+        $factory = UserFactory::findByUserId($id)->findOneById($id);
+        if ($factory = []){
+            return 20000;
+        } else {
+            return 20000 * ($factory->level * 2.5);
+        }
     }
 }
