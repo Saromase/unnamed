@@ -49,6 +49,7 @@ use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
  * @method static User findOneByRememberToken($value)
  * @method static User findOneByStorageId($value)
  * @method static User findOneByUpdatedAt($value)
+ * @method static Collection|User[] get($columns = [])
  * @method Carbon getCreatedAt()
  * @method string getEmail()
  * @method integer getId()

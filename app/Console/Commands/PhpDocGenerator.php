@@ -111,6 +111,7 @@ class PhpDocGenerator extends ModelsCommand
 
             $this->setMethod(Str::camel("find_one_by"), '\\' . get_class($model), ['array $value']);
             $this->setMethod(Str::camel("find_by"), '\Illuminate\Database\Eloquent\Collection|\\' . get_class($model) . "[]", ['array $value']);
+            $this->setMethod(Str::camel("get"), '\Illuminate\Database\Eloquent\Collection|\\' . get_class($model) . "[]", ['$columns = []']);
         }
     }
 

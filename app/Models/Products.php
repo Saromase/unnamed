@@ -45,6 +45,7 @@ use Illuminate\Database\Eloquent\Collection;
  * @method static Products findOneBySupplyDemand($value)
  * @method static Products findOneByTier($value)
  * @method static Products findOneByUpdatedAt($value)
+ * @method static Collection|Products[] get($columns = [])
  * @method string getColor()
  * @method Carbon getCreatedAt()
  * @method integer getId()

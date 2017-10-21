@@ -21,6 +21,7 @@ use Illuminate\Database\Eloquent\Collection;
  * @method static Factory findOneById($value)
  * @method static Factory findOneByName($value)
  * @method static Factory findOneByUpdatedAt($value)
+ * @method static Collection|Factory[] get($columns = [])
  * @method Carbon getCreatedAt()
  * @method integer getId()
  * @method string getName()

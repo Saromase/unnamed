@@ -20,6 +20,7 @@ use Illuminate\Database\Eloquent\Collection;
  * @method static Storage findOneByLength($value)
  * @method static Storage findOneByName($value)
  * @method static Storage findOneByPrice($value)
+ * @method static Collection|Storage[] get($columns = [])
  * @method integer getId()
  * @method integer getLength()
  * @method string getName()

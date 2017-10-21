@@ -30,6 +30,7 @@ use Illuminate\Database\Eloquent\Collection;
  * @method static Inventory findOneByQuantity($value)
  * @method static Inventory findOneByUpdatedAt($value)
  * @method static Inventory findOneByUserId($value)
+ * @method static Collection|Inventory[] get($columns = [])
  * @method integer getBuyPrice()
  * @method Carbon getCreatedAt()
  * @method integer getId()

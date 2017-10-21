@@ -30,6 +30,7 @@ use Illuminate\Database\Eloquent\Collection;
  * @method static UserFactory findOneByName($value)
  * @method static UserFactory findOneByUpdatedAt($value)
  * @method static UserFactory findOneByUserId($value)
+ * @method static Collection|UserFactory[] get($columns = [])
  * @method Carbon getCreatedAt()
  * @method integer getFactoryId()
  * @method integer getId()
