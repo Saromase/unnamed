@@ -2,7 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+
+use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Collection;
 
 /**
  * App\Models\UserFactory
@@ -40,7 +42,7 @@ use Illuminate\Database\Eloquent\Model;
  * @method \App\Models\UserFactory setUserId($value)
  * @mixin \Eloquent
  */
-class UserFactory extends Model
+class UserFactory extends CustomModel
 {
     protected $table = 'user_factory';
 }
