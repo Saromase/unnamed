@@ -74,13 +74,14 @@ use Illuminate\Database\Eloquent\Collection;
 class Products extends CustomModel
 {
     protected $table = 'products';
-    
+
     public $timestamp = false;
 
     /**
      * @return Products
      */
-    public function genSupply(){
-        return $this->setSupplyDemand(rand(-50,50));
+    public function genSupply()
+    {
+        return $this->setSupplyDemand(rand(-50, 50));
     }
 }
