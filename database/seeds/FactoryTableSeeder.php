@@ -11,11 +11,12 @@ class FactoryTableSeeder extends Seeder
      */
     public function run()
     {
-      $name = ['Fonderie', 'Four', 'Raffinerie', 'Scierie', 'Cimenterie', 'Compacteur'];
-      $final = [];
-      foreach ($name as $datas) {
-        array_push($final, ['name' => $datas]);
-      }
-      DB::table('factory')->insert($final);
+        $names = ['Fonderie', 'Four', 'Raffinerie', 'Scierie', 'Cimenterie', 'Compacteur'];
+        $final = [];
+        foreach ($names as $name) {
+            array_push($final, ['name' => $name]);
+        }
+
+        DB::table('factory')->insert($final);
     }
 }
