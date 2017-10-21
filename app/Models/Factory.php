@@ -2,36 +2,36 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
-use App\Models\UserFactory;
+use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Collection;
 
 /**
  * App\Models\Factory
  *
  * @property int $id
  * @property string $name
- * @property \Carbon\Carbon|null $created_at
- * @property \Carbon\Carbon|null $updated_at
- * @method static \Illuminate\Database\Eloquent\Collection|\App\Models\Factory[] findBy(array $value)
- * @method static \Illuminate\Database\Eloquent\Collection|\App\Models\Factory[] findByCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Collection|\App\Models\Factory[] findByName($value)
- * @method static \Illuminate\Database\Eloquent\Collection|\App\Models\Factory[] findByUpdatedAt($value)
- * @method static \App\Models\Factory findOneBy(array $value)
- * @method static \App\Models\Factory findOneByCreatedAt($value)
- * @method static \App\Models\Factory findOneById($value)
- * @method static \App\Models\Factory findOneByName($value)
- * @method static \App\Models\Factory findOneByUpdatedAt($value)
- * @method \Carbon\Carbon getCreatedAt()
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
+ * @method static Collection|Factory[] findBy(array $value)
+ * @method static Collection|Factory[] findByCreatedAt($value)
+ * @method static Collection|Factory[] findByName($value)
+ * @method static Collection|Factory[] findByUpdatedAt($value)
+ * @method static Factory findOneBy(array $value)
+ * @method static Factory findOneByCreatedAt($value)
+ * @method static Factory findOneById($value)
+ * @method static Factory findOneByName($value)
+ * @method static Factory findOneByUpdatedAt($value)
+ * @method Carbon getCreatedAt()
  * @method integer getId()
  * @method string getName()
- * @method \Carbon\Carbon getUpdatedAt()
- * @method \App\Models\Factory setCreatedAt($value)
- * @method \App\Models\Factory setId($value)
- * @method \App\Models\Factory setName($value)
- * @method \App\Models\Factory setUpdatedAt($value)
+ * @method Carbon getUpdatedAt()
+ * @method Factory setCreatedAt($value)
+ * @method Factory setId($value)
+ * @method Factory setName($value)
+ * @method Factory setUpdatedAt($value)
  * @mixin \Eloquent
  */
-class Factory extends Model
+class Factory extends CustomModel
 {
     protected $table = 'factory';
 
