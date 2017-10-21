@@ -19,23 +19,15 @@ class StorageController extends Controller
      */
     public function displayStorages()
     {
-        // On recupere l'ensemble des informations liée à ce storage qu'on envoie à la vue
         $playerStorage = $this->getUser()->getStorage();
-
-        // On recupere l'ensemble des inventaires de l'utilisateur
         $inventory = $this->getUser()->getInventory();
-
-        // On récupère la money de l'utilisateur
         $playerMoney = $this->getUser()->getMoney();
+        $playerStorageId = $playerStorage->getId();
 
-        // On récupère l'id du storage actuel
-        $playerStorageId = $playerStorage->id;
+        // On récupére le dernier storage
+        $lastStorage = Storage::get()->last();
 
-
-        // On récupére l'id du dernier storage
-        $lastStorage = Storage::select('id')->get()->last()->id;
-
-        if ($lastStorage === $this->getUser()->storage_id) {
+        if ($lastStorage === $this->getUser()->getStorage()) {
             return view('storage', [
                 'storage' => $playerStorage,
                 'inventory' => $inventory
@@ -45,7 +37,7 @@ class StorageController extends Controller
             $futureStorageId = $playerStorageId + 1;
 
             // On récupère la valeur de l'amélioration du storage
-            $upgradePrice = Storage::findOneById($futureStorageId)->price;
+            $upgradePrice = Storage::findOneById($futureStorageId)->getPrice();
             // On verifie si il possede un inventaire si il est vide on lui met un message
             if ($inventory->isEmpty()) {
                 session()->flash('warning', 'Vous n\'avez aucun produit !');
