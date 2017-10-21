@@ -78,18 +78,7 @@ class DatabaseContent extends Migration
 
             $table->engine = 'InnoDB';
         });
-        Schema::connection($connection)->create('user_factory', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('name');
-            $table->integer('factpry_id')->unsigned();
-            $table->foreign('factpry_id')->references('id')->on('factory')->onDelete('cascade');
-            $table->integer('level');
-            $table->integer('user_id')->unsigned();
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->timestamps();
-
-            $table->engine = 'InnoDB';
-        });
+        
         Schema::connection($connection)->create('factory', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
@@ -97,6 +86,20 @@ class DatabaseContent extends Migration
 
             $table->engine = 'InnoDB';
         });
+
+        Schema::connection($connection)->create('user_factory', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('name');
+            $table->integer('factory_id')->unsigned();
+            $table->foreign('factory_id')->references('id')->on('factory')->onDelete('cascade');
+            $table->integer('level');
+            $table->integer('user_id')->unsigned();
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->timestamps();
+
+            $table->engine = 'InnoDB';
+        });
+
     }
 
     /**
