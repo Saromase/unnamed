@@ -27,9 +27,9 @@
                 <tbody>
                     @foreach($userFactoryDatas as $userFactory)
                         <tr>
-                            <td>{{ $userFactory->name }}</td>
-                            <td>{{ $userFactory->level }}</td>
-                            <td>{{ $UserFactory->price }}</td>
+                            <td>{{ $userFactory['name'] }}</td>
+                            <td>{{ $userFactory['level'] }}</td>
+                            <td>{{ $userFactory['price'] }}</td>
                             <td><button onclick="">Acheter</button></td>
                         </tr>
                     @endforeach

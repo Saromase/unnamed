@@ -35,13 +35,16 @@ class Factory extends CustomModel
 {
     protected $table = 'factory';
 
-    public function getFactoryPrice($id){
-        $user = $this->getUser();
-        $factory = UserFactory::findByUserId($id)->findOneById($id);
-        if ($factory = []){
+    /**
+     * @param User $user
+     * @return float|int
+     */
+    public function getFactoryPrice(User $user)
+    {
+        if (null !== $userFactory = UserFactory::findOneBy(['user_id' => $user->getId(), 'factory_id' => $this->getId()])) {
+            return 20000 * ($userFactory->getLevel() * 2.5);
+        }else {
             return 20000;
-        } else {
-            return 20000 * ($factory->level * 2.5);
         }
     }
 }
