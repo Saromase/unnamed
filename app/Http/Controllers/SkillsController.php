@@ -18,6 +18,8 @@ class SkillsController extends Controller
    */
    public function displaySkills()
    {
-     # code...
+       return view('skills', [
+
+       ]);
    }
 }
